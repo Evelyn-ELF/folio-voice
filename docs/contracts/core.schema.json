@@ -1,0 +1,499 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:folio-voice:core-contracts:0.1",
+  "title": "Folio Voice 核心设计契约",
+  "description": "设计阶段结构契约，非运行授权；跨字段与持久化约束见配套文档。",
+  "$defs": {
+    "UUID": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "SHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "Action": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool": {
+          "type": "string",
+          "enum": [
+            "get_evidence",
+            "inspect_source",
+            "compare_stages",
+            "run_detector",
+            "submit_repair"
+          ]
+        },
+        "resource_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "maxItems": 32
+        },
+        "binding_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tool",
+        "resource_ids",
+        "binding_id"
+      ]
+    },
+    "PlanStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "step_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "expected_evidence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "step_id",
+        "goal",
+        "expected_evidence"
+      ]
+    },
+    "AgentDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "snapshot_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "plan_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "observe",
+            "propose_repair",
+            "stop"
+          ]
+        },
+        "reason_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true,
+          "maxItems": 32
+        },
+        "plan_steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanStep"
+          },
+          "minItems": 0,
+          "uniqueItems": true,
+          "maxItems": 4
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Action"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stop_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "complete",
+                "no_progress",
+                "budget_exhausted",
+                "needs_input",
+                "needs_maintenance",
+                "stale",
+                "cancelled"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "run_id",
+        "snapshot_hash",
+        "plan_revision",
+        "decision",
+        "reason_summary",
+        "evidence_ids",
+        "plan_steps",
+        "action",
+        "stop_reason"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "stop"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "action": {
+                "type": "null"
+              },
+              "stop_reason": {
+                "type": "string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "action": {
+                "$ref": "#/$defs/Action"
+              },
+              "stop_reason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "propose_repair"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "action": {
+                "properties": {
+                  "tool": {
+                    "const": "submit_repair"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "observe"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "action": {
+                "properties": {
+                  "tool": {
+                    "type": "string",
+                    "enum": [
+                      "get_evidence",
+                      "inspect_source",
+                      "compare_stages",
+                      "run_detector"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Interval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "start_sample": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_sample": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "start_sample",
+        "end_sample"
+      ]
+    },
+    "Evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "contract_version": {
+          "const": 2
+        },
+        "snapshot_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "binding_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "scope_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "risk": {
+          "type": "string",
+          "enum": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D05",
+            "D06"
+          ]
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "suspect",
+            "fail",
+            "unknown",
+            "error"
+          ]
+        },
+        "intervals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Interval"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "attachment_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "server_sequence": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "id",
+        "contract_version",
+        "snapshot_hash",
+        "artifact_sha256",
+        "binding_id",
+        "scope_id",
+        "risk",
+        "outcome",
+        "intervals",
+        "attachment_ids",
+        "server_sequence"
+      ]
+    },
+    "ResolveCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "issue_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "issue_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "proof_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "quality_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "contract_version": {
+          "const": 2
+        }
+      },
+      "required": [
+        "request_id",
+        "issue_id",
+        "issue_revision",
+        "candidate_sha256",
+        "proof_id",
+        "quality_revision",
+        "contract_version"
+      ]
+    },
+    "ReleaseCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "deliverable_kind": {
+          "type": "string",
+          "enum": [
+            "audio",
+            "epub"
+          ]
+        },
+        "quality_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "contract_version": {
+          "const": 2
+        }
+      },
+      "required": [
+        "request_id",
+        "artifact_id",
+        "artifact_sha256",
+        "deliverable_kind",
+        "quality_revision",
+        "contract_version"
+      ]
+    },
+    "CandidateSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "baseline_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "policy_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "target_finding_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "comparison_evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "provisional",
+            "final",
+            "reject"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "target_unresolved",
+              "new_defect",
+              "regression",
+              "missing_evidence",
+              "scope_mismatch",
+              "all_checks_passed",
+              "lower_rebuild_cost"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "baseline_sha256",
+        "candidate_sha256",
+        "policy_sha256",
+        "target_finding_ids",
+        "comparison_evidence_ids",
+        "decision",
+        "reason_codes"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/AgentDecision"
+    },
+    {
+      "$ref": "#/$defs/Evidence"
+    },
+    {
+      "$ref": "#/$defs/ResolveCommand"
+    },
+    {
+      "$ref": "#/$defs/ReleaseCommand"
+    },
+    {
+      "$ref": "#/$defs/CandidateSelection"
+    }
+  ]
+}

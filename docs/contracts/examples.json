@@ -1,0 +1,266 @@
+{
+  "说明": "自写结构样例；合法结构不代表业务权限或证据真实。",
+  "valid": [
+    {
+      "name": "Agent读取证据",
+      "schema": "AgentDecision",
+      "data": {
+        "run_id": "11111111-1111-4111-8111-111111111111",
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "plan_revision": 1,
+        "decision": "observe",
+        "reason_summary": "先比较原声与最终音轨的同一位置",
+        "evidence_ids": [],
+        "plan_steps": [
+          {
+            "step_id": 1,
+            "goal": "定位首次偏差阶段",
+            "expected_evidence": "相同句子各阶段音频的检测回执"
+          }
+        ],
+        "action": {
+          "tool": "compare_stages",
+          "resource_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "binding_id": null
+        },
+        "stop_reason": null
+      }
+    },
+    {
+      "name": "范围明确但没有新证据时停止",
+      "schema": "AgentDecision",
+      "data": {
+        "run_id": "11111111-1111-4111-8111-111111111111",
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "plan_revision": 1,
+        "decision": "stop",
+        "reason_summary": "已无可执行的新取证动作",
+        "evidence_ids": [],
+        "plan_steps": [],
+        "action": null,
+        "stop_reason": "no_progress"
+      }
+    },
+    {
+      "name": "检测记录",
+      "schema": "Evidence",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "binding_id": "11111111-1111-4111-8111-111111111111",
+        "scope_id": "11111111-1111-4111-8111-111111111111",
+        "risk": "D02",
+        "outcome": "suspect",
+        "intervals": [
+          {
+            "start_sample": 0,
+            "end_sample": 24000
+          }
+        ],
+        "attachment_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "server_sequence": 1
+      }
+    },
+    {
+      "name": "技术解决请求无需已发布",
+      "schema": "ResolveCommand",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "issue_id": "11111111-1111-4111-8111-111111111111",
+        "issue_revision": 1,
+        "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "proof_id": "11111111-1111-4111-8111-111111111111",
+        "quality_revision": 1,
+        "contract_version": 2
+      }
+    },
+    {
+      "name": "交付请求不携带用户听审确认",
+      "schema": "ReleaseCommand",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "deliverable_kind": "audio",
+        "quality_revision": 1,
+        "contract_version": 2
+      }
+    },
+    {
+      "name": "候选仅暂定采用",
+      "schema": "CandidateSelection",
+      "data": {
+        "baseline_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidate_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "policy_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "target_finding_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "comparison_evidence_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "decision": "provisional",
+        "reason_codes": [
+          "all_checks_passed"
+        ]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "模型请求任意Shell",
+      "schema": "AgentDecision",
+      "data": {
+        "run_id": "11111111-1111-4111-8111-111111111111",
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "plan_revision": 1,
+        "decision": "observe",
+        "reason_summary": "先比较原声与最终音轨的同一位置",
+        "evidence_ids": [],
+        "plan_steps": [
+          {
+            "step_id": 1,
+            "goal": "定位首次偏差阶段",
+            "expected_evidence": "相同句子各阶段音频的检测回执"
+          }
+        ],
+        "action": {
+          "tool": "shell",
+          "resource_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "binding_id": null
+        },
+        "stop_reason": null
+      }
+    },
+    {
+      "name": "停止仍请求工具",
+      "schema": "AgentDecision",
+      "data": {
+        "run_id": "11111111-1111-4111-8111-111111111111",
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "plan_revision": 1,
+        "decision": "stop",
+        "reason_summary": "已无可执行的新取证动作",
+        "evidence_ids": [],
+        "plan_steps": [],
+        "action": {
+          "tool": "get_evidence",
+          "resource_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "binding_id": null
+        },
+        "stop_reason": "no_progress"
+      }
+    },
+    {
+      "name": "旧质量契约",
+      "schema": "ReleaseCommand",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "deliverable_kind": "audio",
+        "quality_revision": 1,
+        "contract_version": 1
+      }
+    },
+    {
+      "name": "非法散列",
+      "schema": "ReleaseCommand",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "bad",
+        "deliverable_kind": "audio",
+        "quality_revision": 1,
+        "contract_version": 2
+      }
+    },
+    {
+      "name": "负数版本",
+      "schema": "ResolveCommand",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "issue_id": "11111111-1111-4111-8111-111111111111",
+        "issue_revision": 0,
+        "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "proof_id": "11111111-1111-4111-8111-111111111111",
+        "quality_revision": 1,
+        "contract_version": 2
+      }
+    },
+    {
+      "name": "把工具结果写成自动发布",
+      "schema": "Evidence",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "binding_id": "11111111-1111-4111-8111-111111111111",
+        "scope_id": "11111111-1111-4111-8111-111111111111",
+        "risk": "D02",
+        "outcome": "release",
+        "intervals": [
+          {
+            "start_sample": 0,
+            "end_sample": 24000
+          }
+        ],
+        "attachment_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "server_sequence": 1
+      }
+    },
+    {
+      "name": "客户端伪造通过",
+      "schema": "ReleaseCommand",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "deliverable_kind": "audio",
+        "quality_revision": 1,
+        "contract_version": 2,
+        "pass": true
+      }
+    },
+    {
+      "name": "观察动作不能提交修复",
+      "schema": "AgentDecision",
+      "data": {
+        "run_id": "11111111-1111-4111-8111-111111111111",
+        "snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "plan_revision": 1,
+        "decision": "observe",
+        "reason_summary": "先比较原声与最终音轨的同一位置",
+        "evidence_ids": [],
+        "plan_steps": [
+          {
+            "step_id": 1,
+            "goal": "定位首次偏差阶段",
+            "expected_evidence": "相同句子各阶段音频的检测回执"
+          }
+        ],
+        "action": {
+          "tool": "submit_repair",
+          "resource_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "binding_id": null
+        },
+        "stop_reason": null
+      }
+    }
+  ]
+}
