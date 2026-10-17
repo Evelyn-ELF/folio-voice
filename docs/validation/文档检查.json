@@ -1,16 +1,16 @@
 {
-  "检查时间UTC": "2026-10-17T07:02:11.728501+00:00",
+  "检查时间UTC": "2026-10-17T07:17:28.907582+00:00",
   "范围": "活动文档结构、显式锚点、内联本地链接、编号归属及R/V双向映射",
   "边界": "不检查归档、外部网页、自然语言冲突或Schema业务语义",
   "输入SHA256": {
     "README.md": "4fd2db3b2ccecdc032b2b91209a61cf63f0acd01a4da61b786a2f4465a6a195d",
-    "AGENTS.md": "f1db07ce77f8f99caa7aa4c4dc8e311846783b58bc876e3850ac1543df19a919",
+    "AGENTS.md": "265e1cf8c11e0adec17902a032474132d1d865b0ded78a82cb76c28da27f554f",
     "docs/系统设计.md": "055427af20d6811ffb33642412c3d3f4c14f06b4bf3edf698fd92fd96151cdc4",
-    "docs/工程规范.md": "9a1f01e14dc4a89c7431e77d3bc5ffe6305f45d8dd2645ce5129adc588607d39",
+    "docs/工程规范.md": "9568e8efc1c34237ac5daef58a15aacaa62fff20d2e6260670ed291ab7592153",
     "docs/验证计划.md": "ae18d541c04c2ecff6d91501720293fcd83b50a45299445969d8048d17f1f2a7",
-    "docs/开发任务.md": "d21b3e4635ae9503b465076b49dec9448e5d80e492e6c483cdeb343f8c3dc80f"
+    "docs/开发任务.md": "ea106c8c6901573fd9d4c3a24f56ad4f42fd3937c4e7b299def8cd961ce2b1c5"
   },
-  "本地链接数": 226,
+  "本地链接数": 232,
   "定义编号数": {
     "A": 5,
     "ADR": 8,
@@ -24,7 +24,7 @@
     "N": 29,
     "Q": 5,
     "R": 21,
-    "S": 30,
+    "S": 31,
     "T": 4,
     "V": 21
   },
