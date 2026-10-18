@@ -1,0 +1,217 @@
+{
+  "核实时间UTC": "2026-10-18T06:47:16.867Z",
+  "任务": "F03远端CI接入",
+  "依据": [
+    "N03",
+    "N06",
+    "N07",
+    "N20",
+    "N27",
+    "N28",
+    "N29",
+    "S20",
+    "S36",
+    "S43",
+    "S44"
+  ],
+  "用户授权": "用户明确回复可以，授权当前累计开发变更提交并推送到当前开发分支",
+  "目标仓库": "Evelyn-ELF/folio-voice",
+  "目标分支": "codex/folio-voice-development",
+  "代码提交": "18db50de190e41ecf2f7d525ca3d6a994aa1fb5a",
+  "工作流": {
+    "id": 39105051459,
+    "name": "工程检查",
+    "head_sha": "18db50de190e41ecf2f7d525ca3d6a994aa1fb5a",
+    "head_branch": "codex/folio-voice-development",
+    "status": "completed",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "created_at": "2026-10-18T06:43:27Z",
+    "updated_at": "2026-10-18T06:44:41Z",
+    "html_url": "https://github.com/Evelyn-ELF/folio-voice/actions/runs/39105051459"
+  },
+  "作业": {
+    "jobs": [
+      {
+        "id": 117608969973,
+        "name": "工程检查",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 39105051459,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "检出公开源码",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "安装Python",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "安装Node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "按锁安装依赖",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "运行共用检查",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "构建镜像并检查容器入口",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post 安装Node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post 安装Python",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post 检出公开源码",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      }
+    ]
+  },
+  "日志摘要": [
+    "﻿2026-10-18T06:43:32.1008258Z Current runner version: '2.337.0'",
+    "2026-10-18T06:43:32.1025716Z ##[group]Runner Image Provisioner",
+    "2026-10-18T06:43:32.1026346Z Hosted Compute Agent",
+    "2026-10-18T06:43:32.1026705Z Version: 20261012.601",
+    "2026-10-18T06:43:32.1027080Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d",
+    "2026-10-18T06:43:32.1027723Z Build Date: 2026-10-12T17:48:21Z",
+    "2026-10-18T06:43:32.1028127Z Worker ID: {fba8d688-3a04-4f53-ba3f-e1b84764edb3}",
+    "2026-10-18T06:43:32.1028612Z Region: southcentralus",
+    "2026-10-18T06:43:32.1028979Z Cloud: Azure",
+    "2026-10-18T06:43:32.1029302Z ##[endgroup]",
+    "2026-10-18T06:43:32.1030174Z ##[group]Operating System",
+    "2026-10-18T06:43:32.1030534Z Ubuntu",
+    "2026-10-18T06:43:32.1030866Z 24.04.5",
+    "2026-10-18T06:43:32.1031227Z LTS",
+    "2026-10-18T06:43:32.1031541Z ##[endgroup]",
+    "2026-10-18T06:43:32.1031927Z ##[group]Runner Image",
+    "2026-10-18T06:43:32.1032286Z Image: ubuntu-24.04",
+    "2026-10-18T06:43:32.1032642Z Version: 20261012.334.1",
+    "2026-10-18T06:43:32.1033436Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md",
+    "2026-10-18T06:43:32.1034328Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334",
+    "2026-10-18T06:43:32.1034875Z ##[endgroup]",
+    "2026-10-18T06:43:32.1035554Z ##[group]GITHUB_TOKEN Permissions",
+    "2026-10-18T06:43:32.1036927Z Contents: read",
+    "2026-10-18T06:43:32.1037490Z Metadata: read",
+    "2026-10-18T06:43:32.1038159Z ##[endgroup]",
+    "2026-10-18T06:43:32.1039534Z Secret source: Actions",
+    "2026-10-18T06:43:32.1040131Z Cache mode: write",
+    "2026-10-18T06:43:32.1040546Z Prepare workflow directory",
+    "2026-10-18T06:43:57.3341490Z All installed packages are compatible",
+    "2026-10-18T06:43:57.5608418Z   \"结果\": \"通过\"",
+    "2026-10-18T06:43:59.2134025Z   \"结果\": \"通过\"",
+    "2026-10-18T06:44:06.1322632Z Ran 20 tests in 6.799s",
+    "2026-10-18T06:44:09.4316822Z Ran 25 tests in 3.088s",
+    "2026-10-18T06:44:09.5401005Z Ran 6 tests in 0.022s",
+    "2026-10-18T06:44:10.4749721Z Ran 26 tests in 0.875s",
+    "2026-10-18T06:44:11.7957937Z Ran 11 tests in 0.773s",
+    "2026-10-18T06:44:11.9066955Z All checks passed!",
+    "2026-10-18T06:44:11.9298902Z 24 files already formatted",
+    "2026-10-18T06:44:14.8061218Z Success: no issues found in 11 source files",
+    "2026-10-18T06:44:17.8741487Z ℹ tests 5",
+    "2026-10-18T06:44:22.2876953Z #8 resolve registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1 done",
+    "2026-10-18T06:44:22.2877993Z #8 sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1 3.93kB / 3.93kB done",
+    "2026-10-18T06:44:22.2878399Z #8 sha256:70a832c538c185e6a1a5387d46fc5b615363c50d49dcf50505879ee3f39c6001 1.74kB / 1.74kB done",
+    "2026-10-18T06:44:22.2878789Z #8 sha256:354c13b6c96f9ee1d05feba4ffade8b40e4b0f26a75cb493a2cc3b0b6b8a5207 4.52kB / 4.52kB done",
+    "2026-10-18T06:44:22.5868696Z #8 sha256:c99a1005c8f98f8594520f9241d37987592da76660a8fd3d6f756785cc1a15ab 3.31kB / 3.31kB 0.1s done",
+    "2026-10-18T06:44:23.3291881Z #8 sha256:8c03a04d91085790ed28e701bc2db07b652b20f7d10f11e2d083f5c2f794fdf2 54.77MB / 54.77MB 1.0s done",
+    "2026-10-18T06:44:23.3292719Z #8 sha256:68629629b516c3cd6f5e71ffbe18e32afb1ae5b4926c92d058c0f11ef1fd58a3 28.24MB / 28.24MB 1.0s done",
+    "2026-10-18T06:44:23.3293399Z #8 sha256:2706a4201bee41bf7a2f9afaa51863e391e0798b7dfc9f2ccee878de7eaa2cf9 446B / 446B 1.0s done",
+    "2026-10-18T06:44:24.0207454Z #8 extracting sha256:68629629b516c3cd6f5e71ffbe18e32afb1ae5b4926c92d058c0f11ef1fd58a3 0.8s done",
+    "2026-10-18T06:44:24.2311523Z #8 extracting sha256:c99a1005c8f98f8594520f9241d37987592da76660a8fd3d6f756785cc1a15ab done",
+    "2026-10-18T06:44:29.1465777Z #8 extracting sha256:8c03a04d91085790ed28e701bc2db07b652b20f7d10f11e2d083f5c2f794fdf2 1.2s done",
+    "2026-10-18T06:44:29.7102030Z #8 extracting sha256:2706a4201bee41bf7a2f9afaa51863e391e0798b7dfc9f2ccee878de7eaa2cf9 done",
+    "2026-10-18T06:44:29.7104990Z #9 resolve registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941 done",
+    "2026-10-18T06:44:29.7105858Z #9 sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941 9.12kB / 9.12kB done",
+    "2026-10-18T06:44:29.7106565Z #9 sha256:34bb71a7de6dbecc839d8d6f8aaff8c4bf67ce01634764eaf929cb64d3ae315e 1.75kB / 1.75kB done",
+    "2026-10-18T06:44:29.7107412Z #9 sha256:e8890bea8466e8150f8451aea96c71f95824c2533b353e72c9bce3f1fa7780f7 4.97kB / 4.97kB done",
+    "2026-10-18T06:44:29.7108074Z #9 sha256:86233c87d5b9a04953805a777f8aaaaebbb77cc31139e5805ee749348c520f5c 3.52MB / 3.52MB 1.2s done",
+    "2026-10-18T06:44:29.7108792Z #9 sha256:06de01a8f2d2fbe480ec8e2b100ce9275942d8cda175fd9ebd216eeb05c5bd6e 12.91MB / 12.91MB 1.5s done",
+    "2026-10-18T06:44:29.7109496Z #9 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 28.23MB / 28.23MB 1.5s done",
+    "2026-10-18T06:44:29.7110189Z #9 sha256:3d1c23c87c073cf7b6f48f6589616e715cb4d969ba08d215f5ea0895faea424b 251B / 251B 1.5s done",
+    "2026-10-18T06:44:29.7110849Z #9 extracting sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 0.7s done",
+    "2026-10-18T06:44:29.7111527Z #9 extracting sha256:86233c87d5b9a04953805a777f8aaaaebbb77cc31139e5805ee749348c520f5c 0.2s done",
+    "2026-10-18T06:44:29.7112177Z #9 extracting sha256:06de01a8f2d2fbe480ec8e2b100ce9275942d8cda175fd9ebd216eeb05c5bd6e 0.4s done",
+    "2026-10-18T06:44:29.7112828Z #9 extracting sha256:3d1c23c87c073cf7b6f48f6589616e715cb4d969ba08d215f5ea0895faea424b done",
+    "2026-10-18T06:44:35.0421652Z #24 writing image sha256:ec2c2532e115e290f7aac654732ffea5bb5f1ccb26dc4de06fa49adb0e15bbcc done",
+    "2026-10-18T06:44:37.5768400Z     \"Python\": \"3.14.2\",",
+    "2026-10-18T06:44:37.5768588Z     \"UID\": 10001,",
+    "2026-10-18T06:44:37.5768763Z     \"SQLite\": \"3.40.1\",",
+    "2026-10-18T06:44:37.5773119Z   \"存储回归\": \"..........................\\n----------------------------------------------------------------------\\nRan 26 tests in 0.269s\\n\\nOK\\n\",",
+    "2026-10-18T06:44:37.5788759Z   \"镜像ID\": \"sha256:ec2c2532e115e290f7aac654732ffea5bb5f1ccb26dc4de06fa49adb0e15bbcc\",",
+    "2026-10-18T06:44:37.5789182Z   \"结果\": \"通过；不代表业务、模型或设备验收\",",
+    "2026-10-18T06:44:37.5789395Z   \"容器回收\": \"完成\""
+  ],
+  "主分支保护核实": {
+    "分支元数据": {
+      "name": "main",
+      "protected": false,
+      "protection": {
+        "enabled": false,
+        "required_status_checks": {
+          "enforcement_level": "off",
+          "contexts": [],
+          "checks": []
+        }
+      }
+    },
+    "规则集列表": [],
+    "完整管理接口": "403 Resource not accessible by integration",
+    "处置": "未修改远端保护设置；当前未启用必需检查强拦截。F03的可用时设置条件受限，限制留在F03，管理权限可用后补设，不能将CI通过等同强制保护"
+  },
+  "暂存检查例外": {
+    "路径": "migrations/0003_quality_feedback_agent.sql",
+    "行": 323,
+    "问题": "一个已存在的行尾空格",
+    "处置": "保留已验证迁移SHA256；完整暂存whitespace检查仅允许此精确输出与精确散列，其他文件继续检查，无永久忽略规则",
+    "SHA256": "829ffc7987dd07557817baf66145c21adcbcfbaa98311abbc712203498305b5a"
+  },
+  "环境边界": "远端Ubuntu托管运行器；模型/音频/设备/业务服务未由CI验证；容器26项存储用例不重复计入88项Python用例",
+  "评审": "作者本地语义自审；未使用独立评审者，未创建PR或合并main",
+  "后续": "记录CI结果的文档提交将再次触发CI；本文引用上述代码提交证据，最终状态另在用户交付中报告，避免自引用提交散列",
+  "完整作业日志SHA256": "6a79980fb37fe4d76b679fc5a6f3fe6fd33b969b0845a945b99adbccb7c97059",
+  "日志来源与保留": "关键输出保存在本记录，完整作业日志从GitHub作业下载，以上散列对应下载并解码后的UTF-8文本。",
+  "代码Git树": "e0e0785c43d8c7eab8f08cea18eb8e0df43c4912"
+}
