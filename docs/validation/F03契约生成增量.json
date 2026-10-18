@@ -1,0 +1,300 @@
+{
+  "执行时间UTC": "2026-10-17T12:03:24.710631+00:00",
+  "执行者": "Codex：自动化检查与作者本地自审，无独立评审者",
+  "任务": "F03：I0编排结构契约与类型生成链增量",
+  "关联需求": [
+    "R10",
+    "R12",
+    "R14",
+    "R18",
+    "R20",
+    "R21"
+  ],
+  "适用规则": [
+    "N02",
+    "N03",
+    "N06",
+    "N07",
+    "N08",
+    "N20",
+    "N25",
+    "N26",
+    "N28",
+    "N29"
+  ],
+  "权威依据": [
+    "S08",
+    "S09",
+    "S20",
+    "S29",
+    "S30",
+    "S32",
+    "S33",
+    "S34"
+  ],
+  "配置确认": "用户在本次会话确认GPT-6 Astra＋Extra High；非自动切换记录",
+  "环境": {
+    "Python": "3.14.2",
+    "jsonschema": "4.26.0",
+    "rfc3339-validator": "0.1.4",
+    "six": "1.17.0",
+    "ruff": "0.14.14",
+    "mypy": "1.19.1",
+    "attrs": "26.1.0",
+    "referencing": "0.37.0",
+    "jsonschema-specifications": "2025.9.1",
+    "rpds-py": "2026.9.1",
+    "librt": "0.16.0",
+    "pathspec": "1.1.1",
+    "typing_extensions": "4.16.0",
+    "mypy_extensions": "1.1.0",
+    "node": "v26.4.0",
+    "npm": "11.17.0",
+    "TypeScript": "5.9.3"
+  },
+  "输入SHA256": {
+    ".gitignore": "230e57027fc3aa33845bf82f6078bbfd63a4f6c23a104686c0bf12df40a4076e",
+    "README.md": "41c158a2fd029d18cde16fb2f3c5a315ab0b5a73b90d13d16bfb58f4dd2c07b5",
+    "docs/系统设计.md": "2cdb0b39ef9575996171a0a6b224de97eb69ea5e53a5680c12bdd6f7ec947d31",
+    "docs/工程规范.md": "47f02d297a98623dd2dfb0c4cc736bb7e9f7878a272b831b49be3aebe7bcf1bd",
+    "docs/验证计划.md": "4df58f32cb03ee5e0cbb71114e0a3fd8406743f45bf543ffe1c7e95a2cae61a2",
+    "docs/开发任务.md": "bd9f35d124b061c76587f623cdfd255a2fdf83b17ec1d5cef3410d67fb0947e3",
+    "docs/contracts/core.schema.json": "cee30aa09a2678dc135796679bb9a9c01b266fdb794aa2d15b2edd3752262d68",
+    "docs/contracts/examples.json": "d15bedd0c9d23218a86edbdacbfd6b3fbbd959babd96caf33ef72fb8825e1b4d",
+    "docs/validation/契约校验环境.txt": "745887e26af4bf5bd72a2e30d620640dfb6cc862d91edf96a806cdd9eb823242",
+    "tools/generate_contract_types.py": "414b0325f1da6fe0176d21ebf3d5addead72f9441052d001ebcfa243d248f8ae",
+    "tools/validate_design_contracts.py": "78a89d8ebce62a9dddb33db9da0c20eae5e972432044f69ca4b170529d9f8121",
+    "tools/test_generate_contract_types.py": "b558ad3d8a9f9ea43ed1af969bcf112ce6d4e263ae187d25c53863383f766529",
+    "tools/test_check_documents.py": "77f1055b11eca519937556e9ddc070e730b2154689f60d880d754af7582f0b01",
+    "tools/requirements.txt": "813a7beac9317eb3c55c83a5e49facf36006bde1815e084b96b15692da85b69f",
+    "pyproject.toml": "c0bcea09568ae1d384ff64e7edf534562065563cd38988b0b55a9f900d1263bc",
+    "package.json": "110b1953201585630893d1cee523d936739bf16496aeea8a44f5566e28d22d03",
+    "package-lock.json": "b3ec25e874be6f9d0e63eb8a3f9f2e1dc1c49bfe41c3e7b0e27a42a97469b38c",
+    "packages/contracts/generated.py": "dd84260f8c742e5ca9647354432caf942c500f4bbb18e8350938632686ba1d4d",
+    "packages/contracts/generated.ts": "fd4ad922ac670109cc5386c87df31c443fef012624a05db7797a628bad60dbf2",
+    "packages/contracts/tsconfig.json": "0f41f7fae8a07440fc9e21e36855d07d4f919f83e52e978ac81888107fa53917",
+    "tests/contracts/test_orchestration_schema.py": "ff5da32341d25d17c249a3c08e49888d7e8f48a0dbc7d2dc79b14dc3ba285774",
+    "tests/contracts/test_format_capability.py": "65f5d67eb7198d8a00721e63eb555e76b28addadfe039467dd203471285bed4d"
+  },
+  "范围": "Schema结构、格式能力、类型生成与过期检测、静态/类型及文档检查；不是产品服务或质量验收",
+  "结果": "通过",
+  "检查": [
+    {
+      "检查": "工具回归",
+      "命令参数": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_*.py"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 1.693,
+      "标准输出": "",
+      "标准错误": "................\n----------------------------------------------------------------------\nRan 16 tests in 1.655s\n\nOK\n"
+    },
+    {
+      "检查": "编排结构及格式能力回归",
+      "命令参数": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/contracts",
+        "-p",
+        "test_*.py"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.114,
+      "标准输出": "",
+      "标准错误": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "检查": "Schema元校验与32个结构样例",
+      "命令参数": [
+        "python",
+        "tools/validate_design_contracts.py"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.08,
+      "标准输出": "{\n  \"范围\": \"Schema元校验及结构正反例，非产品测试\",\n  \"校验器\": \"jsonschema 4.26.0\",\n  \"Schema元校验\": \"通过\",\n  \"样例\": [\n    {\n      \"样例\": \"Agent读取证据\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"范围明确但没有新证据时停止\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"检测记录\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"技术解决请求无需已发布\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"交付请求不携带用户听审确认\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"候选仅暂定采用\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CreateProduction结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ProductionAccepted结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"TaskLease结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"Heartbeat结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CheckpointCommand结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"TaskResult结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ProductionControl结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CheckpointManifest结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"模型请求任意Shell\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 3\n    },\n    {\n      \"样例\": \"停止仍请求工具\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"旧质量契约\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"非法散列\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"负数版本\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"把工具结果写成自动发布\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"客户端伪造通过\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"观察动作不能提交修复\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CreateProduction拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ProductionAccepted拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"TaskLease拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"Heartbeat拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CheckpointCommand拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"TaskResult拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ProductionControl拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CheckpointManifest拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"租约截止时间缺时区\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"租约截止时间不存在日期\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    }\n  ]\n}\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "生成一致性",
+      "命令参数": [
+        "python",
+        "tools/generate_contract_types.py",
+        "--check"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.032,
+      "标准输出": "生成物一致\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "静态检查",
+      "命令参数": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "tools/generate_contract_types.py",
+        "tools/validate_design_contracts.py",
+        "tools/test_generate_contract_types.py",
+        "tools/test_check_documents.py",
+        "tests/contracts",
+        "packages/contracts/generated.py"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.024,
+      "标准输出": "All checks passed!\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "格式检查",
+      "命令参数": [
+        "python",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "tools/generate_contract_types.py",
+        "tools/validate_design_contracts.py",
+        "tools/test_generate_contract_types.py",
+        "tools/test_check_documents.py",
+        "tests/contracts"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.023,
+      "标准输出": "6 files already formatted\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "Python严格类型检查",
+      "命令参数": [
+        "python",
+        "-m",
+        "mypy"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.215,
+      "标准输出": "Success: no issues found in 2 source files\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "按Node依赖锁重装",
+      "命令参数": [
+        "npm",
+        "ci",
+        "--offline",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "--cache",
+        "/private/tmp/folio-npm-cache"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.318,
+      "标准输出": "\nadded 1 package in 251ms\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "TypeScript严格类型检查",
+      "命令参数": [
+        "npm",
+        "run",
+        "check:contracts"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 1.004,
+      "标准输出": "\n> check:contracts\n> tsc --project packages/contracts/tsconfig.json\n\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "Python依赖完整性",
+      "命令参数": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.156,
+      "标准输出": "No broken requirements found.\n",
+      "标准错误": "WARNING: The directory '/Users/wangmeiling/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n"
+    },
+    {
+      "检查": "文档机械检查",
+      "命令参数": [
+        "python",
+        "tools/check_documents.py",
+        "--output",
+        "docs/validation/文档检查.json"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.109,
+      "标准输出": "{\n  \"检查时间UTC\": \"2026-10-17T12:03:24.598987+00:00\",\n  \"范围\": \"活动文档结构、显式锚点、内联本地链接、编号归属及R/V双向映射\",\n  \"边界\": \"不检查归档、外部网页、自然语言冲突或Schema业务语义\",\n  \"输入SHA256\": {\n    \"README.md\": \"41c158a2fd029d18cde16fb2f3c5a315ab0b5a73b90d13d16bfb58f4dd2c07b5\",\n    \"AGENTS.md\": \"265e1cf8c11e0adec17902a032474132d1d865b0ded78a82cb76c28da27f554f\",\n    \"docs/系统设计.md\": \"2cdb0b39ef9575996171a0a6b224de97eb69ea5e53a5680c12bdd6f7ec947d31\",\n    \"docs/工程规范.md\": \"47f02d297a98623dd2dfb0c4cc736bb7e9f7878a272b831b49be3aebe7bcf1bd\",\n    \"docs/验证计划.md\": \"4df58f32cb03ee5e0cbb71114e0a3fd8406743f45bf543ffe1c7e95a2cae61a2\",\n    \"docs/开发任务.md\": \"bd9f35d124b061c76587f623cdfd255a2fdf83b17ec1d5cef3410d67fb0947e3\"\n  },\n  \"本地链接数\": 251,\n  \"定义编号数\": {\n    \"A\": 5,\n    \"ADR\": 8,\n    \"C\": 12,\n    \"D\": 6,\n    \"E\": 8,\n    \"F\": 12,\n    \"I\": 6,\n    \"INV\": 7,\n    \"K\": 7,\n    \"N\": 29,\n    \"Q\": 5,\n    \"R\": 21,\n    \"S\": 34,\n    \"T\": 4,\n    \"V\": 21\n  },\n  \"错误\": [],\n  \"结果\": \"通过\"\n}\n",
+      "标准错误": ""
+    },
+    {
+      "检查": "差异空白检查",
+      "命令参数": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "预期退出码": 0,
+      "实际退出码": 0,
+      "状态": "通过",
+      "耗时秒": 0.012,
+      "标准输出": "",
+      "标准错误": ""
+    }
+  ],
+  "失败驱动记录": [
+    "编排测试初次因缺少结构定义失败；实现后转绿。",
+    "生成器7项测试初次6项因缺少生成器失败；实现后7项通过。",
+    "无时区及无效日期反例揭露可选日期校验依赖缺失；锁定依赖并对缺能力报错后通过。",
+    "检查点逐单元制品关联输入先被旧结构拒绝；细化对应结构后通过。",
+    "文档测试副本缺新增源码目录及配置导致3项失败；补齐夹具后通过。",
+    "本次新增文档锚点及规则码表述曾被文档检查拒绝；修正引用与表述后通过。"
+  ],
+  "语义自审": {
+    "范围": "设计10.6/10.8、Schema、样例、生成器、生成物、测试与四份活动文档",
+    "结论": "本次范围未发现未决阻断项；结构源唯一，静态类型不冒充运行校验，所有者/租约/事务/质量裁决未冒称实现。",
+    "处置": "补齐日期校验能力及检查点逐单元映射；生成器使用源字节散列检查过期，该散列不代替业务规范散列。",
+    "未决项": "完整质量实体、OpenAPI、SQL迁移、业务规范散列、模块边界检查、CI、服务事务及真实模型/API/设备证据继续归F03及相应后续任务；F03不关闭。"
+  },
+  "限制": [
+    "只验证已有契约工具及类型，未实现应用API或执行器。",
+    "未执行真实TTS、API、人工听审或设备验证。",
+    "未创建远端CI、分支保护、提交、推送或PR。"
+  ]
+}

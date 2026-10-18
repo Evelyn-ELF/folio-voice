@@ -1,0 +1,477 @@
+{
+  "汇总时间UTC": "2026-10-18T04:57:06.156894+00:00",
+  "任务": "F03阶段2，工程骨架增量；整体未完成",
+  "配置": "用户确认GPT-6.1 Sol＋High",
+  "依据": [
+    "N06",
+    "N07",
+    "N20",
+    "N27",
+    "N28",
+    "N29",
+    "S09",
+    "S20",
+    "S29",
+    "S30",
+    "S32",
+    "S33",
+    "S34",
+    "S36",
+    "S39",
+    "S40",
+    "S41",
+    "S42",
+    "S43",
+    "S44",
+    "S45"
+  ],
+  "Git": {
+    "分支": "codex/folio-voice-development",
+    "HEAD": "965018afe379c3146b02677523d1df3973955bb2",
+    "状态": "保留全部未提交改动；未提交推送"
+  },
+  "环境": {
+    "Python": "3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.4.4.1)]",
+    "SQLite": "3.53.3",
+    "平台": "macOS-15.6.1-arm64-arm-64bit-Mach-O",
+    "Node": "v26.4.0",
+    "npm": "11.17.0",
+    "uv": "uv 0.11.25 (Homebrew 2026-06-26 aarch64-apple-darwin)",
+    "Python发行包": {
+      "uvicorn": "0.54.0",
+      "rfc3339-validator": "0.1.4",
+      "lazy-object-proxy": "1.13.0",
+      "click": "8.5.0",
+      "jsonschema-specifications": "2025.9.1",
+      "ruff": "0.14.14",
+      "jsonschema": "4.26.0",
+      "opentelemetry-api": "1.45.1",
+      "fastapi": "0.143.3",
+      "mypy": "1.19.1",
+      "h11": "0.16.0",
+      "pydantic_core": "2.50.1",
+      "PyYAML": "6.0.3",
+      "starlette": "1.8.0",
+      "jsonschema-path": "0.5.0",
+      "truststore": "0.10.5",
+      "python-dotenv": "1.2.4",
+      "annotated-types": "0.8.0",
+      "referencing": "0.37.0",
+      "annotated-doc": "0.0.5",
+      "typing-inspection": "0.4.4",
+      "rpds-py": "2026.9.1",
+      "attrs": "26.1.0",
+      "pathspec": "1.1.1",
+      "librt": "0.16.0",
+      "openapi-spec-validator": "0.9.0",
+      "typing_extensions": "4.16.0",
+      "httpx2": "2.13.1",
+      "pydantic": "2.14.1",
+      "pathable": "0.6.0",
+      "httpcore2": "2.13.1",
+      "openapi-schema-validator": "0.9.0",
+      "anyio": "4.15.1",
+      "pydantic-settings": "2.16.0",
+      "mypy_extensions": "1.1.0",
+      "six": "1.17.0",
+      "idna": "3.20"
+    }
+  },
+  "输入SHA256": {
+    ".agents/skills/task-resume/SKILL.md": "9d25033f4360ac58ecd685f5aeb2744febdbd2b5d00a687d5a99186f57aa83e8",
+    ".agents/skills/task-resume/agents/openai.yaml": "38aa2004491e28bef1561c00db0c4091221ec2211550f29dacd6d6b01f03f9d5",
+    ".agents/skills/task-stop/SKILL.md": "20309b17201a48e0c176dd9fc4e20812aa2ee4bc108f523db693fce72e75db04",
+    ".agents/skills/task-stop/agents/openai.yaml": "b99623905db8bdca86b24a6c96275f803b9de3312dd4a93a3a00069036a407bc",
+    ".dockerignore": "053bcf0b41b8bd42ba3257362938cec1fb5e65f8aaa8fc7433b0d3bbfd3f2b0a",
+    ".github/workflows/check.yml": "a3b8a84c6337a7ba6046dbb00f28afdf0eef32001b20e96a95cdc028d634f39a",
+    ".gitignore": "230e57027fc3aa33845bf82f6078bbfd63a4f6c23a104686c0bf12df40a4076e",
+    ".node-version": "e79cba4fa5e1df808a3948bcfafa17b1777216d350638066864d497ead245cb6",
+    ".python-version": "ca2e220d1fb92b2610d4b4dd20bde54d8d258f3e5ce89b8365612ffd415171ee",
+    "AGENTS.md": "5e67564f182c5f510a6abf1c385ff0d4562ad8d03e01117fa627757ec94846d4",
+    "README.md": "9e27a292ca9185c00c4a62881bdfe56197feb8c2b42d78ef57f62d91fe97f6a0",
+    "apps/api/main.py": "d5f36be536fcab892a0beb2caf08b9210a48e23a5633a2835452b6ede1c09cac",
+    "apps/web/index.html": "994f0ac032edf78d7ac68b1b00da23bc8fa598ed9fd577149b3d7db94a0b0dcb",
+    "apps/web/src/main.tsx": "532835f07cceaa3bbce8d496a0af4baafb562ee37a8db476f90f88a6fe5d4850",
+    "apps/web/src/style.css": "cf511c759e85afa76308b6cd393f2029106c41b8a5bc998d318ef71469743043",
+    "apps/web/tsconfig.json": "f4bcab39b42495fe6b97392a54980e038a260bc88df3c1a288db1ef54c23f152",
+    "apps/web/vite.config.ts": "d725e9615a557ebc640525440ec567cd25cc3d0ecc9698f13febf0f2aa9fc7a9",
+    "deploy/Dockerfile": "06fb855368532f722fcf07dfaa9b8424f78b217f8b040ee30e2c3bbdcac2624e",
+    "deploy/compose.yaml": "60c6ebe4aa8e9b08c86a912877285381ab062828edd9a70600137bcac4e838d4",
+    "docs/contracts/core.schema.json": "ae5453e3fb698de9c8659051fc515f784d091525cd95bc964f3af38469b6954b",
+    "docs/contracts/examples.json": "b315889d5558ad0bc00f37df6f46e0ee1c7734327471916630fb89088c83e57b",
+    "docs/contracts/http_examples.json": "5440419b3fe0d548dc47357164152c25d8a545445def7bc79861624855702282",
+    "docs/contracts/http_response_examples.json": "30ea6e2d5b3e0e434a2f0c88c58c21a6d95cf5dd52f45c96471d8740c4eb8b52",
+    "docs/contracts/openapi.json": "92b6f6922e5cebe80eae4484675c71cf00fb058e273cd2886eff25a680ead573",
+    "docs/validation/F03依赖许可清单.json": "0e3b800f841a1702e9c6ea96e4c4eb6fc79c53eb6095f1829cd242f735f810db",
+    "docs/validation/OpenAPI校验环境.txt": "5a8fed8b19dcecda31bdd8e31e47fbdefde10e1b4fdec1879131b95246b84811",
+    "docs/validation/契约校验环境.txt": "745887e26af4bf5bd72a2e30d620640dfb6cc862d91edf96a806cdd9eb823242",
+    "docs/工程规范.md": "6463d76bc6374772bba9277a53466c5fc55137e11fbe4d2c8f7a191f2ac1ea10",
+    "docs/开发任务.md": "fffd1cc071c4dfce6c7b936696e8f4827dc9f98e0629d3a7d8d42187ee1be165",
+    "docs/系统设计.md": "5af25ac0fac3013925feb7c8d3b7ef308117d395ae2b0cef84586e8176f24488",
+    "docs/验证计划.md": "38d55f58deb32687c50f71d18c8554067b5b0ea6a09e5a43bf61b3f20cb55d7d",
+    "migrations/0001_quality_registry.sql": "5aecad8d3a9cdc3d4e1ff943230b502ec70443e9fd15477bd2d689d8fc2ce48f",
+    "migrations/0002_content_tasks.sql": "ae7a76510b42408081936c14d0592e9d873b8ad153ca7c74b6f4d259320db6c5",
+    "migrations/0003_quality_feedback_agent.sql": "829ffc7987dd07557817baf66145c21adcbcfbaa98311abbc712203498305b5a",
+    "package-lock.json": "e92edf335fa68aa3de78b41928d0de9a5c02f932555a59dd10362ede795cf48b",
+    "package.json": "2d3c62072124b5bac0b8c1bf24a23f170c96290189994109ee733995e2414773",
+    "packages/adapters/sqlite_migrations.py": "7a4d35b5179fdc0c5a0742f38f0b2cd05d044ec9e5d24e2897bd695ada6099ba",
+    "packages/contracts/generated.py": "da454c8ab78f6931d73fa974014de7f430b0d19e5997a5ecbdb89d96a73fe6ba",
+    "packages/contracts/generated.ts": "c6de4de637319f1446e7feaa22e92fa3a57fc9b6a403ace49256a06cfc0ede61",
+    "packages/contracts/tsconfig.json": "0f41f7fae8a07440fc9e21e36855d07d4f919f83e52e978ac81888107fa53917",
+    "packages/core/canonical.py": "defe67086de00c2b5afa846b470f927edee64081e75a2ed35262c88cf3cfe4ef",
+    "pyproject.toml": "3ec3cf7bb9554ab2c1c99e40517090103c2ac953b3c98e5ba301ea74a5860556",
+    "scripts/check.py": "ee240257f3f188e590ce1e8faa9d33bd69f1f90f3db28a43e58c4445f1e8c664",
+    "scripts/check_frontend.mjs": "b57a933a9750edfe902a1b05345c995aefc900bf08f76626bbcb5cd63b7e5ca6",
+    "scripts/smoke_http.py": "257962729864681a9f325a2cc15c63d6d6dd954f45df0dfc85cf5c7755983357",
+    "tests/contracts/test_format_capability.py": "65f5d67eb7198d8a00721e63eb555e76b28addadfe039467dd203471285bed4d",
+    "tests/contracts/test_http_contract.py": "21f3c6ba5a702dab2ef74500567373a4787c3781ac79e72b3ac5fa95cecde628",
+    "tests/contracts/test_orchestration_schema.py": "ff5da32341d25d17c249a3c08e49888d7e8f48a0dbc7d2dc79b14dc3ba285774",
+    "tests/contracts/test_quality_schema.py": "8d572c2442d9da60e0e4876c772672dea8edc2b8556fd1a62e0dda9f859aa853",
+    "tests/core/test_canonical.py": "3030013edad6d3a6f5d79f11cb34963c2790f21fdb5b91560eaf7a0669e8a5a5",
+    "tests/engineering/frontend.test.mjs": "1ebde07371b1871e7762479992515528bacc8d330f65aaddb7e7cf0b3542f300",
+    "tests/engineering/test_boundaries.py": "b4db35050e50e9ee069bb346ec14d364b17c2c792d277a036f240b06419d07e1",
+    "tests/engineering/test_skeleton.py": "82d8e70e2d75b56c38a223a6ace7953caeaf4c6192017706c30715b04390a5de",
+    "tests/fixtures/quality_records.json": "b049f77390e518d60229cfc0a1756eb8624725feb5aac2a2ab8a9d2a09271cac",
+    "tests/storage/test_domain_migrations.py": "1b17c9fa6377a11b3438804a18d4af27ce502d5b1eee40702934b16f760a1e04",
+    "tests/storage/test_migrations.py": "1c595a86e999c37b03a643c7aa7dfa4314240e2748a5d91eb9c64bf71f19ec54",
+    "tools/check_documents.py": "47266abc86babdb54b959a53ed6c6b8b11ffe2ecd4d904cc9a06add4d8dea9ff",
+    "tools/check_module_boundaries.py": "b534f829178864f58e54db54aeceed6deb68ce615375605cf9d93fcbfd50fc37",
+    "tools/generate_contract_types.py": "414b0325f1da6fe0176d21ebf3d5addead72f9441052d001ebcfa243d248f8ae",
+    "tools/requirements.txt": "3c9b00dda7d19fb2c5279d81a8d8203e4977d45d1f5442bc9591306f9a920434",
+    "tools/test_check_documents.py": "f9d0b220aa62d71f95b3544d9710dd02758f2874ed578bc7b90ba2070b1611d4",
+    "tools/test_generate_contract_types.py": "b558ad3d8a9f9ea43ed1af969bcf112ce6d4e263ae187d25c53863383f766529",
+    "tools/test_validate_http_contract.py": "56f8a10bbb5c9e82663d60ae0a7c88ccbf137aa8e926398a604e9d3cf8bf39ba",
+    "tools/validate_design_contracts.py": "78a89d8ebce62a9dddb33db9da0c20eae5e972432044f69ca4b170529d9f8121",
+    "tools/validate_http_contract.py": "0db252d25d0d97b7339a4744abb4753f0d995db6f6949acc8630aa5efbab3f31",
+    "uv.lock": "8fc26123933712f0087d89706c2ff272a252e743fe496b9189c3e393aac68486",
+    "workers/container/main.py": "877fdc9ba2e060ab06ac7a0c3d5fe0a22d843e0a929addb5439e0c68cb9d7597",
+    "workers/macos/main.py": "7f11b32263037ae94e3049d1790a86cce45741d999d77f4716a2e07f8fd6ed86"
+  },
+  "与上轮未变核对": {
+    "docs/contracts/core.schema.json": true,
+    "docs/contracts/openapi.json": true,
+    "migrations/0001_quality_registry.sql": true,
+    "migrations/0003_quality_feedback_agent.sql": true,
+    "migrations/0002_content_tasks.sql": true
+  },
+  "测试计数": {
+    "Python": 88,
+    "前端边界": 5,
+    "Schema正反例": 45,
+    "HTTP操作": 48,
+    "请求样例类别": 30,
+    "响应样例": 38
+  },
+  "运行": [
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "tools/check_documents.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "tools/generate_contract_types.py",
+        "--check"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "tools/validate_design_contracts.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "tools/validate_http_contract.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_*.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/contracts",
+        "-p",
+        "test_*.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/core",
+        "-p",
+        "test_*.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/storage",
+        "-p",
+        "test_*.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/engineering",
+        "-p",
+        "test_*.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "apps/api",
+        "workers",
+        "packages",
+        "tests",
+        "scripts/check.py",
+        "scripts/smoke_http.py",
+        "tools/generate_contract_types.py",
+        "tools/validate_design_contracts.py",
+        "tools/validate_http_contract.py",
+        "tools/check_module_boundaries.py",
+        "tools/test_generate_contract_types.py",
+        "tools/test_check_documents.py",
+        "tools/test_validate_http_contract.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "--exclude",
+        "packages/contracts/generated.py",
+        "apps/api",
+        "workers",
+        "packages",
+        "tests",
+        "scripts/check.py",
+        "scripts/smoke_http.py",
+        "tools/generate_contract_types.py",
+        "tools/validate_design_contracts.py",
+        "tools/validate_http_contract.py",
+        "tools/check_module_boundaries.py",
+        "tools/test_generate_contract_types.py",
+        "tools/test_check_documents.py",
+        "tools/test_validate_http_contract.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "-m",
+        "mypy"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "tools/check_module_boundaries.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "npm",
+        "run",
+        "check:contracts"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "npm",
+        "run",
+        "check:boundaries"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "npm",
+        "run",
+        "test:web"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "npm",
+        "run",
+        "build:web"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python",
+        "scripts/smoke_http.py"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "uv",
+        "lock",
+        "--check",
+        "--offline"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        "/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "docker",
+        "compose",
+        "-f",
+        "deploy/compose.yaml",
+        "config",
+        "--quiet"
+      ],
+      "退出码": 0
+    },
+    {
+      "命令": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "退出码": 0
+    }
+  ],
+  "输出说明": "最终22项命令已实际执行，保存命令与退出码；汇总索引缺漏修复后复用结果，未重复执行未变代码。下面首次共用入口完整输出对应相同代码、契约与依赖，文档随后修订本轮状态与未接入框架边界；最终文档输出另存文档检查.json。",
+  "首次共用入口完整输出": "执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/check_documents.py\n{\n  \"检查时间UTC\": \"2026-10-18T04:47:47.966131+00:00\",\n  \"范围\": \"活动文档结构、显式锚点、内联本地链接、编号归属及R/V双向映射\",\n  \"边界\": \"不检查归档、外部网页、自然语言冲突或Schema业务语义\",\n  \"输入SHA256\": {\n    \"README.md\": \"9e27a292ca9185c00c4a62881bdfe56197feb8c2b42d78ef57f62d91fe97f6a0\",\n    \"AGENTS.md\": \"5e67564f182c5f510a6abf1c385ff0d4562ad8d03e01117fa627757ec94846d4\",\n    \"docs/系统设计.md\": \"b457e3e96fa8a7c0708a3cd418a3b639263b6b2d01a7cac4e3927c0cc8835982\",\n    \"docs/工程规范.md\": \"bf2638656769534af3e2c12562baf3fa56bdeffb0105af7a4e3d4aeb8a6329d6\",\n    \"docs/验证计划.md\": \"38d55f58deb32687c50f71d18c8554067b5b0ea6a09e5a43bf61b3f20cb55d7d\",\n    \"docs/开发任务.md\": \"e0dac3b164b2da5bba51a2e5562b9cd8a204f5727adacb3493e727cf3281ef51\"\n  },\n  \"本地链接数\": 304,\n  \"定义编号数\": {\n    \"A\": 5,\n    \"ADR\": 8,\n    \"C\": 12,\n    \"D\": 6,\n    \"E\": 8,\n    \"F\": 12,\n    \"I\": 6,\n    \"INV\": 7,\n    \"K\": 7,\n    \"N\": 29,\n    \"Q\": 5,\n    \"R\": 21,\n    \"S\": 45,\n    \"T\": 4,\n    \"V\": 21\n  },\n  \"错误\": [],\n  \"结果\": \"通过\"\n}\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/generate_contract_types.py --check\n生成物一致\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/validate_design_contracts.py\n{\n  \"范围\": \"Schema元校验及结构正反例，非产品测试\",\n  \"校验器\": \"jsonschema 4.26.0\",\n  \"Schema元校验\": \"通过\",\n  \"样例\": [\n    {\n      \"样例\": \"Agent读取证据\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"范围明确但没有新证据时停止\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"检测记录\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"技术解决请求无需已发布\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"交付请求不携带用户听审确认\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"候选仅暂定采用\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CreateProduction结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ProductionAccepted结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"TaskLease结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"Heartbeat结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CheckpointCommand结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"TaskResult结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ProductionControl结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CheckpointManifest结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"QualityPolicy自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"Qualification自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CompatibilityProfile自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ReleaseDecision自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"资格报告字段齐全的结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"放行引用字段齐全的结构，非真实放行\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"模型请求任意Shell\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 3\n    },\n    {\n      \"样例\": \"停止仍请求工具\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"旧质量契约\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"非法散列\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 2\n    },\n    {\n      \"样例\": \"负数版本\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"把工具结果写成自动发布\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"客户端伪造通过\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"观察动作不能提交修复\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CreateProduction拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ProductionAccepted拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"TaskLease拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"Heartbeat拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CheckpointCommand拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"TaskResult拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ProductionControl拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CheckpointManifest拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"租约截止时间缺时区\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"租约截止时间不存在日期\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"QualityPolicy拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"Qualification拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CompatibilityProfile拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ReleaseDecision拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"活动资格缺报告\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"放行缺门槛证据与资格引用\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 7\n    },\n    {\n      \"样例\": \"SHA256拒绝末尾换行\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    }\n  ]\n}\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/validate_http_contract.py\n{\n  \"范围\": \"OpenAPI 3.1.1、离线引用、请求结构与协议边界，非服务测试\",\n  \"校验器\": \"openapi-spec-validator 0.9.0\",\n  \"操作数\": 48,\n  \"请求样例数\": 30,\n  \"响应样例数\": 38,\n  \"结果\": \"通过\"\n}\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tools -p test_*.py\n....................\n----------------------------------------------------------------------\nRan 20 tests in 4.813s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/contracts -p test_*.py\n.........................\n----------------------------------------------------------------------\nRan 25 tests in 2.220s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/core -p test_*.py\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.076s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/storage -p test_*.py\n..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.335s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/engineering -p test_*.py\n...........\n----------------------------------------------------------------------\nRan 11 tests in 0.688s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m ruff check apps/api workers packages tests scripts/check.py scripts/smoke_http.py tools/generate_contract_types.py tools/validate_design_contracts.py tools/validate_http_contract.py tools/check_module_boundaries.py tools/test_generate_contract_types.py tools/test_check_documents.py tools/test_validate_http_contract.py\nAll checks passed!\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m ruff format --check --exclude packages/contracts/generated.py apps/api workers packages tests scripts/check.py scripts/smoke_http.py tools/generate_contract_types.py tools/validate_design_contracts.py tools/validate_http_contract.py tools/check_module_boundaries.py tools/test_generate_contract_types.py tools/test_check_documents.py tools/test_validate_http_contract.py\n23 files already formatted\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m mypy\nSuccess: no issues found in 10 source files\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/check_module_boundaries.py\n{\"文件数\": 6, \"错误\": []}\n执行：npm run check:contracts\n\n> check:contracts\n> tsc --project packages/contracts/tsconfig.json\n\n执行：npm run check:boundaries\n\n> check:boundaries\n> node scripts/check_frontend.mjs\n\n{\"文件数\":3,\"错误\":[]}\n执行：npm run test:web\n\n> test:web\n> node --test tests/engineering/frontend.test.mjs\n\n✔ Web可以引用契约及组件 (151.419208ms)\n✔ 相对导入不能穿入核心或执行器 (310.412584ms)\n✔ 导出与动态导入同样检查 (733.194041ms)\n✔ 循环引用被拦截 (144.793084ms)\n✔ 缺失模块及契约反向引用被拦截 (289.04275ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1667.03875\n执行：npm run build:web\n\n> build:web\n> tsc -p apps/web/tsconfig.json && vite build apps/web\n\nvite v8.3.4 building client environment for production...\ntransforming...\n✓ 15 modules transformed.\nrendering chunks...\ncomputing gzip size...\napps/web/dist/index.html                   0.39 kB │ gzip:  0.27 kB\napps/web/dist/assets/index-DYziLauV.css    0.64 kB │ gzip:  0.38 kB\napps/web/dist/assets/index-CmSulDwB.js   220.62 kB │ gzip: 69.33 kB\n\n✓ built in 164ms\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python scripts/smoke_http.py\n{\"存活\": 200, \"未认证就绪\": 401, \"中文页面\": 200, \"静态资源\": 200, \"未实现接口与私有路径\": 404, \"说明\": \"真实回环HTTP；未验证产品任务、浏览器交互或模型\"}\n适用工程检查通过；真实模型、音频、设备与远端CI未由此验证。\n",
+  "纯运行环境": {
+    "安装": "UV_PROJECT_ENVIRONMENT=/private/tmp/folio-engineering-runtime uv sync --locked --offline --no-dev --python /opt/homebrew/bin/python3",
+    "安装包数": 14,
+    "结果": "退出0；新的独立环境，仅运行依赖",
+    "冒烟命令": "/private/tmp/folio-engineering-runtime/bin/python scripts/smoke_http.py",
+    "冒烟退出码": 0,
+    "冒烟输出": "{\"存活\": 200, \"未认证就绪\": 401, \"中文页面\": 200, \"静态资源\": 200, \"未实现接口与私有路径\": 404, \"说明\": \"真实回环HTTP；未验证产品任务、浏览器交互或模型\"}\n"
+  },
+  "Docker": {
+    "daemon": "29.5.3 aarch64，先前未运行；本轮启动Docker Desktop",
+    "构建命令": "docker build -f deploy/Dockerfile -t folio-voice:development .",
+    "结果": "未完成；等待近5分钟仍有多层0B，SIGTERM停止，退出130",
+    "构建日志": "#0 building with \"desktop-linux\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 1.00kB done\n#1 DONE 0.0s\n\n#2 [internal] load metadata for docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#2 ...\n\n#3 [internal] load metadata for docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#3 ...\n\n#2 [internal] load metadata for docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#2 DONE 132.1s\n\n#3 [internal] load metadata for docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#3 DONE 132.3s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 623B done\n#4 DONE 0.0s\n\n#5 [internal] load build context\n#5 transferring context: 472.78kB 0.0s done\n#5 DONE 0.0s\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 resolve docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1 done\n#6 sha256:5eb025d0ae2f87d132536df219020478717b1ac75f4042cb3bc50002d58fe6c2 1.74kB / 1.74kB done\n#6 sha256:9eddd8d4491d179ae22c8061675c44f6169c4769f70289b3b55773495e660b2f 4.54kB / 4.54kB done\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 0.1s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 0.1s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 0.1s\n#6 sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1 3.93kB / 3.93kB done\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 5.2s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 5.2s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 5.2s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 resolve docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941 done\n#7 sha256:977174a93ac5b559a077d2e2997bfde0d9b2c0e283a3fddb12747e35aea43689 1.75kB / 1.75kB done\n#7 sha256:df44f77074c60ca5a3d53c108d843ef7b95969ca3086a8bd5157a1f13efbab6a 4.99kB / 4.99kB done\n#7 sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941 9.12kB / 9.12kB done\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 10.2s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 10.2s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 10.2s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 15.3s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 15.3s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 15.3s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 20.4s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 20.4s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 20.4s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 25.6s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 25.6s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 25.6s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 30.6s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 30.6s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 30.6s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 35.7s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 35.7s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 35.7s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 40.8s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 40.8s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 40.8s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 45.8s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 45.8s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 45.8s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 50.8s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 50.8s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 50.8s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 55.9s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 55.9s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 55.9s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0B / 28.12MB 61.0s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 0B / 3.31kB 61.0s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0B / 54.97MB 61.0s\n#6 sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c 3.31kB / 3.31kB 62.2s done\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 62.3s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 2.10MB / 28.12MB 63.2s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 4.19MB / 28.12MB 63.8s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 3.15MB / 54.97MB 64.0s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 6.29MB / 28.12MB 64.1s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 8.39MB / 28.12MB 64.6s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 6.29MB / 54.97MB 64.9s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 10.49MB / 28.12MB 65.1s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 12.58MB / 28.12MB 65.5s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 14.68MB / 28.12MB 65.9s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 9.44MB / 54.97MB 66.0s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 17.83MB / 28.12MB 66.6s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 19.92MB / 28.12MB 67.0s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 15.73MB / 54.97MB 67.0s\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 67.4s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 24.12MB / 28.12MB 67.8s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 19.92MB / 54.97MB 68.1s\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 26.21MB / 28.12MB 68.3s\n#6 extracting sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009\n#6 sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 28.12MB / 28.12MB 68.4s done\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 23.07MB / 54.97MB 68.5s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 27.26MB / 54.97MB 69.0s\n#6 extracting sha256:74f1dcfcc9c80045f6f6394ffcfc261cb19d0c71b97e964aec3d4abf4e0f7009 0.6s done\n#6 extracting sha256:692742832d41857b4f071f8a8a8007d01625c007a0aa5cd2dcf9bedc3b447e7c done\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 31.46MB / 54.97MB 69.3s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 34.60MB / 54.97MB 69.7s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 38.80MB / 54.97MB 70.1s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 41.94MB / 54.97MB 70.4s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 45.09MB / 54.97MB 70.7s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 49.28MB / 54.97MB 71.0s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 53.48MB / 54.97MB 71.4s\n#6 sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 54.97MB / 54.97MB 71.6s done\n#6 extracting sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0.1s\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 72.5s\n#6 extracting sha256:f6e337beec6ba38d264191f7932c2cddb2019d0f58e0dac3be7f2ea493956885 0.8s done\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 77.6s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 78.5s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 78.5s\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 82.8s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 86.2s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 86.2s\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 88.0s\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 93.1s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 94.0s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 94.0s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 99.1s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 99.1s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 104.2s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 104.2s\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 104.2s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 109.3s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 109.3s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 114.4s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 114.4s\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 114.6s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 119.6s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 119.6s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 124.8s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 124.8s\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 0B / 448B 124.8s\n#6 ...\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 ...\n\n#6 [web 1/7] FROM docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 448B / 448B 125.6s done\n#6 extracting sha256:c6585902b6251d05f310037eaf3da10997cb996a2b6eabbf4fa7c483309ada36 done\n#6 DONE 125.7s\n\n#8 [web 2/7] WORKDIR /app\n#8 DONE 0.0s\n\n#9 [web 3/7] COPY package.json package-lock.json ./\n#9 DONE 0.0s\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 125.8s\n#7 ...\n\n#10 [web 4/7] RUN npm ci --ignore-scripts\n#10 2.773 \n#10 2.773 added 24 packages, and audited 25 packages in 3s\n#10 2.773 \n#10 2.773 8 packages are looking for funding\n#10 2.774   run `npm fund` for details\n#10 2.774 \n#10 2.774 found 0 vulnerabilities\n#10 2.775 npm notice\n#10 2.775 npm notice New major version of npm available! 11.17.0 -> 12.2.0\n#10 2.775 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0\n#10 2.775 npm notice To update run: npm install -g npm@12.2.0\n#10 2.775 npm notice\n#10 DONE 2.9s\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 ...\n\n#11 [web 5/7] COPY apps/web ./apps/web\n#11 DONE 0.0s\n\n#12 [web 6/7] COPY packages/contracts/generated.ts ./packages/contracts/generated.ts\n#12 DONE 0.0s\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 129.9s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 129.9s\n#7 ...\n\n#13 [web 7/7] RUN npm run build:web\n#13 0.171 \n#13 0.171 > build:web\n#13 0.171 > tsc -p apps/web/tsconfig.json && vite build apps/web\n#13 0.171 \n#13 1.534 vite v8.3.4 building client environment for production...\n#13 1.538 transforming...\n#13 1.563 ✓ 15 modules transformed.\n#13 1.578 rendering chunks...\n#13 1.596 computing gzip size...\n#13 1.599 apps/web/dist/index.html                   0.39 kB │ gzip:  0.27 kB\n#13 1.599 apps/web/dist/assets/index-DYziLauV.css    0.64 kB │ gzip:  0.38 kB\n#13 1.599 apps/web/dist/assets/index-CmSulDwB.js   220.62 kB │ gzip: 69.33 kB\n#13 1.599 \n#13 1.599 ✓ built in 64ms\n#13 DONE 1.6s\n\n#7 [runtime 1/9] FROM docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 130.8s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 135.0s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 135.0s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 135.8s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 140.1s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 140.1s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 140.8s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 145.2s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 145.2s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 145.9s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 150.4s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 150.4s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 150.9s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 155.5s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 155.6s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 156.0s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 160.5s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 160.7s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 161.1s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 165.6s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 165.8s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 166.1s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 170.7s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 170.8s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 171.2s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 175.9s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 175.9s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 176.2s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 180.9s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 180.9s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 181.3s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 186.1s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 186.1s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 186.4s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 191.1s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 191.1s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 191.4s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 196.2s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 196.2s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 196.6s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 201.2s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 201.2s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 201.7s\n#7 sha256:d3d5d8ab26d25b9040a3c2160d7ddfe3911ae81035d5b1b0904f3ebda32476b6 0B / 28.11MB 206.4s\n#7 sha256:3047ef430b9963ca0fabd4d79384fdecf4f399a0510e662d0ffbeb4b70f0e467 0B / 3.35MB 206.4s\n#7 sha256:c7033875c9b104ff9cb9997ffbc15b71fb15612138c38146e7dd92b69a823796 0B / 12.80MB 206.7s\n#7 CANCELED\nERROR: failed to build: failed to solve: Canceled: context canceled\n",
+    "清单诊断命令": "docker buildx imagetools inspect docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941",
+    "清单诊断结果": "等待无返回；SIGTERM未退出后SIGKILL回收，退出137",
+    "清单诊断输出": "",
+    "容器启动": "未执行，不记录为通过",
+    "镜像源配置": "未改变全局配置，未操作其他容器",
+    "根因": "仅确认下载停滞，未证明更具体根因"
+  },
+  "本地作者语义审查": {
+    "目的与模块": "仅工程骨架；核心不依赖Web，worker不写数据库，依赖方向集中静态检查，反例返回非零；不是运行沙箱",
+    "行为与权限": "仅公开存活、拒绝未认证就绪，未实现API无成功回执；无任务/MLX能力；未伪造质量或人审",
+    "文档与证据": "四文档按职责同步，原契约与迁移未改；新旧证据各按输入散列适用",
+    "检查与限制": "22个实际检查命令全部退出0；镜像未构建，容器与远端CI/分支保护未验证，未做浏览器交互或真实模型/设备",
+    "文件维护": "保留必要锁、源码、生成物、迁移和证据；临时脚本、日志和可再生缓存收尾清理；保留已有未提交工作",
+    "评审者": "作者本地自审，无独立评审者"
+  },
+  "失败驱动": [
+    "骨架测试先缺依赖/入口失败；Python与前端边界测试先缺检查器失败",
+    "命名空间父目录导入可绕过worker范围，新增反例失败后收紧具体导入",
+    "macOS临时目录别名导致合法引用与环漏检，统一真实路径后回归",
+    "文档来源表空行被检查器拒绝后修复，未改检查规则",
+    "Starlette弃用旧httpx测试后端，改锁HTTPX2；Vite项目声明ES模块",
+    "全局uv源影响锁命令；项目固定官方PyPI源后离线locked同步与导出通过"
+  ],
+  "剩余": [
+    "修复可达性后重试固定摘要镜像构建与容器冒烟，回收本轮容器",
+    "工作流尚未提交推送或远端执行；无远端必需检查/分支保护证据",
+    "F03满足完成条件后，按阶段表确认Astra＋Extra High再进入F04真实服务事务",
+    "F11补自研许可、完整NOTICE、操作系统包/权重许可与安装交付验证"
+  ],
+  "最终文档检查": {
+    "检查时间UTC": "2026-10-18T04:57:06.364245+00:00",
+    "范围": "活动文档结构、显式锚点、内联本地链接、编号归属及R/V双向映射",
+    "边界": "不检查归档、外部网页、自然语言冲突或Schema业务语义",
+    "输入SHA256": {
+      "README.md": "9e27a292ca9185c00c4a62881bdfe56197feb8c2b42d78ef57f62d91fe97f6a0",
+      "AGENTS.md": "5e67564f182c5f510a6abf1c385ff0d4562ad8d03e01117fa627757ec94846d4",
+      "docs/系统设计.md": "5af25ac0fac3013925feb7c8d3b7ef308117d395ae2b0cef84586e8176f24488",
+      "docs/工程规范.md": "6463d76bc6374772bba9277a53466c5fc55137e11fbe4d2c8f7a191f2ac1ea10",
+      "docs/验证计划.md": "38d55f58deb32687c50f71d18c8554067b5b0ea6a09e5a43bf61b3f20cb55d7d",
+      "docs/开发任务.md": "fffd1cc071c4dfce6c7b936696e8f4827dc9f98e0629d3a7d8d42187ee1be165"
+    },
+    "本地链接数": 307,
+    "定义编号数": {
+      "A": 5,
+      "ADR": 8,
+      "C": 12,
+      "D": 6,
+      "E": 8,
+      "F": 12,
+      "I": 6,
+      "INV": 7,
+      "K": 7,
+      "N": 29,
+      "Q": 5,
+      "R": 21,
+      "S": 45,
+      "T": 4,
+      "V": 21
+    },
+    "错误": [],
+    "结果": "通过"
+  }
+}

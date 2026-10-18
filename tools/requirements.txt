@@ -1,0 +1,7 @@
+# 历史契约检查环境，保留用于旧证据复现；日常完整环境使用uv.lock。
+-r ../docs/validation/OpenAPI校验环境.txt
+ruff==0.14.14
+mypy==1.19.1
+mypy_extensions==1.1.0
+pathspec==1.1.1
+librt==0.16.0

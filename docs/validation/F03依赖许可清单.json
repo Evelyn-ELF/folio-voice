@@ -1,0 +1,1109 @@
+{
+  "核实日期": "2026-10-18",
+  "性质": "实际安装Python发行元数据及锁定npm分发元数据清单，不是法律意见或完整再分发审计；包含开发工具，不含未接入模型、权重或素材",
+  "Python": [
+    {
+      "名称": "annotated-doc",
+      "版本": "0.0.5",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/fastapi/annotated-doc",
+        "Documentation, https://github.com/fastapi/annotated-doc",
+        "Repository, https://github.com/fastapi/annotated-doc",
+        "Issues, https://github.com/fastapi/annotated-doc/issues",
+        "Changelog, https://github.com/fastapi/annotated-doc/release-notes.md"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "annotated_doc-0.0.5.dist-info/licenses/LICENSE",
+          "SHA256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+        }
+      ]
+    },
+    {
+      "名称": "annotated-types",
+      "版本": "0.8.0",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/annotated-types/annotated-types",
+        "Source, https://github.com/annotated-types/annotated-types",
+        "Changelog, https://github.com/annotated-types/annotated-types/releases"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "annotated_types-0.8.0.dist-info/licenses/LICENSE",
+          "SHA256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+        }
+      ]
+    },
+    {
+      "名称": "anyio",
+      "版本": "4.15.1",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Documentation, https://anyio.readthedocs.io/en/latest/",
+        "Changelog, https://anyio.readthedocs.io/en/stable/versionhistory.html",
+        "Source code, https://github.com/agronholm/anyio",
+        "Issue tracker, https://github.com/agronholm/anyio/issues"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "anyio-4.15.1.dist-info/licenses/LICENSE",
+          "SHA256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+        }
+      ]
+    },
+    {
+      "名称": "attrs",
+      "版本": "26.1.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Documentation, https://www.attrs.org/",
+        "Changelog, https://www.attrs.org/en/stable/changelog.html",
+        "GitHub, https://github.com/python-attrs/attrs",
+        "Funding, https://github.com/sponsors/hynek",
+        "Tidelift, https://tidelift.com/subscription/pkg/pypi-attrs?utm_source=pypi-attrs&utm_medium=pypi"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "attrs-26.1.0.dist-info/licenses/LICENSE",
+          "SHA256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f"
+        }
+      ]
+    },
+    {
+      "名称": "click",
+      "版本": "8.5.0",
+      "用途": "运行",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Changes, https://click.palletsprojects.com/page/changes/",
+        "Chat, https://discord.gg/pallets",
+        "Documentation, https://click.palletsprojects.com/",
+        "Donate, https://palletsprojects.com/donate",
+        "Source, https://github.com/pallets/click/"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "click-8.5.0.dist-info/licenses/LICENSE.txt",
+          "SHA256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+        }
+      ]
+    },
+    {
+      "名称": "fastapi",
+      "版本": "0.143.3",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/fastapi/fastapi",
+        "Documentation, https://fastapi.tiangolo.com/",
+        "Repository, https://github.com/fastapi/fastapi",
+        "Issues, https://github.com/fastapi/fastapi/issues",
+        "Changelog, https://fastapi.tiangolo.com/release-notes/"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "fastapi-0.143.3.dist-info/licenses/LICENSE",
+          "SHA256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+        }
+      ]
+    },
+    {
+      "名称": "h11",
+      "版本": "0.16.0",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [],
+      "分发许可文件": [
+        {
+          "路径": "h11-0.16.0.dist-info/licenses/LICENSE.txt",
+          "SHA256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361"
+        }
+      ]
+    },
+    {
+      "名称": "httpcore2",
+      "版本": "2.13.1",
+      "用途": "开发检查",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Changelog, https://github.com/pydantic/httpx2/blob/main/src/httpcore2/CHANGELOG.md",
+        "Homepage, https://github.com/pydantic/httpx2",
+        "Source, https://github.com/pydantic/httpx2/blob/main/src/httpcore2"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "httpcore2-2.13.1.dist-info/licenses/LICENSE.md",
+          "SHA256": "c4df125c807b0613501e943a5c92496dd11d2c16604ce396097a8dde396304d9"
+        }
+      ]
+    },
+    {
+      "名称": "httpx2",
+      "版本": "2.13.1",
+      "用途": "开发检查",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Changelog, https://github.com/pydantic/httpx2/blob/main/src/httpx2/CHANGELOG.md",
+        "Homepage, https://github.com/pydantic/httpx2",
+        "Source, https://github.com/pydantic/httpx2"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "httpx2-2.13.1.dist-info/licenses/LICENSE.md",
+          "SHA256": "7e7d6dbaf7fe160d39fd6e84fd02c33cab96bcbea34d36998d545bceb4a19c30"
+        }
+      ]
+    },
+    {
+      "名称": "idna",
+      "版本": "3.20",
+      "用途": "运行",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Changelog, https://github.com/kjd/idna/blob/master/HISTORY.md",
+        "Issue tracker, https://github.com/kjd/idna/issues",
+        "Source, https://github.com/kjd/idna"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "idna-3.20.dist-info/licenses/LICENSE.md",
+          "SHA256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+        }
+      ]
+    },
+    {
+      "名称": "jsonschema",
+      "版本": "4.26.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/python-jsonschema/jsonschema",
+        "Documentation, https://python-jsonschema.readthedocs.io/",
+        "Issues, https://github.com/python-jsonschema/jsonschema/issues/",
+        "Funding, https://github.com/sponsors/Julian",
+        "Tidelift, https://tidelift.com/subscription/pkg/pypi-jsonschema?utm_source=pypi-jsonschema&utm_medium=referral&utm_campaign=pypi-link",
+        "Changelog, https://github.com/python-jsonschema/jsonschema/blob/main/CHANGELOG.rst",
+        "Source, https://github.com/python-jsonschema/jsonschema"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "jsonschema-4.26.0.dist-info/licenses/COPYING",
+          "SHA256": "4f92a015a13c4d1a040bef018aa13430b4f1bc73b41b16bb846c346766de7439"
+        }
+      ]
+    },
+    {
+      "名称": "jsonschema-path",
+      "版本": "0.5.0",
+      "用途": "开发检查",
+      "许可元数据": "Apache-2.0",
+      "维护方链接": [
+        "Repository, https://github.com/p1c2u/jsonschema-path"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "jsonschema_path-0.5.0.dist-info/licenses/LICENSE",
+          "SHA256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ]
+    },
+    {
+      "名称": "jsonschema-specifications",
+      "版本": "2025.9.1",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Documentation, https://jsonschema-specifications.readthedocs.io/",
+        "Homepage, https://github.com/python-jsonschema/jsonschema-specifications",
+        "Issues, https://github.com/python-jsonschema/jsonschema-specifications/issues/",
+        "Funding, https://github.com/sponsors/Julian",
+        "Tidelift, https://tidelift.com/subscription/pkg/pypi-jsonschema-specifications?utm_source=pypi-jsonschema-specifications&utm_medium=referral&utm_campaign=pypi-link",
+        "Source, https://github.com/python-jsonschema/jsonschema-specifications"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "jsonschema_specifications-2025.9.1.dist-info/licenses/COPYING",
+          "SHA256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c"
+        }
+      ]
+    },
+    {
+      "名称": "lazy-object-proxy",
+      "版本": "1.13.0",
+      "用途": "开发检查",
+      "许可元数据": "BSD-2-Clause",
+      "维护方链接": [
+        "Changelog, https://python-lazy-object-proxy.readthedocs.io/en/latest/changelog.html",
+        "Documentation, https://python-lazy-object-proxy.readthedocs.io/",
+        "Issue Tracker, https://github.com/ionelmc/python-lazy-object-proxy/issues",
+        "Sources, https://github.com/ionelmc/python-lazy-object-proxy"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "lazy_object_proxy-1.13.0.dist-info/licenses/LICENSE",
+          "SHA256": "682a2108a42127a3b54318004a2618dd7325561ca977b72edad8a6bdd44f93da"
+        }
+      ]
+    },
+    {
+      "名称": "librt",
+      "版本": "0.16.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/mypyc/librt",
+        "Issues, https://github.com/mypyc/mypyc/issues"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "librt-0.16.0.dist-info/licenses/LICENSE",
+          "SHA256": "88f9e379c684580053c58e75e296ca2eb243b6edcc6e5357f247310e96eeef8a"
+        }
+      ]
+    },
+    {
+      "名称": "mypy",
+      "版本": "1.19.1",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://www.mypy-lang.org/",
+        "Documentation, https://mypy.readthedocs.io/en/stable/index.html",
+        "Repository, https://github.com/python/mypy",
+        "Changelog, https://github.com/python/mypy/blob/master/CHANGELOG.md",
+        "Issues, https://github.com/python/mypy/issues"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "mypy-1.19.1.dist-info/licenses/LICENSE",
+          "SHA256": "fdf1cd17f50e1305ed8cfd37467312d27a984648dba622cef70573b5512e4e1b"
+        }
+      ]
+    },
+    {
+      "名称": "mypy_extensions",
+      "版本": "1.1.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/python/mypy_extensions"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "mypy_extensions-1.1.0.dist-info/licenses/LICENSE",
+          "SHA256": "a50450da1d53cd777b80ced77c58ff96abe0ccd879706bd142c3ec20e245f0b4"
+        }
+      ]
+    },
+    {
+      "名称": "openapi-schema-validator",
+      "版本": "0.9.0",
+      "用途": "开发检查",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Repository, https://github.com/python-openapi/openapi-schema-validator"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "openapi_schema_validator-0.9.0.dist-info/licenses/LICENSE",
+          "SHA256": "d41b4164b6368056255ae4d17e982176fe243808322d1469a3443dee58d1530a"
+        }
+      ]
+    },
+    {
+      "名称": "openapi-spec-validator",
+      "版本": "0.9.0",
+      "用途": "开发检查",
+      "许可元数据": "Apache-2.0",
+      "维护方链接": [
+        "Documentation, https://openapi-spec-validator.readthedocs.io/en/latest/",
+        "Source, https://github.com/python-openapi/openapi-spec-validator"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "openapi_spec_validator-0.9.0.dist-info/licenses/LICENSE",
+          "SHA256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        },
+        {
+          "路径": "openapi_spec_validator-0.9.0.dist-info/licenses/NOTICE",
+          "SHA256": "e66e45d437e7b6198772bae62b3a5f5c18ca14878d20a6ab4cae21be433b6df0"
+        }
+      ]
+    },
+    {
+      "名称": "opentelemetry-api",
+      "版本": "1.45.1",
+      "用途": "运行",
+      "许可元数据": "Apache-2.0",
+      "维护方链接": [
+        "Homepage, https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-api",
+        "Repository, https://github.com/open-telemetry/opentelemetry-python"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "opentelemetry_api-1.45.1.dist-info/licenses/LICENSE",
+          "SHA256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ]
+    },
+    {
+      "名称": "pathable",
+      "版本": "0.6.0",
+      "用途": "开发检查",
+      "许可元数据": "Apache-2.0",
+      "维护方链接": [
+        "Repository, https://github.com/p1c2u/pathable"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "pathable-0.6.0.dist-info/licenses/LICENSE",
+          "SHA256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ]
+    },
+    {
+      "名称": "pathspec",
+      "版本": "1.1.1",
+      "用途": "开发检查",
+      "许可元数据": "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+      "维护方链接": [
+        "Change Log, https://python-path-specification.readthedocs.io/en/latest/changes.html",
+        "Documentation, https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "Issue Tracker, https://github.com/cpburnz/python-pathspec/issues",
+        "Source Code, https://github.com/cpburnz/python-pathspec"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "pathspec-1.1.1.dist-info/licenses/LICENSE",
+          "SHA256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+        }
+      ]
+    },
+    {
+      "名称": "pydantic",
+      "版本": "2.14.1",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/pydantic/pydantic",
+        "Documentation, https://pydantic.dev/docs/validation/latest/get-started/",
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Source, https://github.com/pydantic/pydantic",
+        "Changelog, https://pydantic.dev/docs/validation/latest/get-started/changelog/"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "pydantic-2.14.1.dist-info/licenses/LICENSE",
+          "SHA256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+        }
+      ]
+    },
+    {
+      "名称": "pydantic-settings",
+      "版本": "2.16.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/pydantic/pydantic-settings",
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Source, https://github.com/pydantic/pydantic-settings",
+        "Changelog, https://github.com/pydantic/pydantic-settings/releases",
+        "Documentation, https://docs.pydantic.dev/dev-v2/concepts/pydantic_settings/"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "pydantic_settings-2.16.0.dist-info/licenses/LICENSE",
+          "SHA256": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+        }
+      ]
+    },
+    {
+      "名称": "pydantic_core",
+      "版本": "2.50.1",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Homepage, https://github.com/pydantic",
+        "Source, https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "pydantic_core-2.50.1.dist-info/licenses/LICENSE",
+          "SHA256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+        }
+      ]
+    },
+    {
+      "名称": "python-dotenv",
+      "版本": "1.2.4",
+      "用途": "开发检查",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Source, https://github.com/theskumar/python-dotenv"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "python_dotenv-1.2.4.dist-info/licenses/LICENSE",
+          "SHA256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+        }
+      ]
+    },
+    {
+      "名称": "PyYAML",
+      "版本": "6.0.3",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Bug Tracker, https://github.com/yaml/pyyaml/issues",
+        "CI, https://github.com/yaml/pyyaml/actions",
+        "Documentation, https://pyyaml.org/wiki/PyYAMLDocumentation",
+        "Mailing lists, http://lists.sourceforge.net/lists/listinfo/yaml-core",
+        "Source Code, https://github.com/yaml/pyyaml"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "pyyaml-6.0.3.dist-info/licenses/LICENSE",
+          "SHA256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+        }
+      ]
+    },
+    {
+      "名称": "referencing",
+      "版本": "0.37.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Documentation, https://referencing.readthedocs.io/",
+        "Homepage, https://github.com/python-jsonschema/referencing",
+        "Issues, https://github.com/python-jsonschema/referencing/issues/",
+        "Funding, https://github.com/sponsors/Julian",
+        "Tidelift, https://tidelift.com/subscription/pkg/pypi-referencing?utm_source=pypi-referencing&utm_medium=referral&utm_campaign=pypi-link",
+        "Changelog, https://referencing.readthedocs.io/en/stable/changes/",
+        "Source, https://github.com/python-jsonschema/referencing"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "referencing-0.37.0.dist-info/licenses/COPYING",
+          "SHA256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c"
+        }
+      ]
+    },
+    {
+      "名称": "rfc3339-validator",
+      "版本": "0.1.4",
+      "用途": "开发检查",
+      "许可元数据": "MIT license",
+      "维护方链接": [],
+      "分发许可文件": [
+        {
+          "路径": "rfc3339_validator-0.1.4.dist-info/LICENSE",
+          "SHA256": "5ba1a4f03626ccca6dcbf53a554545e4f776a335bfdaa233ec3bfe9bb7fac15d"
+        }
+      ]
+    },
+    {
+      "名称": "rpds-py",
+      "版本": "2026.9.1",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Documentation, https://rpds.readthedocs.io/",
+        "Funding, https://github.com/sponsors/Julian",
+        "Homepage, https://github.com/crate-py/rpds",
+        "Issues, https://github.com/crate-py/rpds/issues/",
+        "Source, https://github.com/crate-py/rpds",
+        "Tidelift, https://tidelift.com/subscription/pkg/pypi-rpds-py?utm_source=pypi-rpds-py&utm_medium=referral&utm_campaign=pypi-link",
+        "Upstream, https://github.com/orium/rpds"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "rpds_py-2026.9.1.dist-info/licenses/LICENSE",
+          "SHA256": "314e4e91be3baa93c0fb4bccc9e4e97cd643eb839b065af921782c2175fe9909"
+        }
+      ]
+    },
+    {
+      "名称": "ruff",
+      "版本": "0.14.14",
+      "用途": "开发检查",
+      "许可元数据": "License :: OSI Approved :: MIT License",
+      "维护方链接": [
+        "Changelog, https://github.com/astral-sh/ruff/blob/main/CHANGELOG.md",
+        "Documentation, https://docs.astral.sh/ruff/",
+        "Repository, https://github.com/astral-sh/ruff"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "ruff-0.14.14.dist-info/licenses/LICENSE",
+          "SHA256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+        }
+      ]
+    },
+    {
+      "名称": "six",
+      "版本": "1.17.0",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [],
+      "分发许可文件": [
+        {
+          "路径": "six-1.17.0.dist-info/LICENSE",
+          "SHA256": "4375ba20e2b9c6c4e7cad2940a628fd90e95cc3d50ee92aae755715d8ba1fbd0"
+        }
+      ]
+    },
+    {
+      "名称": "starlette",
+      "版本": "1.8.0",
+      "用途": "运行",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Homepage, https://github.com/Kludex/starlette",
+        "Documentation, https://starlette.dev/",
+        "Changelog, https://starlette.dev/release-notes/",
+        "Funding, https://github.com/sponsors/Kludex",
+        "Source, https://github.com/Kludex/starlette"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "starlette-1.8.0.dist-info/licenses/LICENSE.md",
+          "SHA256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+        }
+      ]
+    },
+    {
+      "名称": "truststore",
+      "版本": "0.10.5",
+      "用途": "开发检查",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Documentation, https://truststore.readthedocs.io",
+        "Source, https://github.com/sethmlarson/truststore"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "truststore-0.10.5.dist-info/licenses/LICENSE",
+          "SHA256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca"
+        }
+      ]
+    },
+    {
+      "名称": "typing-inspection",
+      "版本": "0.4.4",
+      "用途": "运行",
+      "许可元数据": "MIT",
+      "维护方链接": [
+        "Homepage, https://github.com/pydantic/typing-inspection",
+        "Documentation, https://pydantic.github.io/typing-inspection/dev/",
+        "Source, https://github.com/pydantic/typing-inspection",
+        "Changelog, https://github.com/pydantic/typing-inspection/blob/main/HISTORY.md"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "typing_inspection-0.4.4.dist-info/licenses/LICENSE",
+          "SHA256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+        }
+      ]
+    },
+    {
+      "名称": "typing_extensions",
+      "版本": "4.16.0",
+      "用途": "运行",
+      "许可元数据": "PSF-2.0",
+      "维护方链接": [
+        "Bug Tracker, https://github.com/python/typing_extensions/issues",
+        "Changes, https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+        "Documentation, https://typing-extensions.readthedocs.io/",
+        "Home, https://github.com/python/typing_extensions",
+        "Q & A, https://github.com/python/typing/discussions",
+        "Repository, https://github.com/python/typing_extensions"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+          "SHA256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+        }
+      ]
+    },
+    {
+      "名称": "uvicorn",
+      "版本": "0.54.0",
+      "用途": "运行",
+      "许可元数据": "BSD-3-Clause",
+      "维护方链接": [
+        "Changelog, https://uvicorn.dev/release-notes",
+        "Funding, https://github.com/sponsors/Kludex",
+        "Homepage, https://uvicorn.dev/",
+        "Source, https://github.com/Kludex/uvicorn"
+      ],
+      "分发许可文件": [
+        {
+          "路径": "uvicorn-0.54.0.dist-info/licenses/LICENSE.md",
+          "SHA256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+        }
+      ]
+    }
+  ],
+  "npm": [
+    {
+      "包路径": "node_modules/@oxc-project/types",
+      "版本": "0.154.0",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@oxc-project/types/-/types-0.154.0.tgz",
+      "完整性": "sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-android-arm-eabi",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-android-arm-eabi/-/binding-android-arm-eabi-1.2.14.tgz",
+      "完整性": "sha512-aWR+XKH9+rW7m5fWq/5360J3mHycrx/o6xZM2DQFdJnTMdyP7/WzxPjhtLbVWdKo2y612/4U1bWqb3HQhiF7vg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-android-arm64",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-android-arm64/-/binding-android-arm64-1.2.14.tgz",
+      "完整性": "sha512-QiVxHofl6A8lQU7WAtOUY4QMVZXohxwz7WJJoeh8NBEUyKfIkMRKhYyq8az/1RypNiIXzNTtiS6KwHz0erxYRQ==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-darwin-arm64",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-darwin-arm64/-/binding-darwin-arm64-1.2.14.tgz",
+      "完整性": "sha512-lTQOzHuBIooh3jIr5XINQkjPGEuGy+Dsy0meXDr6Sjty0b99kYgGh4uBC/8mJX1T0kC8d6S0aPP1Y+bHkh6aBw==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-darwin-x64",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-darwin-x64/-/binding-darwin-x64-1.2.14.tgz",
+      "完整性": "sha512-hyMKEGatjmBYCs/Q4sbIcL/GqpFEqsX3wc+HYVQ/85A4rxc1o7rPm4DUI4GV4k/h0ITddwFSGpqQunI14GXjTA==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-freebsd-x64",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-freebsd-x64/-/binding-freebsd-x64-1.2.14.tgz",
+      "完整性": "sha512-u371GbXoVXrEgP20PwzoGNOdAOqAMhzo19JzzY+V4YmmnC+DTOoqdbMu+O+54emM59Mik/UdrtWgcuEDKWRPKA==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-arm-gnueabihf/-/binding-linux-arm-gnueabihf-1.2.14.tgz",
+      "完整性": "sha512-BqwKsdZQf6EqVWr8fv2MrDYzAvOZ7+NYFSJESRGs87fkseEhs0TU9TXgRJTkZoRRkxTizyEg1LKUXfU3/78uqg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.2.14.tgz",
+      "完整性": "sha512-SD9kY8M009x/7s57Z1dgUVlP5+uYBgKQK0Tkr1WIWngrtUJmRCW1RJFMY7QDla2khXhmg2i5Io7MUjcmZNZ/KQ==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-arm64-musl",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.2.14.tgz",
+      "完整性": "sha512-BJ2CL19M6uuWesMgnqJzgxoI+N+eV7b0A9O9vLV42y+gitC41fNa8KElau1tHVzuLWX5GzEuxMPhAO0tQXQMkg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-ppc64-gnu/-/binding-linux-ppc64-gnu-1.2.14.tgz",
+      "完整性": "sha512-4+Kl8daPV8NDHaD7mfCcc1pRM+Qg7ab8DyMm5FG5WoZgv4h2i3KFN1CybYBNbQqmuYm7ftJLvmMI1eHYJ22S/Q==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-s390x-gnu/-/binding-linux-s390x-gnu-1.2.14.tgz",
+      "完整性": "sha512-V/h8ePq1fKDrmtFMz6xcCN3DKvuvMRrwwD1q0PkBeeo4DpK64biaKvqWGVxqCeYKqeRk7gE7/iKPxLCn08O97A==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-x64-gnu",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.2.14.tgz",
+      "完整性": "sha512-WxalXzgrLVpKC93xfpaJ3gCXUWzeCr+FRCbDVD2mUAy4L6Vo3lNVz0epUEUpxPWJkLNYUwM4OSIikv36OJ9mLg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-linux-x64-musl",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-linux-x64-musl/-/binding-linux-x64-musl-1.2.14.tgz",
+      "完整性": "sha512-3G3tnAmTpdk9jO3GQtyHXqeFD2SlecfTws/Y3M2mmj9nMBwwuLT4kur8sZKeu7ENUHSpVO3cIsm5A52LEWWwlg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-openharmony-arm64",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-openharmony-arm64/-/binding-openharmony-arm64-1.2.14.tgz",
+      "完整性": "sha512-qyr5XiNGxm2ytx17vvtcJ9nXn6v1gENETi503bJx3OGwZ1tSonj7BosxbMa/xeAfSl5iS9X6KjEWYXLu6v1L7Q==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.2.14.tgz",
+      "完整性": "sha512-oA4o5o0S2yB199YyYXDzKUv1Z56Rc+mgOjwm7Z/vJ9Z8igiDPYvoOuDyo6g7AK/ZaF09nPhDKVnGBcYHO11GXA==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/binding-win32-x64-msvc",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.2.14.tgz",
+      "完整性": "sha512-9mE94bf2GZUaR/fUSXCMpBoWkctu421Mi0ORpm4zqfbkjKep7RxzPFa5etcGs5h+2KApoWBOA/hAJa/7saGgEQ==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/@rolldown/pluginutils",
+      "版本": "1.0.1",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz",
+      "完整性": "sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/@types/node",
+      "版本": "26.6.5",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@types/node/-/node-26.6.5.tgz",
+      "完整性": "sha512-uMzsv9stDdofIZBx4UGh4Z9ZgXnGC9seRDscilBcTHAeOFk67MZg/k9bWVfO+bk4qZmG+l52hRnLwUiH2LnJTg==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/@types/react",
+      "版本": "19.3.0",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@types/react/-/react-19.3.0.tgz",
+      "完整性": "sha512-N0rFCuH9YoxG9/m61l9MfpJKfmLOVU0em7ipIz6TRgSSkvReLB9vL85GB+yr8Bs5leqpvg96JSwF4ZS1s4viQg==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/@types/react-dom",
+      "版本": "19.3.0",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.3.0.tgz",
+      "完整性": "sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/csstype",
+      "版本": "3.2.3",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+      "完整性": "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/detect-libc",
+      "版本": "2.1.2",
+      "用途": "开发构建",
+      "许可元数据": "Apache-2.0",
+      "分发地址": "https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz",
+      "完整性": "sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/fdir",
+      "版本": "6.5.0",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+      "完整性": "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/fsevents",
+      "版本": "2.3.3",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
+      "完整性": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss/-/lightningcss-1.33.0.tgz",
+      "完整性": "sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/lightningcss-android-arm64",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-android-arm64/-/lightningcss-android-arm64-1.33.0.tgz",
+      "完整性": "sha512-gEpRTalKdosp4Bb8qWtc2iOgE5SeIHlpS1up9bFq2wAyYhl1UdTObYiHe98zEM9SQvSoqQZ1IQD0JNpg3Ml5pg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-darwin-arm64",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.33.0.tgz",
+      "完整性": "sha512-Sciaz8eenNTKn9b3t7+xr0ipTp9YxKQY4npwQ3mrRuL0BAVHBLyZxofhaKBAVtzmtRZ/zTyo0/to4B1uWG/Djg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-darwin-x64",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-darwin-x64/-/lightningcss-darwin-x64-1.33.0.tgz",
+      "完整性": "sha512-Z5UPAxzrjlWNNyGy6i65cJzzvgJ5D3T6wMvs+gWpY9d7qRhANrxqAp6LhxIgZhWEw18RfJTGcRxjuLIBr+m8XQ==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-freebsd-x64",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-freebsd-x64/-/lightningcss-freebsd-x64-1.33.0.tgz",
+      "完整性": "sha512-QQM/Ti/hQajJwCY+RiWuCZ9sdtI/XQk7nDK5vC8kkdwixezOlDgvDx7+RT+QjK6FcFT4MpsuoBnHIo/O3StRRg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-linux-arm-gnueabihf",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-linux-arm-gnueabihf/-/lightningcss-linux-arm-gnueabihf-1.33.0.tgz",
+      "完整性": "sha512-N7FVBe6iS24MlM6R/4RBTxGhQheZGs7tiQ9U32UtF75NzP5Q7xWPRqLBCKxlRQRk3rY1jCIPLzx7WzOhuUIRLQ==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-linux-arm64-gnu",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-linux-arm64-gnu/-/lightningcss-linux-arm64-gnu-1.33.0.tgz",
+      "完整性": "sha512-j2v/itmy4HlNxlc6voKXYgBqNi0Ng2LShg4z7GufpEgs05P+2suBVyi9I6YHq5uoVFx9ETin3eCEhLVyXGQnKg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-linux-arm64-musl",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-linux-arm64-musl/-/lightningcss-linux-arm64-musl-1.33.0.tgz",
+      "完整性": "sha512-yiO5ROMuYQgXbC60yjZU5CYSFZGKXL0HFATXt9mHJn1+zW55oCtMI9NfcVhYLMFDL7gV7oBPon/EmMMGg2OvtQ==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-linux-x64-gnu",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.33.0.tgz",
+      "完整性": "sha512-ar+Ju7LmcN0Jo4FpL4hpFybwNG9/3A/Br5KW2n2jyODg3MEZXaDYADdemoNS+BDNfMgKvylJLj4S5tyRActuAg==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-linux-x64-musl",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-linux-x64-musl/-/lightningcss-linux-x64-musl-1.33.0.tgz",
+      "完整性": "sha512-RYiYbkokw0trfKqqzfF55lginwEPrD3OJDfTuJzFs1MK6iFnDenaz1fqLLtX4ITG3OktJQXOeTaw1awrBAlZPw==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-win32-arm64-msvc",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-win32-arm64-msvc/-/lightningcss-win32-arm64-msvc-1.33.0.tgz",
+      "完整性": "sha512-1K+MPfLSFVpphzpdbfkhlWk6wBrTObBzS2T6db10PNOZgR9GoVsAWzwNyuhUYYbTp23j+4RrncfujZ4uAzXvwA==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/lightningcss-win32-x64-msvc",
+      "版本": "1.33.0",
+      "用途": "开发构建",
+      "许可元数据": "MPL-2.0",
+      "分发地址": "https://registry.npmjs.org/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.33.0.tgz",
+      "完整性": "sha512-OlEICDx/Xl0FqSp4bry8zFnCvGpig3Gl4gCquvYwHuqJKEC1+n9NgDniFvqHGmMv1ZkqDJrDqKKSykTDX+ehuA==",
+      "可选": true
+    },
+    {
+      "包路径": "node_modules/nanoid",
+      "版本": "3.3.20",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.20.tgz",
+      "完整性": "sha512-uKdg2G3GNCKQn9byYOpxbGqrT2fGO5KRt5J/8b3pok8rT6qxGWF6hxMyJiEYtAf+FVyYuD9hRaDqX5uPFYJ4ZQ==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/picocolors",
+      "版本": "1.1.1",
+      "用途": "开发构建",
+      "许可元数据": "ISC",
+      "分发地址": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+      "完整性": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/picomatch",
+      "版本": "4.0.7",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+      "完整性": "sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/postcss",
+      "版本": "8.5.30",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/postcss/-/postcss-8.5.30.tgz",
+      "完整性": "sha512-zkd+e9S1AQHhmaBKye9zlFHWjOwVgqXl1q3ECYy8561K7qxR2cREf/STLskulBFd78k6AOFeA+ff1TtEzk9bAA==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/react",
+      "版本": "19.3.1",
+      "用途": "Web运行",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/react/-/react-19.3.1.tgz",
+      "完整性": "sha512-QNhWdt7nrgVWWQG58QuGsAR3jv3Hbe4mb4vz7w2csnHavciZJgda1CPNaldF6eVxv90ud3jUXpKlHL69gO38yw==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/react-dom",
+      "版本": "19.3.1",
+      "用途": "Web运行",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/react-dom/-/react-dom-19.3.1.tgz",
+      "完整性": "sha512-Y0bARz53lhEC1NMCASs0/j+faB/zqt3R8hpvg1e8+61ZVJ4UL0UdC4cBbXfZMcIuhrfgeILTLe+ZeBCavQPtKQ==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/rolldown",
+      "版本": "1.2.14",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/rolldown/-/rolldown-1.2.14.tgz",
+      "完整性": "sha512-eTBTTqMR6uHKLgcUqpJP8ntzDI6V4LYA8negAMBEI7gkgVvOdrx6VsvS2Ym+83KhOPdLCHWJu0w7UQFJZhHKNw==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/scheduler",
+      "版本": "0.28.0",
+      "用途": "Web运行",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/scheduler/-/scheduler-0.28.0.tgz",
+      "完整性": "sha512-juorfCmIkIw8tT+p5BXSm6PJjQF/ycEYmKyzURCIt/RaZIhL+PulbQ9Yu2z1HdOJDdqDTlxA1+xKBmHXJsczAw==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/source-map-js",
+      "版本": "1.2.2",
+      "用途": "开发构建",
+      "许可元数据": "BSD-3-Clause",
+      "分发地址": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.2.tgz",
+      "完整性": "sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/tinyglobby",
+      "版本": "0.2.17",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
+      "完整性": "sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/typescript",
+      "版本": "5.9.3",
+      "用途": "开发构建",
+      "许可元数据": "Apache-2.0",
+      "分发地址": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+      "完整性": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/undici-types",
+      "版本": "8.9.0",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/undici-types/-/undici-types-8.9.0.tgz",
+      "完整性": "sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==",
+      "可选": false
+    },
+    {
+      "包路径": "node_modules/vite",
+      "版本": "8.3.4",
+      "用途": "开发构建",
+      "许可元数据": "MIT",
+      "分发地址": "https://registry.npmjs.org/vite/-/vite-8.3.4.tgz",
+      "完整性": "sha512-IftLE8phJhdNRIGNEV4JCCvfNScoZQVfcXaN8TQropWGJtOHcu+iAB9pHcuGvmEb/kddw0LBe/jS8ztdC6xdiQ==",
+      "可选": false
+    }
+  ],
+  "工具": {
+    "uv": "0.11.25，MIT/Apache-2.0；https://github.com/astral-sh/uv",
+    "Node": "26.4.0；https://github.com/nodejs/node/blob/main/LICENSE",
+    "npm": "11.17.0；https://github.com/npm/cli/blob/latest/LICENSE"
+  },
+  "未决": "自研许可证与完整分发NOTICE、基础镜像操作系统包许可及未来模型权重再分发由F11发布前完成",
+  "锁文件SHA256": {
+    "pyproject.toml": "3ec3cf7bb9554ab2c1c99e40517090103c2ac953b3c98e5ba301ea74a5860556",
+    "uv.lock": "8fc26123933712f0087d89706c2ff272a252e743fe496b9189c3e393aac68486",
+    "package.json": "2d3c62072124b5bac0b8c1bf24a23f170c96290189994109ee733995e2414773",
+    "package-lock.json": "e92edf335fa68aa3de78b41928d0de9a5c02f932555a59dd10362ede795cf48b"
+  }
+}

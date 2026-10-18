@@ -1,0 +1,31 @@
+"""Mac原生执行器入口；不加载或下载模型。"""
+
+import argparse
+import json
+import platform
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--diagnose", action="store_true", help="输出环境诊断后退出")
+    args = parser.parse_args()
+    if args.diagnose:
+        print(
+            json.dumps(
+                {
+                    "执行环境": "Mac原生MLX",
+                    "系统": platform.system(),
+                    "架构": platform.machine(),
+                    "就绪": False,
+                    "能力": [],
+                    "说明": "MLX适配及任务执行器尚未实现",
+                },
+                ensure_ascii=False,
+            )
+        )
+        return 0
+    parser.exit(2, "任务执行器尚未实现，请使用 --diagnose 检查入口。\n")
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,30 @@
+name: folio-voice
+services:
+  app:
+    image: folio-voice:development
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "127.0.0.1:8000:8000"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/live', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  worker-diagnose:
+    image: folio-voice:development
+    profiles: ["diagnose"]
+    command: ["python", "-m", "workers.container.main", "--diagnose"]
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

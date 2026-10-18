@@ -1,0 +1,4 @@
+interface:
+  display_name: "核对现场并继续任务"
+  short_description: "核对中断现场、已有修改和执行结果，从未完成的位置继续开发"
+  default_prompt: "$task-resume 继续之前的任务，先核对中断现场，保留已有修改，从未完成处接着做。"

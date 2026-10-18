@@ -1,0 +1,767 @@
+[
+  {
+    "name": "SessionRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/sessions",
+    "status": 201,
+    "data": {
+      "principal_id": "11111111-1111-4111-8111-111111111111",
+      "role": "maintainer",
+      "expires_at": "2026-10-18T00:00:00Z",
+      "csrf_token": "自写非凭据样例"
+    }
+  },
+  {
+    "name": "SessionClosed自写响应，非实际执行",
+    "method": "delete",
+    "path": "/sessions/current",
+    "status": 200,
+    "data": {
+      "closed": true
+    }
+  },
+  {
+    "name": "UploadRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/uploads",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "size_bytes": 100,
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "chunk_size_bytes": 128,
+      "expires_at": "2026-10-18T00:00:00Z",
+      "received_chunks": [],
+      "state": "open",
+      "artifact": null
+    }
+  },
+  {
+    "name": "ChunkAccepted自写响应，非实际执行",
+    "method": "put",
+    "path": "/uploads/{id}/chunks/{index}",
+    "status": 200,
+    "data": {
+      "upload_id": "11111111-1111-4111-8111-111111111111",
+      "index": 0,
+      "size_bytes": 100,
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  {
+    "name": "ArtifactRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/uploads/{id}/complete",
+    "status": 200,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "size_bytes": 100,
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "media_type": "application/json",
+      "validation_status": "validated",
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "BookRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/books",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "title": "自写书",
+      "authors": [
+        "自写作者"
+      ],
+      "revision": 1,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "TaskAccepted自写响应，非实际执行",
+    "method": "post",
+    "path": "/books/{id}/imports",
+    "status": 202,
+    "data": {
+      "task_id": "11111111-1111-4111-8111-111111111111",
+      "status_url": "/api/v1/tasks/11111111-1111-4111-8111-111111111111"
+    }
+  },
+  {
+    "name": "RevisionList自写响应，非实际执行",
+    "method": "get",
+    "path": "/books/{id}/revisions",
+    "status": 200,
+    "data": {
+      "book_id": "11111111-1111-4111-8111-111111111111",
+      "resource_revision": 1,
+      "items": [
+        {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "book_id": "11111111-1111-4111-8111-111111111111",
+          "revision": 1,
+          "parent_revision_id": null,
+          "structure_artifact_id": "11111111-1111-4111-8111-111111111111",
+          "structure_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "created_at": "2026-10-18T00:00:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "name": "TextRevisionRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/books/{id}/revisions",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "book_id": "11111111-1111-4111-8111-111111111111",
+      "revision": 1,
+      "parent_revision_id": null,
+      "structure_artifact_id": "11111111-1111-4111-8111-111111111111",
+      "structure_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "VoiceRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/voices",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "name": "自写声音",
+      "revision": 1,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "VoiceVersionRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/voices/{id}/versions",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "voice_id": "11111111-1111-4111-8111-111111111111",
+      "version": 1,
+      "reference_artifact_id": "11111111-1111-4111-8111-111111111111",
+      "reference_text": "自写参考文字",
+      "compatible_model_revisions": [
+        "自写模型@1"
+      ],
+      "config_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "approved_review_id": null,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "ProductionAccepted自写响应，非实际执行",
+    "method": "post",
+    "path": "/productions",
+    "status": 202,
+    "data": {
+      "production_id": "11111111-1111-4111-8111-111111111111",
+      "control_revision": 1,
+      "status_url": "/api/v1/productions/11111111-1111-4111-8111-111111111111"
+    }
+  },
+  {
+    "name": "ProductionRecord自写响应，非实际执行",
+    "method": "get",
+    "path": "/productions/{id}",
+    "status": 200,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "book_id": "11111111-1111-4111-8111-111111111111",
+      "text_revision_id": "11111111-1111-4111-8111-111111111111",
+      "voice_version_id": "11111111-1111-4111-8111-111111111111",
+      "model_revision": "自写模型@1",
+      "config_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "scope": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "control_state": "active",
+      "control_revision": 1,
+      "execution_state": "queued",
+      "quality_revision": 1,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "TaskRecord自写响应，非实际执行",
+    "method": "get",
+    "path": "/tasks/{id}",
+    "status": 200,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "production_id": "11111111-1111-4111-8111-111111111111",
+      "stage": "parse_epub",
+      "state": "queued",
+      "revision": 1,
+      "attempt_no": 0,
+      "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "output_artifacts": [],
+      "last_error": null,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "WorkerRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/workers/register",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "protocol_version": 1,
+      "name": "自写执行器",
+      "platform": "container",
+      "capabilities": [
+        "parse_epub"
+      ],
+      "model_revisions": [],
+      "online": false,
+      "registered_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "TaskLease自写响应，非实际执行",
+    "method": "post",
+    "path": "/workers/{id}/claims",
+    "status": 200,
+    "data": {
+      "task_id": "11111111-1111-4111-8111-111111111111",
+      "production_id": "11111111-1111-4111-8111-111111111111",
+      "attempt_no": 1,
+      "lease_token": "自写非有效租约",
+      "expires_at": "2026-10-18T00:00:00Z",
+      "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "control_revision": 1,
+      "app_generation": "11111111-1111-4111-8111-111111111111",
+      "input_artifacts": [
+        {
+          "artifact_id": "11111111-1111-4111-8111-111111111111",
+          "size_bytes": 100,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    }
+  },
+  {
+    "name": "HeartbeatAccepted自写响应，非实际执行",
+    "method": "post",
+    "path": "/tasks/{id}/heartbeat",
+    "status": 200,
+    "data": {
+      "task_id": "11111111-1111-4111-8111-111111111111",
+      "attempt_no": 1,
+      "expires_at": "2026-10-18T00:00:00Z",
+      "app_generation": "11111111-1111-4111-8111-111111111111",
+      "control_state": "pausing",
+      "control_revision": 2
+    }
+  },
+  {
+    "name": "SubmissionReceipt自写响应，非实际执行",
+    "method": "post",
+    "path": "/tasks/{id}/results",
+    "status": 200,
+    "data": {
+      "receipt_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "11111111-1111-4111-8111-111111111111",
+      "task_id": "11111111-1111-4111-8111-111111111111",
+      "attempt_no": 1,
+      "accepted_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "ReviewRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/reviews",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "artifact_id": "11111111-1111-4111-8111-111111111111",
+      "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "scope_id": "11111111-1111-4111-8111-111111111111",
+      "dimension": "自写维度",
+      "conclusion": "uncertain",
+      "voice_version_id": "11111111-1111-4111-8111-111111111111",
+      "actor_id": "11111111-1111-4111-8111-111111111111",
+      "comment": "非真实听审",
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "QualitySnapshot自写响应，非实际执行",
+    "method": "get",
+    "path": "/productions/{id}/quality",
+    "status": 200,
+    "data": {
+      "production_id": "11111111-1111-4111-8111-111111111111",
+      "snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "revision": 1,
+      "contract_version": 2,
+      "policy_hash": null,
+      "gates": [
+        {
+          "gate": "Q1",
+          "status": "pending",
+          "evidence_ids": [],
+          "blockers": []
+        },
+        {
+          "gate": "Q2",
+          "status": "pending",
+          "evidence_ids": [],
+          "blockers": []
+        },
+        {
+          "gate": "Q3",
+          "status": "pending",
+          "evidence_ids": [],
+          "blockers": []
+        },
+        {
+          "gate": "Q4",
+          "status": "pending",
+          "evidence_ids": [],
+          "blockers": []
+        },
+        {
+          "gate": "Q5",
+          "status": "pending",
+          "evidence_ids": [],
+          "blockers": []
+        }
+      ],
+      "qualification": null,
+      "compatibility_profile": null,
+      "blockers": []
+    }
+  },
+  {
+    "name": "ExportAccepted自写响应，非实际执行",
+    "method": "post",
+    "path": "/exports",
+    "status": 202,
+    "data": {
+      "export_id": "11111111-1111-4111-8111-111111111111",
+      "task_id": "11111111-1111-4111-8111-111111111111",
+      "status_url": "/api/v1/tasks/11111111-1111-4111-8111-111111111111"
+    }
+  },
+  {
+    "name": "ResumeManifest自写响应，非实际执行",
+    "method": "get",
+    "path": "/productions/{id}/resume-manifest",
+    "status": 200,
+    "data": {
+      "production": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "book_id": "11111111-1111-4111-8111-111111111111",
+        "text_revision_id": "11111111-1111-4111-8111-111111111111",
+        "voice_version_id": "11111111-1111-4111-8111-111111111111",
+        "model_revision": "自写模型@1",
+        "config_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "control_state": "active",
+        "control_revision": 1,
+        "execution_state": "queued",
+        "quality_revision": 1,
+        "created_at": "2026-10-18T00:00:00Z"
+      },
+      "source_sha256s": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "completed_unit_ids": [],
+      "pending_unit_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "artifacts": [],
+      "failed_task_ids": [],
+      "unresolved_issue_ids": [],
+      "workers": [
+        {
+          "worker_id": "11111111-1111-4111-8111-111111111111",
+          "online": false,
+          "ready_capabilities": []
+        }
+      ],
+      "last_event_sequence": 0,
+      "next_step": "等待执行器",
+      "recovery_command": null,
+      "updated_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "HealthLive自写响应，非实际执行",
+    "method": "get",
+    "path": "/health/live",
+    "status": 200,
+    "data": {
+      "status": "alive"
+    }
+  },
+  {
+    "name": "HealthReady自写响应，非实际执行",
+    "method": "get",
+    "path": "/health/ready",
+    "status": 200,
+    "data": {
+      "ready": true,
+      "database": "ready",
+      "migration": "ready",
+      "disk": "ready",
+      "workers": [
+        {
+          "worker_id": "11111111-1111-4111-8111-111111111111",
+          "online": false,
+          "ready_capabilities": []
+        }
+      ]
+    }
+  },
+  {
+    "name": "AgentRunAccepted自写响应，非实际执行",
+    "method": "post",
+    "path": "/productions/{id}/agent-runs",
+    "status": 202,
+    "data": {
+      "run_id": "11111111-1111-4111-8111-111111111111",
+      "status_url": "/api/v1/agent-runs/11111111-1111-4111-8111-111111111111"
+    }
+  },
+  {
+    "name": "AgentRunRecord自写响应，非实际执行",
+    "method": "get",
+    "path": "/agent-runs/{id}",
+    "status": 200,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "production_id": "11111111-1111-4111-8111-111111111111",
+      "snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "provider_id": "自写供应商",
+      "model_revision": "自写模型",
+      "template_version": "1",
+      "schema_version": "1",
+      "state": "queued",
+      "budget": {
+        "currency": "CNY",
+        "reserved_minor": 0,
+        "actual_minor": 0,
+        "unknown_minor": 0,
+        "model_requests": 0,
+        "tool_calls": 0
+      },
+      "proposal_ids": [],
+      "last_step_sequence": 0,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "RepairApplied自写响应，非实际执行",
+    "method": "post",
+    "path": "/repair-proposals/{id}/apply",
+    "status": 202,
+    "data": {
+      "proposal_id": "11111111-1111-4111-8111-111111111111",
+      "task_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "invalidated_node_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "retained_node_ids": []
+    }
+  },
+  {
+    "name": "Qualification自写响应，非实际执行",
+    "method": "post",
+    "path": "/quality-policies/{id}/qualify",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "version": 1,
+      "revision": 3,
+      "contract_version": 2,
+      "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+      "scope": {
+        "languages": [
+          "zh-CN"
+        ],
+        "source_types": [
+          "epub"
+        ],
+        "voice_version_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "model_revisions": [
+          "自写模型@1"
+        ],
+        "processing_config_sha256s": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "deliverable_kinds": [
+          "audio"
+        ]
+      },
+      "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "report_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "issuer_id": "11111111-1111-4111-8111-111111111111",
+      "issued_at": "2026-10-18T00:00:00Z",
+      "status": "active",
+      "change_triggers": [
+        "detector"
+      ],
+      "revocation_sequence": 0,
+      "created_at": "2026-10-17T00:00:00Z"
+    }
+  },
+  {
+    "name": "RevocationReceipt自写响应，非实际执行",
+    "method": "post",
+    "path": "/qualifications/{id}/revoke",
+    "status": 200,
+    "data": {
+      "qualification_id": "11111111-1111-4111-8111-111111111111",
+      "qualification_version": 1,
+      "revocation_sequence": 1,
+      "affected_release_ids": []
+    }
+  },
+  {
+    "name": "ReleaseResponse自写响应，非实际执行",
+    "method": "post",
+    "path": "/exports/{id}/release",
+    "status": 200,
+    "data": {
+      "decision": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "export_id": "11111111-1111-4111-8111-111111111111",
+        "deliverable_kind": "audio",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "production_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "quality_revision": 1,
+        "quality_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "gate_evidence": {
+          "Q1": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q2": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q3": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q4": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q5": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "qualification": {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "version": 1,
+          "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+          "revocation_sequence": 0
+        },
+        "compatibility_profile": {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "version": 1
+        },
+        "decision": "released",
+        "blockers": [],
+        "created_at": "2026-10-17T00:00:00Z"
+      },
+      "download": {
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "size_bytes": 100,
+        "download_url": "/api/v1/artifacts/11111111-1111-4111-8111-111111111111"
+      }
+    }
+  },
+  {
+    "name": "IssueRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/issues",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "book_id": "11111111-1111-4111-8111-111111111111",
+      "description": "自写问题",
+      "status": "awaiting_location",
+      "severity": "P1",
+      "revision": 1,
+      "location": null,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "RepairPlanRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/issues/{id}/repair-plans",
+    "status": 201,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "version": 1,
+      "issue_id": "11111111-1111-4111-8111-111111111111",
+      "issue_revision": 1,
+      "base_export_id": "11111111-1111-4111-8111-111111111111",
+      "base_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "target_production_id": "11111111-1111-4111-8111-111111111111",
+      "changed_node_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "invalidated_node_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "retained_node_ids": [],
+      "retest_cases": [
+        "自写复现"
+      ],
+      "rollback_artifact_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "required_device_environment": null,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "EvidenceAppended自写响应，非实际执行",
+    "method": "post",
+    "path": "/issues/{id}/evidence",
+    "status": 201,
+    "data": {
+      "evidence_id": "11111111-1111-4111-8111-111111111111",
+      "server_sequence": 1,
+      "issue_revision": 2
+    }
+  },
+  {
+    "name": "ResolutionRecord自写响应，非实际执行",
+    "method": "post",
+    "path": "/issues/{id}/resolve",
+    "status": 200,
+    "data": {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "issue_id": "11111111-1111-4111-8111-111111111111",
+      "issue_revision": 1,
+      "plan_id": "11111111-1111-4111-8111-111111111111",
+      "plan_version": 1,
+      "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "proof_id": "11111111-1111-4111-8111-111111111111",
+      "reproduction_evidence_id": "11111111-1111-4111-8111-111111111111",
+      "evidence_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "resolution_kind": "resolved_system",
+      "user_confirmation_id": null,
+      "created_at": "2026-10-18T00:00:00Z"
+    }
+  },
+  {
+    "name": "无权操作自写错误响应",
+    "method": "post",
+    "path": "/exports/{id}/release",
+    "status": 403,
+    "data": {
+      "type": "about:blank",
+      "title": "无权操作",
+      "status": 403,
+      "detail": "自写错误样例，不代表实际服务请求",
+      "instance": "/api/v1/exports/11111111-1111-4111-8111-111111111111/release",
+      "code": "FORBIDDEN",
+      "request_id": "11111111-1111-4111-8111-111111111111",
+      "retryable": false,
+      "affected_scope": [
+        "11111111-1111-4111-8111-111111111111"
+      ]
+    }
+  },
+  {
+    "name": "交付证据缺失自写错误响应",
+    "method": "post",
+    "path": "/exports/{id}/release",
+    "status": 409,
+    "data": {
+      "type": "about:blank",
+      "title": "交付证据缺失",
+      "status": 409,
+      "detail": "自写错误样例，不代表实际服务请求",
+      "instance": "/api/v1/exports/11111111-1111-4111-8111-111111111111/release",
+      "code": "REVIEW_REQUIRED",
+      "request_id": "11111111-1111-4111-8111-111111111111",
+      "retryable": false,
+      "affected_scope": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "blockers": [
+        {
+          "code": "REVIEW_REQUIRED",
+          "detail": "缺少Q4证据"
+        }
+      ]
+    }
+  },
+  {
+    "name": "资源版本过期自写错误响应",
+    "method": "post",
+    "path": "/issues/{id}/resolve",
+    "status": 412,
+    "data": {
+      "type": "about:blank",
+      "title": "资源版本过期",
+      "status": 412,
+      "detail": "自写错误样例，不代表实际服务请求",
+      "instance": "/api/v1/exports/11111111-1111-4111-8111-111111111111/release",
+      "code": "REVISION_STALE",
+      "request_id": "11111111-1111-4111-8111-111111111111",
+      "retryable": false,
+      "affected_scope": [
+        "11111111-1111-4111-8111-111111111111"
+      ]
+    }
+  },
+  {
+    "name": "应用未就绪自写错误响应",
+    "method": "get",
+    "path": "/health/ready",
+    "status": 503,
+    "data": {
+      "type": "about:blank",
+      "title": "应用未就绪",
+      "status": 503,
+      "detail": "自写错误样例，不代表实际服务请求",
+      "instance": "/api/v1/exports/11111111-1111-4111-8111-111111111111/release",
+      "code": "DISK_LOW",
+      "request_id": "11111111-1111-4111-8111-111111111111",
+      "retryable": false,
+      "affected_scope": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "health": {
+        "ready": false,
+        "database": "ready",
+        "migration": "ready",
+        "disk": "low",
+        "workers": [
+          {
+            "worker_id": "11111111-1111-4111-8111-111111111111",
+            "online": false,
+            "ready_capabilities": []
+          }
+        ]
+      }
+    }
+  }
+]

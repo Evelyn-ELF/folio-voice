@@ -1,0 +1,330 @@
+{
+  "汇总时间UTC": "2026-10-18T06:10:12.689862+00:00",
+  "任务": "F03容器验证续做；本地范围通过，远端CI尚未运行，F03整体仍进行中",
+  "配置": "沿用用户已确认GPT-6.1 Sol＋High，同一工程阶段",
+  "依据": [
+    "N06",
+    "N07",
+    "N20",
+    "N27",
+    "N28",
+    "N29",
+    "S11",
+    "S20",
+    "S36",
+    "S44"
+  ],
+  "Git": {
+    "分支": "codex/folio-voice-development",
+    "HEAD": "965018afe379c3146b02677523d1df3973955bb2",
+    "状态": "保留全部累计未提交变更；未提交或推送"
+  },
+  "现场核对": {
+    "变更范围": [
+      ".github/workflows/check.yml",
+      "README.md",
+      "deploy/Dockerfile",
+      "docs/工程规范.md",
+      "docs/开发任务.md",
+      "docs/验证计划.md",
+      "pyproject.toml",
+      "scripts/check.py",
+      "scripts/check_container.py",
+      "scripts/smoke_http.py"
+    ],
+    "前轮输入与执行状态": "开工核对前轮68项输入SHA256全部一致；无上轮遗留构建、清单诊断或应用进程；daemon可用且无运行容器"
+  },
+  "输入SHA256": {
+    ".agents/skills/task-resume/SKILL.md": "9d25033f4360ac58ecd685f5aeb2744febdbd2b5d00a687d5a99186f57aa83e8",
+    ".agents/skills/task-resume/agents/openai.yaml": "38aa2004491e28bef1561c00db0c4091221ec2211550f29dacd6d6b01f03f9d5",
+    ".agents/skills/task-stop/SKILL.md": "20309b17201a48e0c176dd9fc4e20812aa2ee4bc108f523db693fce72e75db04",
+    ".agents/skills/task-stop/agents/openai.yaml": "b99623905db8bdca86b24a6c96275f803b9de3312dd4a93a3a00069036a407bc",
+    ".dockerignore": "053bcf0b41b8bd42ba3257362938cec1fb5e65f8aaa8fc7433b0d3bbfd3f2b0a",
+    ".github/workflows/check.yml": "e1751169bbfd8993130e3926d883f3c89ea254d81fac2c8cfab165eceb51c35b",
+    ".gitignore": "230e57027fc3aa33845bf82f6078bbfd63a4f6c23a104686c0bf12df40a4076e",
+    ".node-version": "e79cba4fa5e1df808a3948bcfafa17b1777216d350638066864d497ead245cb6",
+    ".python-version": "ca2e220d1fb92b2610d4b4dd20bde54d8d258f3e5ce89b8365612ffd415171ee",
+    "AGENTS.md": "5e67564f182c5f510a6abf1c385ff0d4562ad8d03e01117fa627757ec94846d4",
+    "README.md": "74dc4413adb9b53536b6c80ca4b74b596121602582a5f791ca38e8890b2c9ca4",
+    "apps/api/main.py": "d5f36be536fcab892a0beb2caf08b9210a48e23a5633a2835452b6ede1c09cac",
+    "apps/web/index.html": "994f0ac032edf78d7ac68b1b00da23bc8fa598ed9fd577149b3d7db94a0b0dcb",
+    "apps/web/src/main.tsx": "532835f07cceaa3bbce8d496a0af4baafb562ee37a8db476f90f88a6fe5d4850",
+    "apps/web/src/style.css": "cf511c759e85afa76308b6cd393f2029106c41b8a5bc998d318ef71469743043",
+    "apps/web/tsconfig.json": "f4bcab39b42495fe6b97392a54980e038a260bc88df3c1a288db1ef54c23f152",
+    "apps/web/vite.config.ts": "d725e9615a557ebc640525440ec567cd25cc3d0ecc9698f13febf0f2aa9fc7a9",
+    "deploy/Dockerfile": "6fc9b98cb6f99308b92c7b92c7657bb0c3680e7e091a8f925bcc77f3b9086830",
+    "deploy/compose.yaml": "60c6ebe4aa8e9b08c86a912877285381ab062828edd9a70600137bcac4e838d4",
+    "docs/contracts/core.schema.json": "ae5453e3fb698de9c8659051fc515f784d091525cd95bc964f3af38469b6954b",
+    "docs/contracts/examples.json": "b315889d5558ad0bc00f37df6f46e0ee1c7734327471916630fb89088c83e57b",
+    "docs/contracts/http_examples.json": "5440419b3fe0d548dc47357164152c25d8a545445def7bc79861624855702282",
+    "docs/contracts/http_response_examples.json": "30ea6e2d5b3e0e434a2f0c88c58c21a6d95cf5dd52f45c96471d8740c4eb8b52",
+    "docs/contracts/openapi.json": "92b6f6922e5cebe80eae4484675c71cf00fb058e273cd2886eff25a680ead573",
+    "docs/validation/F03依赖许可清单.json": "0e3b800f841a1702e9c6ea96e4c4eb6fc79c53eb6095f1829cd242f735f810db",
+    "docs/validation/OpenAPI校验环境.txt": "5a8fed8b19dcecda31bdd8e31e47fbdefde10e1b4fdec1879131b95246b84811",
+    "docs/validation/契约校验环境.txt": "745887e26af4bf5bd72a2e30d620640dfb6cc862d91edf96a806cdd9eb823242",
+    "docs/工程规范.md": "df978d81791bf3cf652675ab661314fe3c683825f769400ccd40a72d2a2601a9",
+    "docs/开发任务.md": "4eb17d905065ebb1a8902ca96a283920fcda04e712a06b913cb98cbfa8fc641e",
+    "docs/系统设计.md": "5af25ac0fac3013925feb7c8d3b7ef308117d395ae2b0cef84586e8176f24488",
+    "docs/验证计划.md": "e063cc19525636a24b0a0e232f5b10a6921a0e92cf05e0db89743d9da3e8c689",
+    "migrations/0001_quality_registry.sql": "5aecad8d3a9cdc3d4e1ff943230b502ec70443e9fd15477bd2d689d8fc2ce48f",
+    "migrations/0002_content_tasks.sql": "ae7a76510b42408081936c14d0592e9d873b8ad153ca7c74b6f4d259320db6c5",
+    "migrations/0003_quality_feedback_agent.sql": "829ffc7987dd07557817baf66145c21adcbcfbaa98311abbc712203498305b5a",
+    "package-lock.json": "e92edf335fa68aa3de78b41928d0de9a5c02f932555a59dd10362ede795cf48b",
+    "package.json": "2d3c62072124b5bac0b8c1bf24a23f170c96290189994109ee733995e2414773",
+    "packages/adapters/sqlite_migrations.py": "7a4d35b5179fdc0c5a0742f38f0b2cd05d044ec9e5d24e2897bd695ada6099ba",
+    "packages/contracts/generated.py": "da454c8ab78f6931d73fa974014de7f430b0d19e5997a5ecbdb89d96a73fe6ba",
+    "packages/contracts/generated.ts": "c6de4de637319f1446e7feaa22e92fa3a57fc9b6a403ace49256a06cfc0ede61",
+    "packages/contracts/tsconfig.json": "0f41f7fae8a07440fc9e21e36855d07d4f919f83e52e978ac81888107fa53917",
+    "packages/core/canonical.py": "defe67086de00c2b5afa846b470f927edee64081e75a2ed35262c88cf3cfe4ef",
+    "pyproject.toml": "3407ac637b0ef1d85670d7059a1af2dd5ee7632ed6be2213a5df8bade2b31931",
+    "scripts/check.py": "f8dabc448cae22fd677f23561d3d2664a34e46e42601f183de73511221c8295b",
+    "scripts/check_container.py": "83f427f9511f4fa8dade2b17c1aac6615d45b364946312baa978cd328437d75f",
+    "scripts/check_frontend.mjs": "b57a933a9750edfe902a1b05345c995aefc900bf08f76626bbcb5cd63b7e5ca6",
+    "scripts/smoke_http.py": "e6759bf27fe1bd0bed05bc727063cdc9086ec0a47e66926c236ccf249a64d45b",
+    "tests/contracts/test_format_capability.py": "65f5d67eb7198d8a00721e63eb555e76b28addadfe039467dd203471285bed4d",
+    "tests/contracts/test_http_contract.py": "21f3c6ba5a702dab2ef74500567373a4787c3781ac79e72b3ac5fa95cecde628",
+    "tests/contracts/test_orchestration_schema.py": "ff5da32341d25d17c249a3c08e49888d7e8f48a0dbc7d2dc79b14dc3ba285774",
+    "tests/contracts/test_quality_schema.py": "8d572c2442d9da60e0e4876c772672dea8edc2b8556fd1a62e0dda9f859aa853",
+    "tests/core/test_canonical.py": "3030013edad6d3a6f5d79f11cb34963c2790f21fdb5b91560eaf7a0669e8a5a5",
+    "tests/engineering/frontend.test.mjs": "1ebde07371b1871e7762479992515528bacc8d330f65aaddb7e7cf0b3542f300",
+    "tests/engineering/test_boundaries.py": "b4db35050e50e9ee069bb346ec14d364b17c2c792d277a036f240b06419d07e1",
+    "tests/engineering/test_skeleton.py": "82d8e70e2d75b56c38a223a6ace7953caeaf4c6192017706c30715b04390a5de",
+    "tests/fixtures/quality_records.json": "b049f77390e518d60229cfc0a1756eb8624725feb5aac2a2ab8a9d2a09271cac",
+    "tests/storage/test_domain_migrations.py": "1b17c9fa6377a11b3438804a18d4af27ce502d5b1eee40702934b16f760a1e04",
+    "tests/storage/test_migrations.py": "1c595a86e999c37b03a643c7aa7dfa4314240e2748a5d91eb9c64bf71f19ec54",
+    "tools/check_documents.py": "47266abc86babdb54b959a53ed6c6b8b11ffe2ecd4d904cc9a06add4d8dea9ff",
+    "tools/check_module_boundaries.py": "b534f829178864f58e54db54aeceed6deb68ce615375605cf9d93fcbfd50fc37",
+    "tools/generate_contract_types.py": "414b0325f1da6fe0176d21ebf3d5addead72f9441052d001ebcfa243d248f8ae",
+    "tools/requirements.txt": "3c9b00dda7d19fb2c5279d81a8d8203e4977d45d1f5442bc9591306f9a920434",
+    "tools/test_check_documents.py": "f9d0b220aa62d71f95b3544d9710dd02758f2874ed578bc7b90ba2070b1611d4",
+    "tools/test_generate_contract_types.py": "b558ad3d8a9f9ea43ed1af969bcf112ce6d4e263ae187d25c53863383f766529",
+    "tools/test_validate_http_contract.py": "56f8a10bbb5c9e82663d60ae0a7c88ccbf137aa8e926398a604e9d3cf8bf39ba",
+    "tools/validate_design_contracts.py": "78a89d8ebce62a9dddb33db9da0c20eae5e972432044f69ca4b170529d9f8121",
+    "tools/validate_http_contract.py": "0db252d25d0d97b7339a4744abb4753f0d995db6f6949acc8630aa5efbab3f31",
+    "uv.lock": "8fc26123933712f0087d89706c2ff272a252e743fe496b9189c3e393aac68486",
+    "workers/container/main.py": "877fdc9ba2e060ab06ac7a0c3d5fe0a22d843e0a929addb5439e0c68cb9d7597",
+    "workers/macos/main.py": "7f11b32263037ae94e3049d1790a86cce45741d999d77f4716a2e07f8fd6ed86"
+  },
+  "官方依据补充": "https://docs.docker.com/reference/api/registry/latest/，官方registry-1.docker.io端点和固定摘要；Dockerfile仅修改端点，基镜像版本/摘要不变",
+  "网络探测": {
+    "Python": {
+      "命令": [
+        "docker",
+        "pull",
+        "registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941"
+      ],
+      "耗时秒": 12.83,
+      "退出码": 0,
+      "输出": "registry-1.docker.io/library/python@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941: Pulling from library/python\nd3d5d8ab26d2: Pulling fs layer\n3047ef430b99: Pulling fs layer\nc7033875c9b1: Pulling fs layer\nd8082048b068: Pulling fs layer\nd8082048b068: Waiting\n3047ef430b99: Verifying Checksum\n3047ef430b99: Download complete\nd8082048b068: Verifying Checksum\nd8082048b068: Download complete\nd3d5d8ab26d2: Verifying Checksum\nd3d5d8ab26d2: Download complete\nc7033875c9b1: Verifying Checksum\nc7033875c9b1: Download complete\nd3d5d8ab26d2: Pull complete\n3047ef430b99: Pull complete\nc7033875c9b1: Pull complete\nd8082048b068: Pull complete\nDigest: sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\nStatus: Downloaded newer image for registry-1.docker.io/library/python@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\nregistry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n",
+      "错误": ""
+    },
+    "Node": {
+      "命令": [
+        "docker",
+        "pull",
+        "registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1"
+      ],
+      "耗时秒": 4.85,
+      "退出码": 0,
+      "输出": "registry-1.docker.io/library/node@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1: Pulling from library/node\n74f1dcfcc9c8: Already exists\n692742832d41: Already exists\nf6e337beec6b: Already exists\nc6585902b625: Already exists\nDigest: sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\nStatus: Downloaded newer image for registry-1.docker.io/library/node@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\nregistry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n",
+      "错误": ""
+    },
+    "更具体DNS或代理根因": "未证实；不外推已定位所有网络原因，不改全局设置"
+  },
+  "首次构建失败": {
+    "命令": [
+      "docker",
+      "build",
+      "-f",
+      "deploy/Dockerfile",
+      "-t",
+      "folio-voice:development",
+      "."
+    ],
+    "耗时秒": 3.24,
+    "退出码": 1,
+    "日志": "#0 building with \"desktop-linux\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 1.06kB done\n#1 DONE 0.0s\n\n#2 [internal] load metadata for registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#2 DONE 0.0s\n\n#3 [internal] load metadata for registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#3 ERROR: failed to authorize: failed to fetch anonymous token: Get \"https://auth.docker.io/token?scope=repository%3Alibrary%2Fnode%3Apull&service=registry.docker.io\": dial tcp 108.160.162.104:443: connect: connection refused\n------\n > [internal] load metadata for registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1:\n------\nDockerfile:1\n--------------------\n   1 | >>> FROM registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1 AS web\n   2 |     WORKDIR /app\n   3 |     COPY package.json package-lock.json ./\n--------------------\nERROR: failed to build: failed to solve: failed to fetch anonymous token: Get \"https://auth.docker.io/token?scope=repository%3Alibrary%2Fnode%3Apull&service=registry.docker.io\": dial tcp 108.160.162.104:443: connect: connection refused\n"
+  },
+  "预取后首次成功": {
+    "命令": [
+      "docker",
+      "build",
+      "-f",
+      "deploy/Dockerfile",
+      "-t",
+      "folio-voice:development",
+      "."
+    ],
+    "耗时秒": 9.27,
+    "退出码": 0,
+    "日志": "#0 building with \"desktop-linux\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 1.06kB done\n#1 DONE 0.0s\n\n#2 [internal] load metadata for registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#2 DONE 0.0s\n\n#3 [internal] load metadata for registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#3 DONE 0.0s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 623B done\n#4 DONE 0.0s\n\n#5 [web 1/7] FROM registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#5 DONE 0.0s\n\n#6 [internal] load build context\n#6 transferring context: 223.05kB done\n#6 DONE 0.0s\n\n#7 [runtime 1/9] FROM registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#7 DONE 0.0s\n\n#8 [web 3/7] COPY package.json package-lock.json ./\n#8 CACHED\n\n#9 [web 2/7] WORKDIR /app\n#9 CACHED\n\n#10 [web 6/7] COPY packages/contracts/generated.ts ./packages/contracts/generated.ts\n#10 CACHED\n\n#11 [web 4/7] RUN npm ci --ignore-scripts\n#11 CACHED\n\n#12 [web 5/7] COPY apps/web ./apps/web\n#12 CACHED\n\n#13 [web 7/7] RUN npm run build:web\n#13 CACHED\n\n#14 [runtime 2/9] WORKDIR /app\n#14 DONE 0.0s\n\n#15 [runtime 3/9] RUN python -m pip install --no-cache-dir uv==0.11.25\n#15 2.033 Collecting uv==0.11.25\n#15 2.865   Downloading uv-0.11.25-py3-none-manylinux_2_28_aarch64.whl.metadata (11 kB)\n#15 3.071 Downloading uv-0.11.25-py3-none-manylinux_2_28_aarch64.whl (25.1 MB)\n#15 6.061    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 25.1/25.1 MB 8.8 MB/s  0:00:02\n#15 6.088 Installing collected packages: uv\n#15 6.249 Successfully installed uv-0.11.25\n#15 6.249 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#15 6.996 \n#15 6.996 [notice] A new release of pip is available: 25.3 -> 26.2.1\n#15 6.996 [notice] To update, run: pip install --upgrade pip\n#15 DONE 7.2s\n\n#16 [runtime 4/9] COPY pyproject.toml uv.lock ./\n#16 DONE 0.0s\n\n#17 [runtime 5/9] RUN uv sync --locked --no-dev --no-install-project --python /usr/local/bin/python && uv cache clean\n#17 0.229 Using CPython 3.14.2 interpreter at: /usr/local/bin/python\n#17 0.229 Creating virtual environment at: .venv\n#17 0.233 Resolved 39 packages in 1ms\n#17 1.073 Downloading pydantic-core (2.0MiB)\n#17 1.384  Downloaded pydantic-core\n#17 1.384 Prepared 14 packages in 1.15s\n#17 1.406 Installed 14 packages in 21ms\n#17 1.406  + annotated-doc==0.0.5\n#17 1.406  + annotated-types==0.8.0\n#17 1.406  + anyio==4.15.1\n#17 1.406  + click==8.5.0\n#17 1.406  + fastapi==0.143.3\n#17 1.406  + h11==0.16.0\n#17 1.406  + idna==3.20\n#17 1.406  + opentelemetry-api==1.45.1\n#17 1.406  + pydantic==2.14.1\n#17 1.406  + pydantic-core==2.50.1\n#17 1.406  + starlette==1.8.0\n#17 1.406  + typing-extensions==4.16.0\n#17 1.406  + typing-inspection==0.4.4\n#17 1.406  + uvicorn==0.54.0\n#17 1.431 Clearing cache at: /root/.cache/uv\n#17 1.437 Removed 497 files (9.6MiB)\n#17 DONE 1.5s\n\n#18 [runtime 6/9] COPY apps/api ./apps/api\n#18 DONE 0.0s\n\n#19 [runtime 7/9] COPY packages ./packages\n#19 DONE 0.0s\n\n#20 [runtime 8/9] COPY workers ./workers\n#20 DONE 0.0s\n\n#21 [runtime 9/9] COPY --from=web /app/apps/web/dist ./apps/web/dist\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers 0.1s done\n#22 writing image sha256:a4bef76ebc85ab0849ae5ae65c79fc9f4aff47402333cb264a873a40dbab3438 done\n#22 naming to docker.io/library/folio-voice:development\n#22 naming to docker.io/library/folio-voice:development done\n#22 DONE 0.1s\n"
+  },
+  "最终实际构建与验证": [
+    {
+      "命令": [
+        "docker",
+        "build",
+        "-f",
+        "deploy/Dockerfile",
+        "-t",
+        "folio-voice:development",
+        "."
+      ],
+      "耗时秒": 1.99,
+      "退出码": 0,
+      "输出": "",
+      "错误": "#0 building with \"desktop-linux\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 1.06kB done\n#1 DONE 0.0s\n\n#2 [internal] load metadata for registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#2 DONE 0.0s\n\n#3 [internal] load metadata for registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#3 DONE 0.0s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 623B done\n#4 DONE 0.0s\n\n#5 [runtime 1/9] FROM registry-1.docker.io/library/python:3.14.2-slim-bookworm@sha256:e87711ef5c86aaeaa7031718a69db79d334d94c545c709583f651b8185870941\n#5 DONE 0.0s\n\n#6 [web 1/7] FROM registry-1.docker.io/library/node:26.4.0-bookworm-slim@sha256:ec82d089a8ae2cf02628da7b34ea57dc357b24db724d557fe2d240e6beb659c1\n#6 DONE 0.0s\n\n#7 [internal] load build context\n#7 transferring context: 2.81kB done\n#7 DONE 0.0s\n\n#8 [runtime 2/9] WORKDIR /app\n#8 CACHED\n\n#9 [runtime 3/9] RUN python -m pip install --no-cache-dir uv==0.11.25\n#9 CACHED\n\n#10 [web 2/7] WORKDIR /app\n#10 CACHED\n\n#11 [web 6/7] COPY packages/contracts/generated.ts ./packages/contracts/generated.ts\n#11 CACHED\n\n#12 [web 3/7] COPY package.json package-lock.json ./\n#12 CACHED\n\n#13 [web 4/7] RUN npm ci --ignore-scripts\n#13 CACHED\n\n#14 [web 5/7] COPY apps/web ./apps/web\n#14 CACHED\n\n#15 [web 7/7] RUN npm run build:web\n#15 CACHED\n\n#16 [runtime 4/9] COPY pyproject.toml uv.lock ./\n#16 DONE 0.0s\n\n#17 [runtime 5/9] RUN uv sync --locked --no-dev --no-install-project --python /usr/local/bin/python && uv cache clean\n#17 0.219 Using CPython 3.14.2 interpreter at: /usr/local/bin/python\n#17 0.219 Creating virtual environment at: .venv\n#17 0.224 Resolved 39 packages in 0.90ms\n#17 0.947 Downloading pydantic-core (2.0MiB)\n#17 1.367  Downloaded pydantic-core\n#17 1.367 Prepared 14 packages in 1.14s\n#17 1.398 Installed 14 packages in 30ms\n#17 1.399  + annotated-doc==0.0.5\n#17 1.399  + annotated-types==0.8.0\n#17 1.399  + anyio==4.15.1\n#17 1.399  + click==8.5.0\n#17 1.399  + fastapi==0.143.3\n#17 1.399  + h11==0.16.0\n#17 1.399  + idna==3.20\n#17 1.399  + opentelemetry-api==1.45.1\n#17 1.399  + pydantic==2.14.1\n#17 1.399  + pydantic-core==2.50.1\n#17 1.399  + starlette==1.8.0\n#17 1.399  + typing-extensions==4.16.0\n#17 1.399  + typing-inspection==0.4.4\n#17 1.399  + uvicorn==0.54.0\n#17 1.433 Clearing cache at: /root/.cache/uv\n#17 1.438 Removed 497 files (9.6MiB)\n#17 DONE 1.5s\n\n#18 [runtime 6/9] COPY apps/api ./apps/api\n#18 DONE 0.0s\n\n#19 [runtime 7/9] COPY packages ./packages\n#19 DONE 0.0s\n\n#20 [runtime 8/9] COPY workers ./workers\n#20 DONE 0.0s\n\n#21 [runtime 9/9] COPY --from=web /app/apps/web/dist ./apps/web/dist\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers 0.0s done\n#22 writing image sha256:d03b1b9965e91e6a425fe35f113eb3b27141afeb8c92fb79ee04f2e09b269879 done\n#22 naming to docker.io/library/folio-voice:development done\n#22 DONE 0.1s\n"
+    },
+    {
+      "命令": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.check_container"
+      ],
+      "耗时秒": 2.12,
+      "退出码": 0,
+      "输出": "{\"镜像\": \"folio-voice:development\", \"临时容器\": \"folio-check-faf398086e1a41fa834ef2c107a6d476\"}\n{\n  \"镜像\": \"folio-voice:development\",\n  \"临时容器\": \"folio-check-faf398086e1a41fa834ef2c107a6d476\",\n  \"HTTP\": {\n    \"存活\": 200,\n    \"未认证就绪\": 401,\n    \"中文页面\": 200,\n    \"静态资源\": 200,\n    \"未实现接口与私有路径\": 404,\n    \"说明\": \"真实HTTP；未验证产品任务、浏览器交互或模型\"\n  },\n  \"运行环境\": {\n    \"Python\": \"3.14.2\",\n    \"UID\": 10001,\n    \"SQLite\": \"3.40.1\",\n    \"包\": {\n      \"h11\": \"0.16.0\",\n      \"fastapi\": \"0.143.3\",\n      \"idna\": \"3.20\",\n      \"starlette\": \"1.8.0\",\n      \"pydantic_core\": \"2.50.1\",\n      \"pydantic\": \"2.14.1\",\n      \"click\": \"8.5.0\",\n      \"anyio\": \"4.15.1\",\n      \"annotated-doc\": \"0.0.5\",\n      \"typing-inspection\": \"0.4.4\",\n      \"annotated-types\": \"0.8.0\",\n      \"typing_extensions\": \"4.16.0\",\n      \"uvicorn\": \"0.54.0\",\n      \"opentelemetry-api\": \"1.45.1\"\n    }\n  },\n  \"存储回归\": \"..........................\\n----------------------------------------------------------------------\\nRan 26 tests in 0.181s\\n\\nOK\\n\",\n  \"container诊断\": {\n    \"执行环境\": \"容器CPU\",\n    \"就绪\": false,\n    \"能力\": [],\n    \"说明\": \"任务执行器尚未实现\"\n  },\n  \"macos诊断\": {\n    \"执行环境\": \"Mac原生MLX\",\n    \"系统\": \"Linux\",\n    \"架构\": \"aarch64\",\n    \"就绪\": false,\n    \"能力\": [],\n    \"说明\": \"MLX适配及任务执行器尚未实现\"\n  },\n  \"镜像ID\": \"sha256:d03b1b9965e91e6a425fe35f113eb3b27141afeb8c92fb79ee04f2e09b269879\",\n  \"结果\": \"通过；不代表业务、模型或设备验收\",\n  \"容器回收\": \"完成\"\n}\n",
+      "错误": ""
+    },
+    {
+      "命令": [
+        ".venv/bin/python",
+        "scripts/smoke_http.py"
+      ],
+      "耗时秒": 0.54,
+      "退出码": 0,
+      "输出": "{\"存活\": 200, \"未认证就绪\": 401, \"中文页面\": 200, \"静态资源\": 200, \"未实现接口与私有路径\": 404, \"说明\": \"真实HTTP；未验证产品任务、浏览器交互或模型\"}\n",
+      "错误": ""
+    }
+  ],
+  "容器环境与结果": {
+    "镜像": "folio-voice:development",
+    "临时容器": "folio-check-faf398086e1a41fa834ef2c107a6d476",
+    "HTTP": {
+      "存活": 200,
+      "未认证就绪": 401,
+      "中文页面": 200,
+      "静态资源": 200,
+      "未实现接口与私有路径": 404,
+      "说明": "真实HTTP；未验证产品任务、浏览器交互或模型"
+    },
+    "运行环境": {
+      "Python": "3.14.2",
+      "UID": 10001,
+      "SQLite": "3.40.1",
+      "包": {
+        "h11": "0.16.0",
+        "fastapi": "0.143.3",
+        "idna": "3.20",
+        "starlette": "1.8.0",
+        "pydantic_core": "2.50.1",
+        "pydantic": "2.14.1",
+        "click": "8.5.0",
+        "anyio": "4.15.1",
+        "annotated-doc": "0.0.5",
+        "typing-inspection": "0.4.4",
+        "annotated-types": "0.8.0",
+        "typing_extensions": "4.16.0",
+        "uvicorn": "0.54.0",
+        "opentelemetry-api": "1.45.1"
+      }
+    },
+    "存储回归": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.181s\n\nOK\n",
+    "container诊断": {
+      "执行环境": "容器CPU",
+      "就绪": false,
+      "能力": [],
+      "说明": "任务执行器尚未实现"
+    },
+    "macos诊断": {
+      "执行环境": "Mac原生MLX",
+      "系统": "Linux",
+      "架构": "aarch64",
+      "就绪": false,
+      "能力": [],
+      "说明": "MLX适配及任务执行器尚未实现"
+    },
+    "镜像ID": "sha256:d03b1b9965e91e6a425fe35f113eb3b27141afeb8c92fb79ee04f2e09b269879",
+    "结果": "通过；不代表业务、模型或设备验收",
+    "容器回收": "完成"
+  },
+  "缺镜像负例": {
+    "命令": [
+      ".venv/bin/python",
+      "-m",
+      "scripts.check_container",
+      "--image",
+      "folio-voice:missing-validation-image"
+    ],
+    "退出码": 1,
+    "结果": "实际No such image；--pull=never，无自动下载；回收核查无本轮容器",
+    "输出": "{\"镜像\": \"folio-voice:missing-validation-image\", \"临时容器\": \"folio-check-bb7f57597a73456f96d882c361171a98\"}\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/wangmeiling/Documents/py_workspace/folio-voice/scripts/check_container.py\", line 151, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/wangmeiling/Documents/py_workspace/folio-voice/scripts/check_container.py\", line 57, in main\n    container = command([*create, image]).strip()\n                ~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"/Users/wangmeiling/Documents/py_workspace/folio-voice/scripts/check_container.py\", line 21, in command\n    raise RuntimeError(\n        f\"{args!r}退出{result.returncode}：{result.stdout}{result.stderr}\"\n    )\nRuntimeError: ['docker', 'create', '--pull=never', '--name', 'folio-check-bb7f57597a73456f96d882c361171a98', '--label', 'io.folio-voice.check=folio-check-bb7f57597a73456f96d882c361171a98', '--read-only', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true', '--tmpfs', '/tmp:rw,nosuid,nodev,size=64m', '--publish', '127.0.0.1::8000', '--mount', 'type=bind,src=/Users/wangmeiling/Documents/py_workspace/folio-voice/migrations,dst=/app/migrations,readonly', '--mount', 'type=bind,src=/Users/wangmeiling/Documents/py_workspace/folio-voice/tests,dst=/app/tests,readonly', 'folio-voice:missing-validation-image']退出1：Error response from daemon: No such image: folio-voice:missing-validation-image\n\n"
+  },
+  "更新后共用入口": {
+    "命令": [
+      ".venv/bin/python",
+      "scripts/check.py"
+    ],
+    "退出码": 0,
+    "完整输出": "执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/check_documents.py\n{\n  \"检查时间UTC\": \"2026-10-18T06:07:25.863647+00:00\",\n  \"范围\": \"活动文档结构、显式锚点、内联本地链接、编号归属及R/V双向映射\",\n  \"边界\": \"不检查归档、外部网页、自然语言冲突或Schema业务语义\",\n  \"输入SHA256\": {\n    \"README.md\": \"74dc4413adb9b53536b6c80ca4b74b596121602582a5f791ca38e8890b2c9ca4\",\n    \"AGENTS.md\": \"5e67564f182c5f510a6abf1c385ff0d4562ad8d03e01117fa627757ec94846d4\",\n    \"docs/系统设计.md\": \"5af25ac0fac3013925feb7c8d3b7ef308117d395ae2b0cef84586e8176f24488\",\n    \"docs/工程规范.md\": \"df978d81791bf3cf652675ab661314fe3c683825f769400ccd40a72d2a2601a9\",\n    \"docs/验证计划.md\": \"e063cc19525636a24b0a0e232f5b10a6921a0e92cf05e0db89743d9da3e8c689\",\n    \"docs/开发任务.md\": \"5e5039133fd81f1cb48f33e5c486e02e885c540cdaad62072945e49bf7b6177a\"\n  },\n  \"本地链接数\": 308,\n  \"定义编号数\": {\n    \"A\": 5,\n    \"ADR\": 8,\n    \"C\": 12,\n    \"D\": 6,\n    \"E\": 8,\n    \"F\": 12,\n    \"I\": 6,\n    \"INV\": 7,\n    \"K\": 7,\n    \"N\": 29,\n    \"Q\": 5,\n    \"R\": 21,\n    \"S\": 45,\n    \"T\": 4,\n    \"V\": 21\n  },\n  \"错误\": [],\n  \"结果\": \"通过\"\n}\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/generate_contract_types.py --check\n生成物一致\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/validate_design_contracts.py\n{\n  \"范围\": \"Schema元校验及结构正反例，非产品测试\",\n  \"校验器\": \"jsonschema 4.26.0\",\n  \"Schema元校验\": \"通过\",\n  \"样例\": [\n    {\n      \"样例\": \"Agent读取证据\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"范围明确但没有新证据时停止\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"检测记录\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"技术解决请求无需已发布\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"交付请求不携带用户听审确认\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"候选仅暂定采用\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CreateProduction结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ProductionAccepted结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"TaskLease结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"Heartbeat结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CheckpointCommand结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"TaskResult结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ProductionControl结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CheckpointManifest结构有效（非运行授权）\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"QualityPolicy自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"Qualification自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"CompatibilityProfile自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"ReleaseDecision自写结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"资格报告字段齐全的结构\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"放行引用字段齐全的结构，非真实放行\",\n      \"预期\": \"valid\",\n      \"符合预期\": true,\n      \"结构错误数\": 0\n    },\n    {\n      \"样例\": \"模型请求任意Shell\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 3\n    },\n    {\n      \"样例\": \"停止仍请求工具\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"旧质量契约\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"非法散列\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 2\n    },\n    {\n      \"样例\": \"负数版本\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"把工具结果写成自动发布\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"客户端伪造通过\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"观察动作不能提交修复\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CreateProduction拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ProductionAccepted拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"TaskLease拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"Heartbeat拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CheckpointCommand拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"TaskResult拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ProductionControl拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CheckpointManifest拒绝额外通过字段\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"租约截止时间缺时区\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"租约截止时间不存在日期\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"QualityPolicy拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"Qualification拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"CompatibilityProfile拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"ReleaseDecision拒绝外加通过标记\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"活动资格缺报告\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    },\n    {\n      \"样例\": \"放行缺门槛证据与资格引用\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 7\n    },\n    {\n      \"样例\": \"SHA256拒绝末尾换行\",\n      \"预期\": \"invalid\",\n      \"符合预期\": true,\n      \"结构错误数\": 1\n    }\n  ]\n}\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/validate_http_contract.py\n{\n  \"范围\": \"OpenAPI 3.1.1、离线引用、请求结构与协议边界，非服务测试\",\n  \"校验器\": \"openapi-spec-validator 0.9.0\",\n  \"操作数\": 48,\n  \"请求样例数\": 30,\n  \"响应样例数\": 38,\n  \"结果\": \"通过\"\n}\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tools -p test_*.py\n....................\n----------------------------------------------------------------------\nRan 20 tests in 4.415s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/contracts -p test_*.py\n.........................\n----------------------------------------------------------------------\nRan 25 tests in 2.013s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/core -p test_*.py\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.059s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/storage -p test_*.py\n..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.462s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m unittest discover -s tests/engineering -p test_*.py\n...........\n----------------------------------------------------------------------\nRan 11 tests in 0.607s\n\nOK\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m ruff check apps/api workers packages tests scripts/check.py scripts/smoke_http.py scripts/check_container.py tools/generate_contract_types.py tools/validate_design_contracts.py tools/validate_http_contract.py tools/check_module_boundaries.py tools/test_generate_contract_types.py tools/test_check_documents.py tools/test_validate_http_contract.py\nAll checks passed!\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m ruff format --check --exclude packages/contracts/generated.py apps/api workers packages tests scripts/check.py scripts/smoke_http.py scripts/check_container.py tools/generate_contract_types.py tools/validate_design_contracts.py tools/validate_http_contract.py tools/check_module_boundaries.py tools/test_generate_contract_types.py tools/test_check_documents.py tools/test_validate_http_contract.py\n24 files already formatted\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python -m mypy\nSuccess: no issues found in 11 source files\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python tools/check_module_boundaries.py\n{\"文件数\": 6, \"错误\": []}\n执行：npm run check:contracts\n\n> check:contracts\n> tsc --project packages/contracts/tsconfig.json\n\n执行：npm run check:boundaries\n\n> check:boundaries\n> node scripts/check_frontend.mjs\n\n{\"文件数\":3,\"错误\":[]}\n执行：npm run test:web\n\n> test:web\n> node --test tests/engineering/frontend.test.mjs\n\n✔ Web可以引用契约及组件 (136.726875ms)\n✔ 相对导入不能穿入核心或执行器 (265.396375ms)\n✔ 导出与动态导入同样检查 (652.968167ms)\n✔ 循环引用被拦截 (127.142459ms)\n✔ 缺失模块及契约反向引用被拦截 (267.771458ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1487.460209\n执行：npm run build:web\n\n> build:web\n> tsc -p apps/web/tsconfig.json && vite build apps/web\n\nvite v8.3.4 building client environment for production...\ntransforming...\n✓ 15 modules transformed.\nrendering chunks...\ncomputing gzip size...\napps/web/dist/index.html                   0.39 kB │ gzip:  0.27 kB\napps/web/dist/assets/index-DYziLauV.css    0.64 kB │ gzip:  0.38 kB\napps/web/dist/assets/index-CmSulDwB.js   220.62 kB │ gzip: 69.33 kB\n\n✓ built in 60ms\n执行：/Users/wangmeiling/Documents/py_workspace/folio-voice/.venv/bin/python scripts/smoke_http.py\n{\"存活\": 200, \"未认证就绪\": 401, \"中文页面\": 200, \"静态资源\": 200, \"未实现接口与私有路径\": 404, \"说明\": \"真实HTTP；未验证产品任务、浏览器交互或模型\"}\n适用工程检查通过；真实模型、音频、设备与远端CI未由此验证。\n",
+    "Python用例数": 88,
+    "前端用例数": 5,
+    "mypy文件数": 11,
+    "Ruff格式文件数": 24,
+    "重复计数说明": "容器另跑26项已有存储用例，属于第二环境执行，不加到独立用例数"
+  },
+  "文档检查": {
+    "检查时间UTC": "2026-10-18T06:09:09.143273+00:00",
+    "范围": "活动文档结构、显式锚点、内联本地链接、编号归属及R/V双向映射",
+    "边界": "不检查归档、外部网页、自然语言冲突或Schema业务语义",
+    "输入SHA256": {
+      "README.md": "74dc4413adb9b53536b6c80ca4b74b596121602582a5f791ca38e8890b2c9ca4",
+      "AGENTS.md": "5e67564f182c5f510a6abf1c385ff0d4562ad8d03e01117fa627757ec94846d4",
+      "docs/系统设计.md": "5af25ac0fac3013925feb7c8d3b7ef308117d395ae2b0cef84586e8176f24488",
+      "docs/工程规范.md": "df978d81791bf3cf652675ab661314fe3c683825f769400ccd40a72d2a2601a9",
+      "docs/验证计划.md": "e063cc19525636a24b0a0e232f5b10a6921a0e92cf05e0db89743d9da3e8c689",
+      "docs/开发任务.md": "4eb17d905065ebb1a8902ca96a283920fcda04e712a06b913cb98cbfa8fc641e"
+    },
+    "本地链接数": 311,
+    "定义编号数": {
+      "A": 5,
+      "ADR": 8,
+      "C": 12,
+      "D": 6,
+      "E": 8,
+      "F": 12,
+      "I": 6,
+      "INV": 7,
+      "K": 7,
+      "N": 29,
+      "Q": 5,
+      "R": 21,
+      "S": 45,
+      "T": 4,
+      "V": 21
+    },
+    "错误": [],
+    "结果": "通过"
+  },
+  "语义及作者自审": {
+    "目的和模块": "只补部署验证；HTTP预期复用一个函数，容器检查独立于纯本机检查，由CI在构建后调用；生产Schema/业务/迁移字节未改",
+    "状态权限": "仅存活/未认证拒绝/诊断，不虚报任务或推理就绪；UID10001、只读根目录、回环端口、临时目录和只读自写测试挂载，无私人数据",
+    "文档证据": "工程规范、验证计划、README及F03原位同步，旧证据保留各自输入范围；容器实际SQLite3.40.1补入S36适用性，Mac入口Linux诊断不当作真实Mac模型证据",
+    "检查和未决": "实际命令通过；远端CI、规则集/必需检查尚未执行，不能关闭F03或宣称合并强拦截；本轮没有独立评审者",
+    "文件维护": "保留有效镜像、环境和证据，临时容器按准确ID清理；临时日志和可再生缓存汇总后删除，既有修改保留"
+  },
+  "远端只读核实": {
+    "仓库": "Evelyn-ELF/folio-voice",
+    "可见性": "public",
+    "连接器返回权限": [
+      "admin",
+      "maintain",
+      "pull",
+      "push",
+      "triage"
+    ],
+    "CLI": "gh未登录；不据此推断连接器不可用",
+    "实际远端写入": "无；访问权限不代替用户授权"
+  },
+  "下一步": "请求用户允许提交并推送当前累计开发变更到当前开发分支后运行远端CI；在授权前保留本地并不上传，不进入依赖F03关闭的F04。"
+}

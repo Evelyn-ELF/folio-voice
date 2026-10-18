@@ -1,0 +1,4 @@
+interface:
+  display_name: "整理并结束任务"
+  short_description: "整理当前任务并保存进度、未完成操作和下一步，然后停止推进"
+  default_prompt: "$task-stop 我要结束任务了，请按仓库约定整理并停止。"

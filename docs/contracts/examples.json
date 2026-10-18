@@ -110,6 +110,403 @@
           "all_checks_passed"
         ]
       }
+    },
+    {
+      "name": "CreateProduction结构有效（非运行授权）",
+      "schema": "CreateProduction",
+      "data": {
+        "book_id": "11111111-1111-4111-8111-111111111111",
+        "text_revision_id": "11111111-1111-4111-8111-111111111111",
+        "voice_version_id": "11111111-1111-4111-8111-111111111111",
+        "model_revision": "自写测试模型@固定修订",
+        "config_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": [
+          "11111111-1111-4111-8111-111111111111",
+          "22222222-2222-4222-8222-222222222222"
+        ],
+        "request_id": "11111111-1111-4111-8111-111111111111"
+      }
+    },
+    {
+      "name": "ProductionAccepted结构有效（非运行授权）",
+      "schema": "ProductionAccepted",
+      "data": {
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "control_revision": 1,
+        "status_url": "/api/v1/productions/11111111-1111-4111-8111-111111111111"
+      }
+    },
+    {
+      "name": "TaskLease结构有效（非运行授权）",
+      "schema": "TaskLease",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "task_id": "11111111-1111-4111-8111-111111111111",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "expires_at": "2026-10-17T12:00:00+00:00",
+        "control_revision": 1,
+        "input_artifacts": [
+          {
+            "artifact_id": "11111111-1111-4111-8111-111111111111",
+            "size_bytes": 0,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Heartbeat结构有效（非运行授权）",
+      "schema": "Heartbeat",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111"
+      }
+    },
+    {
+      "name": "CheckpointCommand结构有效（非运行授权）",
+      "schema": "CheckpointCommand",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "checkpoint_artifact_id": "11111111-1111-4111-8111-111111111111",
+        "completed_unit_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ]
+      }
+    },
+    {
+      "name": "TaskResult结构有效（非运行授权）",
+      "schema": "TaskResult",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "output_artifact_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "result_summary": "自写测试单元已执行；质量另行检查。"
+      }
+    },
+    {
+      "name": "ProductionControl结构有效（非运行授权）",
+      "schema": "ProductionControl",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "expected_control_revision": 1
+      }
+    },
+    {
+      "name": "CheckpointManifest结构有效（非运行授权）",
+      "schema": "CheckpointManifest",
+      "data": {
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "adapter_version": "测试适配器@1",
+        "completed_unit_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "artifacts": [
+          {
+            "unit_id": "11111111-1111-4111-8111-111111111111",
+            "artifacts": [
+              {
+                "artifact_id": "11111111-1111-4111-8111-111111111111",
+                "size_bytes": 10,
+                "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            ]
+          }
+        ],
+        "pending_unit_ids": [
+          "22222222-2222-4222-8222-222222222222"
+        ],
+        "cursor": "下一完整单元"
+      }
+    },
+    {
+      "name": "QualityPolicy自写结构",
+      "schema": "QualityPolicy",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+        "config": {
+          "contract_version": 2,
+          "canonicalization": "fv-json-v1",
+          "applicability": {
+            "languages": [
+              "zh-CN"
+            ],
+            "source_types": [
+              "epub"
+            ],
+            "voice_version_ids": [
+              "11111111-1111-4111-8111-111111111111"
+            ],
+            "model_revisions": [
+              "自写模型@1"
+            ],
+            "processing_config_sha256s": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "deliverable_kinds": [
+              "audio"
+            ]
+          },
+          "required_detectors": [
+            {
+              "id": "11111111-1111-4111-8111-111111111111",
+              "version": 1,
+              "engine": "自写检测器",
+              "engine_revision": "1",
+              "model_revision": null,
+              "prompt_sha256": null,
+              "input_modalities": [
+                "audio"
+              ],
+              "risks": [
+                "D04"
+              ],
+              "thresholds": [
+                {
+                  "metric": "自写指标",
+                  "unit": "sample",
+                  "direction": "upper",
+                  "value": "0",
+                  "regression_tolerance": "0"
+                }
+              ],
+              "calibration_report_sha256": null
+            }
+          ],
+          "adjudication_rule_sha256s": [],
+          "repair_presets": [],
+          "budget_rules": {
+            "plan_steps": 4,
+            "replans": 2,
+            "reflections": 2,
+            "actions_per_turn": 1,
+            "model_requests_per_finding": 8,
+            "tool_calls_per_finding": 12,
+            "tts_generations_per_block": 3,
+            "no_progress_repetitions": 2,
+            "request_timeout_seconds": 120,
+            "transient_retries": 2,
+            "fee_limits": null
+          }
+        },
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "Qualification自写结构",
+      "schema": "Qualification",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "revision": 1,
+        "contract_version": 2,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+        "scope": {
+          "languages": [
+            "zh-CN"
+          ],
+          "source_types": [
+            "epub"
+          ],
+          "voice_version_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "model_revisions": [
+            "自写模型@1"
+          ],
+          "processing_config_sha256s": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "deliverable_kinds": [
+            "audio"
+          ]
+        },
+        "dataset_sha256": null,
+        "report_sha256": null,
+        "issuer_id": null,
+        "issued_at": null,
+        "status": "draft",
+        "change_triggers": [
+          "detector"
+        ],
+        "revocation_sequence": 0,
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "CompatibilityProfile自写结构",
+      "schema": "CompatibilityProfile",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "contract_version": 2,
+        "deliverable_kind": "audio",
+        "tested_versions": [
+          {
+            "platform": "自写平台",
+            "os_version": "1",
+            "reader": "自写播放器",
+            "reader_version": "1",
+            "encoder_version": "1",
+            "packager_version": "1"
+          }
+        ],
+        "file_features": [
+          "aac"
+        ],
+        "limits": {
+          "chapters": 1,
+          "sentences": 10,
+          "duration_samples": 48000,
+          "sample_rate": 48000,
+          "size_bytes": 10000
+        },
+        "device_tests": [
+          {
+            "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "evidence_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ],
+        "status": "draft",
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "ReleaseDecision自写结构",
+      "schema": "ReleaseDecision",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "export_id": "11111111-1111-4111-8111-111111111111",
+        "deliverable_kind": "audio",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "production_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "quality_revision": 1,
+        "quality_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "gate_evidence": {
+          "Q1": [],
+          "Q2": [],
+          "Q3": [],
+          "Q4": [],
+          "Q5": []
+        },
+        "qualification": null,
+        "compatibility_profile": null,
+        "decision": "blocked",
+        "blockers": [
+          {
+            "code": "REVIEW_REQUIRED",
+            "detail": "缺少证据"
+          }
+        ],
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "资格报告字段齐全的结构",
+      "schema": "Qualification",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "revision": 3,
+        "contract_version": 2,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+        "scope": {
+          "languages": [
+            "zh-CN"
+          ],
+          "source_types": [
+            "epub"
+          ],
+          "voice_version_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "model_revisions": [
+            "自写模型@1"
+          ],
+          "processing_config_sha256s": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "deliverable_kinds": [
+            "audio"
+          ]
+        },
+        "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "report_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "issuer_id": "11111111-1111-4111-8111-111111111111",
+        "issued_at": "2026-10-17T00:00:00Z",
+        "status": "active",
+        "change_triggers": [
+          "detector"
+        ],
+        "revocation_sequence": 0,
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "放行引用字段齐全的结构，非真实放行",
+      "schema": "ReleaseDecision",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "export_id": "11111111-1111-4111-8111-111111111111",
+        "deliverable_kind": "audio",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "production_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "quality_revision": 1,
+        "quality_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "gate_evidence": {
+          "Q1": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q2": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q3": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q4": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "Q5": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "qualification": {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "version": 1,
+          "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+          "revocation_sequence": 0
+        },
+        "compatibility_profile": {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "version": 1
+        },
+        "decision": "released",
+        "blockers": [],
+        "created_at": "2026-10-17T00:00:00Z"
+      }
     }
   ],
   "invalid": [
@@ -260,6 +657,514 @@
           "binding_id": null
         },
         "stop_reason": null
+      }
+    },
+    {
+      "name": "CreateProduction拒绝额外通过字段",
+      "schema": "CreateProduction",
+      "data": {
+        "book_id": "11111111-1111-4111-8111-111111111111",
+        "text_revision_id": "11111111-1111-4111-8111-111111111111",
+        "voice_version_id": "11111111-1111-4111-8111-111111111111",
+        "model_revision": "自写测试模型@固定修订",
+        "config_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": [
+          "11111111-1111-4111-8111-111111111111",
+          "22222222-2222-4222-8222-222222222222"
+        ],
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "passed": true
+      }
+    },
+    {
+      "name": "ProductionAccepted拒绝额外通过字段",
+      "schema": "ProductionAccepted",
+      "data": {
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "control_revision": 1,
+        "status_url": "/api/v1/productions/11111111-1111-4111-8111-111111111111",
+        "passed": true
+      }
+    },
+    {
+      "name": "TaskLease拒绝额外通过字段",
+      "schema": "TaskLease",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "task_id": "11111111-1111-4111-8111-111111111111",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "expires_at": "2026-10-17T12:00:00+00:00",
+        "control_revision": 1,
+        "input_artifacts": [
+          {
+            "artifact_id": "11111111-1111-4111-8111-111111111111",
+            "size_bytes": 0,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "name": "Heartbeat拒绝额外通过字段",
+      "schema": "Heartbeat",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "passed": true
+      }
+    },
+    {
+      "name": "CheckpointCommand拒绝额外通过字段",
+      "schema": "CheckpointCommand",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "checkpoint_artifact_id": "11111111-1111-4111-8111-111111111111",
+        "completed_unit_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "passed": true
+      }
+    },
+    {
+      "name": "TaskResult拒绝额外通过字段",
+      "schema": "TaskResult",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "output_artifact_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "result_summary": "自写测试单元已执行；质量另行检查。",
+        "passed": true
+      }
+    },
+    {
+      "name": "ProductionControl拒绝额外通过字段",
+      "schema": "ProductionControl",
+      "data": {
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "expected_control_revision": 1,
+        "passed": true
+      }
+    },
+    {
+      "name": "CheckpointManifest拒绝额外通过字段",
+      "schema": "CheckpointManifest",
+      "data": {
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "adapter_version": "测试适配器@1",
+        "completed_unit_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "artifacts": [
+          {
+            "unit_id": "11111111-1111-4111-8111-111111111111",
+            "artifacts": [
+              {
+                "artifact_id": "11111111-1111-4111-8111-111111111111",
+                "size_bytes": 10,
+                "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            ]
+          }
+        ],
+        "pending_unit_ids": [
+          "22222222-2222-4222-8222-222222222222"
+        ],
+        "cursor": "下一完整单元",
+        "passed": true
+      }
+    },
+    {
+      "name": "租约截止时间缺时区",
+      "schema": "TaskLease",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "task_id": "11111111-1111-4111-8111-111111111111",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "expires_at": "2026-10-17T12:00:00",
+        "control_revision": 1,
+        "input_artifacts": [
+          {
+            "artifact_id": "11111111-1111-4111-8111-111111111111",
+            "size_bytes": 0,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ]
+      }
+    },
+    {
+      "name": "租约截止时间不存在日期",
+      "schema": "TaskLease",
+      "data": {
+        "attempt_no": 1,
+        "lease_token": "仅用于测试的租约令牌",
+        "input_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "app_generation": "11111111-1111-4111-8111-111111111111",
+        "task_id": "11111111-1111-4111-8111-111111111111",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "expires_at": "2026-02-30T12:00:00Z",
+        "control_revision": 1,
+        "input_artifacts": [
+          {
+            "artifact_id": "11111111-1111-4111-8111-111111111111",
+            "size_bytes": 0,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ]
+      }
+    },
+    {
+      "name": "QualityPolicy拒绝外加通过标记",
+      "schema": "QualityPolicy",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+        "config": {
+          "contract_version": 2,
+          "canonicalization": "fv-json-v1",
+          "applicability": {
+            "languages": [
+              "zh-CN"
+            ],
+            "source_types": [
+              "epub"
+            ],
+            "voice_version_ids": [
+              "11111111-1111-4111-8111-111111111111"
+            ],
+            "model_revisions": [
+              "自写模型@1"
+            ],
+            "processing_config_sha256s": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "deliverable_kinds": [
+              "audio"
+            ]
+          },
+          "required_detectors": [
+            {
+              "id": "11111111-1111-4111-8111-111111111111",
+              "version": 1,
+              "engine": "自写检测器",
+              "engine_revision": "1",
+              "model_revision": null,
+              "prompt_sha256": null,
+              "input_modalities": [
+                "audio"
+              ],
+              "risks": [
+                "D04"
+              ],
+              "thresholds": [
+                {
+                  "metric": "自写指标",
+                  "unit": "sample",
+                  "direction": "upper",
+                  "value": "0",
+                  "regression_tolerance": "0"
+                }
+              ],
+              "calibration_report_sha256": null
+            }
+          ],
+          "adjudication_rule_sha256s": [],
+          "repair_presets": [],
+          "budget_rules": {
+            "plan_steps": 4,
+            "replans": 2,
+            "reflections": 2,
+            "actions_per_turn": 1,
+            "model_requests_per_finding": 8,
+            "tool_calls_per_finding": 12,
+            "tts_generations_per_block": 3,
+            "no_progress_repetitions": 2,
+            "request_timeout_seconds": 120,
+            "transient_retries": 2,
+            "fee_limits": null
+          }
+        },
+        "created_at": "2026-10-17T00:00:00Z",
+        "passed": true
+      }
+    },
+    {
+      "name": "Qualification拒绝外加通过标记",
+      "schema": "Qualification",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "revision": 1,
+        "contract_version": 2,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+        "scope": {
+          "languages": [
+            "zh-CN"
+          ],
+          "source_types": [
+            "epub"
+          ],
+          "voice_version_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "model_revisions": [
+            "自写模型@1"
+          ],
+          "processing_config_sha256s": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "deliverable_kinds": [
+            "audio"
+          ]
+        },
+        "dataset_sha256": null,
+        "report_sha256": null,
+        "issuer_id": null,
+        "issued_at": null,
+        "status": "draft",
+        "change_triggers": [
+          "detector"
+        ],
+        "revocation_sequence": 0,
+        "created_at": "2026-10-17T00:00:00Z",
+        "passed": true
+      }
+    },
+    {
+      "name": "CompatibilityProfile拒绝外加通过标记",
+      "schema": "CompatibilityProfile",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "contract_version": 2,
+        "deliverable_kind": "audio",
+        "tested_versions": [
+          {
+            "platform": "自写平台",
+            "os_version": "1",
+            "reader": "自写播放器",
+            "reader_version": "1",
+            "encoder_version": "1",
+            "packager_version": "1"
+          }
+        ],
+        "file_features": [
+          "aac"
+        ],
+        "limits": {
+          "chapters": 1,
+          "sentences": 10,
+          "duration_samples": 48000,
+          "sample_rate": 48000,
+          "size_bytes": 10000
+        },
+        "device_tests": [
+          {
+            "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "evidence_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ],
+        "status": "draft",
+        "created_at": "2026-10-17T00:00:00Z",
+        "passed": true
+      }
+    },
+    {
+      "name": "ReleaseDecision拒绝外加通过标记",
+      "schema": "ReleaseDecision",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "export_id": "11111111-1111-4111-8111-111111111111",
+        "deliverable_kind": "audio",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "production_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "quality_revision": 1,
+        "quality_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "gate_evidence": {
+          "Q1": [],
+          "Q2": [],
+          "Q3": [],
+          "Q4": [],
+          "Q5": []
+        },
+        "qualification": null,
+        "compatibility_profile": null,
+        "decision": "blocked",
+        "blockers": [
+          {
+            "code": "REVIEW_REQUIRED",
+            "detail": "缺少证据"
+          }
+        ],
+        "created_at": "2026-10-17T00:00:00Z",
+        "passed": true
+      }
+    },
+    {
+      "name": "活动资格缺报告",
+      "schema": "Qualification",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "revision": 3,
+        "contract_version": 2,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+        "scope": {
+          "languages": [
+            "zh-CN"
+          ],
+          "source_types": [
+            "epub"
+          ],
+          "voice_version_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ],
+          "model_revisions": [
+            "自写模型@1"
+          ],
+          "processing_config_sha256s": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "deliverable_kinds": [
+            "audio"
+          ]
+        },
+        "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "report_sha256": null,
+        "issuer_id": "11111111-1111-4111-8111-111111111111",
+        "issued_at": "2026-10-17T00:00:00Z",
+        "status": "active",
+        "change_triggers": [
+          "detector"
+        ],
+        "revocation_sequence": 0,
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "放行缺门槛证据与资格引用",
+      "schema": "ReleaseDecision",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "contract_version": 2,
+        "request_id": "11111111-1111-4111-8111-111111111111",
+        "export_id": "11111111-1111-4111-8111-111111111111",
+        "deliverable_kind": "audio",
+        "artifact_id": "11111111-1111-4111-8111-111111111111",
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "production_id": "11111111-1111-4111-8111-111111111111",
+        "production_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "quality_revision": 1,
+        "quality_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "gate_evidence": {
+          "Q1": [],
+          "Q2": [],
+          "Q3": [],
+          "Q4": [],
+          "Q5": []
+        },
+        "qualification": null,
+        "compatibility_profile": null,
+        "decision": "released",
+        "blockers": [],
+        "created_at": "2026-10-17T00:00:00Z"
+      }
+    },
+    {
+      "name": "SHA256拒绝末尾换行",
+      "schema": "QualityPolicy",
+      "data": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "version": 1,
+        "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e\n",
+        "config": {
+          "contract_version": 2,
+          "canonicalization": "fv-json-v1",
+          "applicability": {
+            "languages": [
+              "zh-CN"
+            ],
+            "source_types": [
+              "epub"
+            ],
+            "voice_version_ids": [
+              "11111111-1111-4111-8111-111111111111"
+            ],
+            "model_revisions": [
+              "自写模型@1"
+            ],
+            "processing_config_sha256s": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "deliverable_kinds": [
+              "audio"
+            ]
+          },
+          "required_detectors": [
+            {
+              "id": "11111111-1111-4111-8111-111111111111",
+              "version": 1,
+              "engine": "自写检测器",
+              "engine_revision": "1",
+              "model_revision": null,
+              "prompt_sha256": null,
+              "input_modalities": [
+                "audio"
+              ],
+              "risks": [
+                "D04"
+              ],
+              "thresholds": [
+                {
+                  "metric": "自写指标",
+                  "unit": "sample",
+                  "direction": "upper",
+                  "value": "0",
+                  "regression_tolerance": "0"
+                }
+              ],
+              "calibration_report_sha256": null
+            }
+          ],
+          "adjudication_rule_sha256s": [],
+          "repair_presets": [],
+          "budget_rules": {
+            "plan_steps": 4,
+            "replans": 2,
+            "reflections": 2,
+            "actions_per_turn": 1,
+            "model_requests_per_finding": 8,
+            "tool_calls_per_finding": 12,
+            "tts_generations_per_block": 3,
+            "no_progress_repetitions": 2,
+            "request_timeout_seconds": 120,
+            "transient_retries": 2,
+            "fee_limits": null
+          }
+        },
+        "created_at": "2026-10-17T00:00:00Z"
       }
     }
   ]

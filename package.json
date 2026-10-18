@@ -1,0 +1,28 @@
+{
+  "name": "folio-voice",
+  "private": true,
+  "description": "Folio Voice Web与工程检查",
+  "scripts": {
+    "check:contracts": "tsc --project packages/contracts/tsconfig.json",
+    "dev:web": "vite apps/web --host 127.0.0.1",
+    "build:web": "tsc -p apps/web/tsconfig.json && vite build apps/web",
+    "check:boundaries": "node scripts/check_frontend.mjs",
+    "test:web": "node --test tests/engineering/frontend.test.mjs"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "8.3.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/node": "26.6.5"
+  },
+  "engines": {
+    "node": "26.4.0",
+    "npm": "11.17.0"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "type": "module"
+}

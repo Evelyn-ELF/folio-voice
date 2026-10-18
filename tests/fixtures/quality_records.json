@@ -1,0 +1,174 @@
+{
+  "QualityPolicy": {
+    "id": "11111111-1111-4111-8111-111111111111",
+    "version": 1,
+    "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+    "config": {
+      "contract_version": 2,
+      "canonicalization": "fv-json-v1",
+      "applicability": {
+        "languages": [
+          "zh-CN"
+        ],
+        "source_types": [
+          "epub"
+        ],
+        "voice_version_ids": [
+          "11111111-1111-4111-8111-111111111111"
+        ],
+        "model_revisions": [
+          "自写模型@1"
+        ],
+        "processing_config_sha256s": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "deliverable_kinds": [
+          "audio"
+        ]
+      },
+      "required_detectors": [
+        {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "version": 1,
+          "engine": "自写检测器",
+          "engine_revision": "1",
+          "model_revision": null,
+          "prompt_sha256": null,
+          "input_modalities": [
+            "audio"
+          ],
+          "risks": [
+            "D04"
+          ],
+          "thresholds": [
+            {
+              "metric": "自写指标",
+              "unit": "sample",
+              "direction": "upper",
+              "value": "0",
+              "regression_tolerance": "0"
+            }
+          ],
+          "calibration_report_sha256": null
+        }
+      ],
+      "adjudication_rule_sha256s": [],
+      "repair_presets": [],
+      "budget_rules": {
+        "plan_steps": 4,
+        "replans": 2,
+        "reflections": 2,
+        "actions_per_turn": 1,
+        "model_requests_per_finding": 8,
+        "tool_calls_per_finding": 12,
+        "tts_generations_per_block": 3,
+        "no_progress_repetitions": 2,
+        "request_timeout_seconds": 120,
+        "transient_retries": 2,
+        "fee_limits": null
+      }
+    },
+    "created_at": "2026-10-17T00:00:00Z"
+  },
+  "Qualification": {
+    "id": "11111111-1111-4111-8111-111111111111",
+    "version": 1,
+    "revision": 1,
+    "contract_version": 2,
+    "policy_hash": "e46f59a9c8f7d4e84d879eef0f7aab45981e4ab9b33ff10f3450255a1392cb0e",
+    "scope": {
+      "languages": [
+        "zh-CN"
+      ],
+      "source_types": [
+        "epub"
+      ],
+      "voice_version_ids": [
+        "11111111-1111-4111-8111-111111111111"
+      ],
+      "model_revisions": [
+        "自写模型@1"
+      ],
+      "processing_config_sha256s": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "deliverable_kinds": [
+        "audio"
+      ]
+    },
+    "dataset_sha256": null,
+    "report_sha256": null,
+    "issuer_id": null,
+    "issued_at": null,
+    "status": "draft",
+    "change_triggers": [
+      "detector"
+    ],
+    "revocation_sequence": 0,
+    "created_at": "2026-10-17T00:00:00Z"
+  },
+  "CompatibilityProfile": {
+    "id": "11111111-1111-4111-8111-111111111111",
+    "version": 1,
+    "contract_version": 2,
+    "deliverable_kind": "audio",
+    "tested_versions": [
+      {
+        "platform": "自写平台",
+        "os_version": "1",
+        "reader": "自写播放器",
+        "reader_version": "1",
+        "encoder_version": "1",
+        "packager_version": "1"
+      }
+    ],
+    "file_features": [
+      "aac"
+    ],
+    "limits": {
+      "chapters": 1,
+      "sentences": 10,
+      "duration_samples": 48000,
+      "sample_rate": 48000,
+      "size_bytes": 10000
+    },
+    "device_tests": [
+      {
+        "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evidence_id": "11111111-1111-4111-8111-111111111111"
+      }
+    ],
+    "status": "draft",
+    "created_at": "2026-10-17T00:00:00Z"
+  },
+  "ReleaseDecision": {
+    "id": "11111111-1111-4111-8111-111111111111",
+    "contract_version": 2,
+    "request_id": "11111111-1111-4111-8111-111111111111",
+    "export_id": "11111111-1111-4111-8111-111111111111",
+    "deliverable_kind": "audio",
+    "artifact_id": "11111111-1111-4111-8111-111111111111",
+    "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "production_id": "11111111-1111-4111-8111-111111111111",
+    "production_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "quality_revision": 1,
+    "quality_snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "gate_evidence": {
+      "Q1": [],
+      "Q2": [],
+      "Q3": [],
+      "Q4": [],
+      "Q5": []
+    },
+    "qualification": null,
+    "compatibility_profile": null,
+    "decision": "blocked",
+    "blockers": [
+      {
+        "code": "REVIEW_REQUIRED",
+        "detail": "缺少证据"
+      }
+    ],
+    "created_at": "2026-10-17T00:00:00Z"
+  }
+}

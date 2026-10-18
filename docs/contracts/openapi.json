@@ -1,0 +1,5236 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Folio Voice HTTP契约",
+    "version": "1.0.0",
+    "description": "设计第10章的HTTP结构基线。全部身份、归属、租约、质量与事务检查由服务实现；本文件不表示服务已运行。"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/sessions": {
+      "post": {
+        "operationId": "createSession",
+        "summary": "用一次性配对码建立会话；校验Origin/Host，设置HttpOnly、SameSite=Strict会话Cookie。",
+        "security": [],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionRecord"
+                }
+              }
+            },
+            "headers": {
+              "Set-Cookie": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "会话Cookie；令牌不可写日志。"
+              }
+            }
+          },
+          "400": {
+            "description": "请求语义不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求过于频繁",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSession"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "用一次性配对码建立会话；校验Origin/Host，设置HttpOnly、SameSite=Strict会话Cookie。"
+      }
+    },
+    "/sessions/current": {
+      "delete": {
+        "operationId": "closeSession",
+        "summary": "closeSession",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionClosed"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/uploads": {
+      "post": {
+        "operationId": "createUpload",
+        "summary": "createUpload",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "资源或服务尚未就绪",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "超过允许大小",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpload"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/uploads/{id}": {
+      "get": {
+        "operationId": "getUpload",
+        "summary": "getUpload",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{id}/chunks/{index}": {
+      "put": {
+        "operationId": "putUploadChunk",
+        "summary": "二进制分块使用request_id查询参数；相同索引/请求重传必须长度及散列一致。执行器仅可操作所属任务上传。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "request_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "X-Chunk-SHA256",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SHA256"
+            }
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChunkAccepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求语义不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "超过允许大小",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "二进制分块使用request_id查询参数；相同索引/请求重传必须长度及散列一致。执行器仅可操作所属任务上传。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{id}/complete": {
+      "post": {
+        "operationId": "completeUpload",
+        "summary": "completeUpload",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtifactRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "资源或服务尚未就绪",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "超过允许大小",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/artifacts/{id}": {
+      "get": {
+        "operationId": "getArtifact",
+        "summary": "按关联权限读取；view=bytes返回字节，view=metadata返回元数据，不返回宿主路径。执行器只能读取获派输入或本任务产物。",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "bytes",
+                "metadata"
+              ],
+              "default": "bytes"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "description": "仅支持单一字节范围；不满足返回416。"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtifactRecord"
+                }
+              },
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "416": {
+            "description": "字节范围不满足",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "满足的单一字节范围",
+            "headers": {
+              "Content-Range": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "description": "按关联权限读取；view=bytes返回字节，view=metadata返回元数据，不返回宿主路径。执行器只能读取获派输入或本任务产物。"
+      }
+    },
+    "/books": {
+      "post": {
+        "operationId": "createBook",
+        "summary": "createBook",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBook"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/books/{id}/imports": {
+      "post": {
+        "operationId": "createImport",
+        "summary": "createImport",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskAccepted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateImport"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/books/{id}/revisions": {
+      "get": {
+        "operationId": "listTextRevisions",
+        "summary": "listTextRevisions",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionList"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTextRevision",
+        "summary": "上传的结构制品须包含来源与四层映射，由服务校验后创建不可变修订；If-Match针对书籍修订列表的资源版本。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextRevisionRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTextRevision"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "上传的结构制品须包含来源与四层映射，由服务校验后创建不可变修订；If-Match针对书籍修订列表的资源版本。",
+        "x-concurrency": "etag"
+      }
+    },
+    "/voices": {
+      "post": {
+        "operationId": "createVoice",
+        "summary": "createVoice",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoice"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/voices/{id}/versions": {
+      "post": {
+        "operationId": "createVoiceVersion",
+        "summary": "参考变更创建新版本；认可记录由用户会话创建，未认可不得正式生产。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceVersionRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoiceVersion"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "参考变更创建新版本；认可记录由用户会话创建，未认可不得正式生产。"
+      }
+    },
+    "/productions": {
+      "post": {
+        "operationId": "createProduction",
+        "summary": "createProduction",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductionAccepted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProduction"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/productions/{id}": {
+      "get": {
+        "operationId": "getProduction",
+        "summary": "getProduction",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductionRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productions/{id}/pause": {
+      "post": {
+        "operationId": "pauseProduction",
+        "summary": "制作级屏障使用expected_control_revision核验；与结果提交串行，不把执行完成当质量通过。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductionRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductionControl"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "制作级屏障使用expected_control_revision核验；与结果提交串行，不把执行完成当质量通过。"
+      }
+    },
+    "/productions/{id}/resume": {
+      "post": {
+        "operationId": "resumeProduction",
+        "summary": "制作级屏障使用expected_control_revision核验；与结果提交串行，不把执行完成当质量通过。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductionRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductionControl"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "制作级屏障使用expected_control_revision核验；与结果提交串行，不把执行完成当质量通过。"
+      }
+    },
+    "/productions/{id}/cancel": {
+      "post": {
+        "operationId": "cancelProduction",
+        "summary": "制作级屏障使用expected_control_revision核验；与结果提交串行，不把执行完成当质量通过。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductionRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductionControl"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "制作级屏障使用expected_control_revision核验；与结果提交串行，不把执行完成当质量通过。"
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "operationId": "getTask",
+        "summary": "getTask",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "description": "执行器仅可读取当前获派任务，用户按书籍归属读取；返回阶段信息，不返回租约令牌或主机路径。"
+      }
+    },
+    "/tasks/{id}/pause": {
+      "post": {
+        "operationId": "pauseTask",
+        "summary": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskControlCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。"
+      }
+    },
+    "/tasks/{id}/resume": {
+      "post": {
+        "operationId": "resumeTask",
+        "summary": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskControlCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。"
+      }
+    },
+    "/tasks/{id}/cancel": {
+      "post": {
+        "operationId": "cancelTask",
+        "summary": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskControlCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。"
+      }
+    },
+    "/tasks/{id}/retry": {
+      "post": {
+        "operationId": "retryTask",
+        "summary": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskControlCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "任务状态和expected_task_revision冲突返回409；retry仅限failed，不增加既有执行/TTS/API预算。"
+      }
+    },
+    "/workers/register": {
+      "post": {
+        "operationId": "registerWorker",
+        "summary": "registerWorker",
+        "security": [
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "worker",
+        "x-allowed-roles": [
+          "worker"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkerRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkerRegistration"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/workers/{id}/claims": {
+      "post": {
+        "operationId": "claimTask",
+        "summary": "执行器ID须属于认证令牌；只授予能力匹配、依赖满足且父制作active的租约。无任务返回204。",
+        "security": [
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "worker",
+        "x-allowed-roles": [
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskLease"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "当前无可领取任务，无响应体"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaimTasks"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "执行器ID须属于认证令牌；只授予能力匹配、依赖满足且父制作active的租约。无任务返回204。"
+      }
+    },
+    "/tasks/{id}/heartbeat": {
+      "post": {
+        "operationId": "heartbeat",
+        "summary": "心跳不是创建/控制/提交幂等命令；校验现有租约及世代，只延续尚有效租约。",
+        "security": [
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "worker",
+        "x-allowed-roles": [
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HeartbeatAccepted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Heartbeat"
+              }
+            }
+          }
+        },
+        "description": "心跳不是创建/控制/提交幂等命令；校验现有租约及世代，只延续尚有效租约。"
+      }
+    },
+    "/tasks/{id}/results": {
+      "post": {
+        "operationId": "submitResult",
+        "summary": "submitResult",
+        "security": [
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "worker",
+        "x-allowed-roles": [
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskResult"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/tasks/{id}/checkpoints": {
+      "post": {
+        "operationId": "submitCheckpoint",
+        "summary": "submitCheckpoint",
+        "security": [
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "worker",
+        "x-allowed-roles": [
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckpointCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/reviews": {
+      "post": {
+        "operationId": "createReview",
+        "summary": "仅认证用户会话可创建；actor由服务取得。voice_version_id非空时核验参考试听范围，不接受worker或CLI伪造人工认可。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReview"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "仅认证用户会话可创建；actor由服务取得。voice_version_id非空时核验参考试听范围，不接受worker或CLI伪造人工认可。",
+        "x-session-only": true
+      }
+    },
+    "/productions/{id}/quality": {
+      "get": {
+        "operationId": "getQuality",
+        "summary": "getQuality",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QualitySnapshot"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exports": {
+      "post": {
+        "operationId": "createExport",
+        "summary": "这里只创建候选封装任务，不要求已有Q4；封装后独立执行Q4和Q5，release另判。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportAccepted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExport"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "这里只创建候选封装任务，不要求已有Q4；封装后独立执行Q4和Q5，release另判。"
+      }
+    },
+    "/productions/{id}/resume-manifest": {
+      "get": {
+        "operationId": "getResumeManifest",
+        "summary": "getResumeManifest",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResumeManifest"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/live": {
+      "get": {
+        "operationId": "healthLive",
+        "summary": "healthLive",
+        "security": [],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthLive"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "healthReady",
+        "summary": "迁移、数据库和磁盘决定应用就绪；执行器状态独立列出，不把离线伪装推理就绪。",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthReady"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "应用尚未就绪，health字段列明状态；执行器状态独立显示。",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "description": "迁移、数据库和磁盘决定应用就绪；执行器状态独立列出，不把离线伪装推理就绪。"
+      }
+    },
+    "/productions/{id}/agent-runs": {
+      "post": {
+        "operationId": "createAgentRun",
+        "summary": "createAgentRun",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentRunAccepted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentRun"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/agent-runs/{id}": {
+      "get": {
+        "operationId": "getAgentRun",
+        "summary": "getAgentRun",
+        "security": [
+          {
+            "BrowserSession": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentRunRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-runs/{id}/cancel": {
+      "post": {
+        "operationId": "cancelAgentRun",
+        "summary": "只取消本次Agent运行，不取消全部制作；不重置共享预算。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentRunRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "只取消本次Agent运行，不取消全部制作；不重置共享预算。"
+      }
+    },
+    "/repair-proposals/{id}/apply": {
+      "post": {
+        "operationId": "applyRepairProposal",
+        "summary": "If-Match针对提案版本；服务计算影响闭包、核验预算和制作快照。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepairApplied"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyRepairProposal"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "If-Match针对提案版本；服务计算影响闭包、核验预算和制作快照。",
+        "x-concurrency": "etag"
+      }
+    },
+    "/quality-policies/{id}/qualify": {
+      "post": {
+        "operationId": "qualifyPolicy",
+        "summary": "仅维护者依据真实报告签发并核验必需检测绑定和适用范围；issuer由认证身份提供。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Qualification"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QualifyPolicy"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "仅维护者依据真实报告签发并核验必需检测绑定和适用范围；issuer由认证身份提供。"
+      }
+    },
+    "/qualifications/{id}/revoke": {
+      "post": {
+        "operationId": "revokeQualification",
+        "summary": "仅维护者撤销；核验资格版本/撤销序号，递增序号并登记受影响交付风险。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevocationReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevokeQualification"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "仅维护者撤销；核验资格版本/撤销序号，递增序号并登记受影响交付风险。"
+      }
+    },
+    "/exports/{id}/release": {
+      "post": {
+        "operationId": "releaseExport",
+        "summary": "服务事务核验Q1–Q5、质量版本、资格版本/撤销序号及Issue；缺条件409的ProblemDetails列blockers，不接受客户端passed布尔值。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReleaseResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReleaseCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "服务事务核验Q1–Q5、质量版本、资格版本/撤销序号及Issue；缺条件409的ProblemDetails列blockers，不接受客户端passed布尔值。"
+      }
+    },
+    "/issues": {
+      "post": {
+        "operationId": "createIssue",
+        "summary": "createIssue",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssue"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。"
+      }
+    },
+    "/issues/{id}/locate": {
+      "post": {
+        "operationId": "locateIssue",
+        "summary": "locateIssue",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocateIssue"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "x-concurrency": "etag"
+      }
+    },
+    "/issues/{id}/repair-plans": {
+      "post": {
+        "operationId": "createRepairPlan",
+        "summary": "createRepairPlan",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepairPlanRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRepairPlan"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "x-concurrency": "etag"
+      }
+    },
+    "/issues/{id}/evidence": {
+      "post": {
+        "operationId": "appendIssueEvidence",
+        "summary": "证据追加递增Issue revision；按kind验证人工/工具/真机/兼容匹配身份及范围。worker不能冒充human或device_test操作者。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          },
+          {
+            "WorkerToken": []
+          }
+        ],
+        "x-actor-kind": "human_or_worker",
+        "x-allowed-roles": [
+          "user",
+          "maintainer",
+          "worker"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidenceAppended"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppendIssueEvidence"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "证据追加递增Issue revision；按kind验证人工/工具/真机/兼容匹配身份及范围。worker不能冒充human或device_test操作者。"
+      }
+    },
+    "/issues/{id}/resolve": {
+      "post": {
+        "operationId": "resolveIssue",
+        "summary": "candidate_checks_ok及repair_proof_ok满足即可；不依赖已有release或Issue先resolved，失败证据及撤销必须使旧请求失效。",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResolutionRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveCommand"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "description": "candidate_checks_ok及repair_proof_ok满足即可；不依赖已有release或Issue先resolved，失败证据及撤销必须使旧请求失效。",
+        "x-concurrency": "etag"
+      }
+    },
+    "/issues/{id}/confirm": {
+      "post": {
+        "operationId": "confirmIssue",
+        "summary": "confirmIssue",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmIssue"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "x-concurrency": "etag",
+        "x-session-only": true
+      }
+    },
+    "/issues/{id}/reopen": {
+      "post": {
+        "operationId": "reopenIssue",
+        "summary": "reopenIssue",
+        "security": [
+          {
+            "BrowserSession": [],
+            "CsrfToken": []
+          },
+          {
+            "UserToken": []
+          }
+        ],
+        "x-actor-kind": "human",
+        "x-allowed-roles": [
+          "user",
+          "maintainer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UUID"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+            },
+            "description": "必须使用最近读取的强ETag；不接受通配符或弱ETag。"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueRecord"
+                }
+              }
+            },
+            "headers": {
+              "ETag": {
+                "description": "强资源版本标识",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^\"[0-9]+\"(?![\\s\\S])"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未认证",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "无权操作",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在或不可见",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "输入结构或必需材料不合法",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务、版本、租约、证据、幂等或预算冲突",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "If-Match资源版本不匹配",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReopenIssue"
+              }
+            }
+          }
+        },
+        "x-idempotency": "主体＋操作＋request_id及规范载荷散列；同键不同载荷409，已有回执先于过期检查返回。",
+        "x-concurrency": "etag"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UUID": {
+        "$ref": "core.schema.json#/$defs/UUID"
+      },
+      "SHA256": {
+        "$ref": "core.schema.json#/$defs/SHA256"
+      },
+      "Action": {
+        "$ref": "core.schema.json#/$defs/Action"
+      },
+      "PlanStep": {
+        "$ref": "core.schema.json#/$defs/PlanStep"
+      },
+      "AgentDecision": {
+        "$ref": "core.schema.json#/$defs/AgentDecision"
+      },
+      "Interval": {
+        "$ref": "core.schema.json#/$defs/Interval"
+      },
+      "Evidence": {
+        "$ref": "core.schema.json#/$defs/Evidence"
+      },
+      "ResolveCommand": {
+        "$ref": "core.schema.json#/$defs/ResolveCommand"
+      },
+      "ReleaseCommand": {
+        "$ref": "core.schema.json#/$defs/ReleaseCommand"
+      },
+      "CandidateSelection": {
+        "$ref": "core.schema.json#/$defs/CandidateSelection"
+      },
+      "DateTime": {
+        "$ref": "core.schema.json#/$defs/DateTime"
+      },
+      "ArtifactReference": {
+        "$ref": "core.schema.json#/$defs/ArtifactReference"
+      },
+      "CreateProduction": {
+        "$ref": "core.schema.json#/$defs/CreateProduction"
+      },
+      "ProductionAccepted": {
+        "$ref": "core.schema.json#/$defs/ProductionAccepted"
+      },
+      "TaskLease": {
+        "$ref": "core.schema.json#/$defs/TaskLease"
+      },
+      "Heartbeat": {
+        "$ref": "core.schema.json#/$defs/Heartbeat"
+      },
+      "CheckpointCommand": {
+        "$ref": "core.schema.json#/$defs/CheckpointCommand"
+      },
+      "TaskResult": {
+        "$ref": "core.schema.json#/$defs/TaskResult"
+      },
+      "ProductionControl": {
+        "$ref": "core.schema.json#/$defs/ProductionControl"
+      },
+      "CheckpointManifest": {
+        "$ref": "core.schema.json#/$defs/CheckpointManifest"
+      },
+      "CheckpointUnitArtifacts": {
+        "$ref": "core.schema.json#/$defs/CheckpointUnitArtifacts"
+      },
+      "DecimalString": {
+        "$ref": "core.schema.json#/$defs/DecimalString"
+      },
+      "NonnegativeDecimalString": {
+        "$ref": "core.schema.json#/$defs/NonnegativeDecimalString"
+      },
+      "CapabilityScope": {
+        "$ref": "core.schema.json#/$defs/CapabilityScope"
+      },
+      "MetricThreshold": {
+        "$ref": "core.schema.json#/$defs/MetricThreshold"
+      },
+      "DetectorBinding": {
+        "$ref": "core.schema.json#/$defs/DetectorBinding"
+      },
+      "VersionReference": {
+        "$ref": "core.schema.json#/$defs/VersionReference"
+      },
+      "RepairPresetReference": {
+        "$ref": "core.schema.json#/$defs/RepairPresetReference"
+      },
+      "FeeLimits": {
+        "$ref": "core.schema.json#/$defs/FeeLimits"
+      },
+      "BudgetRules": {
+        "$ref": "core.schema.json#/$defs/BudgetRules"
+      },
+      "QualityPolicyConfig": {
+        "$ref": "core.schema.json#/$defs/QualityPolicyConfig"
+      },
+      "QualityPolicy": {
+        "$ref": "core.schema.json#/$defs/QualityPolicy"
+      },
+      "Qualification": {
+        "$ref": "core.schema.json#/$defs/Qualification"
+      },
+      "TestedVersions": {
+        "$ref": "core.schema.json#/$defs/TestedVersions"
+      },
+      "CompatibilityLimits": {
+        "$ref": "core.schema.json#/$defs/CompatibilityLimits"
+      },
+      "DeviceTestReference": {
+        "$ref": "core.schema.json#/$defs/DeviceTestReference"
+      },
+      "CompatibilityProfile": {
+        "$ref": "core.schema.json#/$defs/CompatibilityProfile"
+      },
+      "GateEvidence": {
+        "$ref": "core.schema.json#/$defs/GateEvidence"
+      },
+      "QualificationReference": {
+        "$ref": "core.schema.json#/$defs/QualificationReference"
+      },
+      "ReleaseBlocker": {
+        "$ref": "core.schema.json#/$defs/ReleaseBlocker"
+      },
+      "ReleaseDecision": {
+        "$ref": "core.schema.json#/$defs/ReleaseDecision"
+      },
+      "ProblemDetails": {
+        "$ref": "core.schema.json#/$defs/ProblemDetails"
+      },
+      "RequestCommand": {
+        "$ref": "core.schema.json#/$defs/RequestCommand"
+      },
+      "CreateSession": {
+        "$ref": "core.schema.json#/$defs/CreateSession"
+      },
+      "SessionRecord": {
+        "$ref": "core.schema.json#/$defs/SessionRecord"
+      },
+      "SessionClosed": {
+        "$ref": "core.schema.json#/$defs/SessionClosed"
+      },
+      "CreateUpload": {
+        "$ref": "core.schema.json#/$defs/CreateUpload"
+      },
+      "UploadChunk": {
+        "$ref": "core.schema.json#/$defs/UploadChunk"
+      },
+      "UploadRecord": {
+        "$ref": "core.schema.json#/$defs/UploadRecord"
+      },
+      "ChunkAccepted": {
+        "$ref": "core.schema.json#/$defs/ChunkAccepted"
+      },
+      "ArtifactRecord": {
+        "$ref": "core.schema.json#/$defs/ArtifactRecord"
+      },
+      "BookRecord": {
+        "$ref": "core.schema.json#/$defs/BookRecord"
+      },
+      "CreateBook": {
+        "$ref": "core.schema.json#/$defs/CreateBook"
+      },
+      "SourceSelection": {
+        "$ref": "core.schema.json#/$defs/SourceSelection"
+      },
+      "CreateImport": {
+        "$ref": "core.schema.json#/$defs/CreateImport"
+      },
+      "TaskAccepted": {
+        "$ref": "core.schema.json#/$defs/TaskAccepted"
+      },
+      "CreateTextRevision": {
+        "$ref": "core.schema.json#/$defs/CreateTextRevision"
+      },
+      "TextRevisionRecord": {
+        "$ref": "core.schema.json#/$defs/TextRevisionRecord"
+      },
+      "RevisionList": {
+        "$ref": "core.schema.json#/$defs/RevisionList"
+      },
+      "CreateVoice": {
+        "$ref": "core.schema.json#/$defs/CreateVoice"
+      },
+      "VoiceRecord": {
+        "$ref": "core.schema.json#/$defs/VoiceRecord"
+      },
+      "CreateVoiceVersion": {
+        "$ref": "core.schema.json#/$defs/CreateVoiceVersion"
+      },
+      "VoiceVersionRecord": {
+        "$ref": "core.schema.json#/$defs/VoiceVersionRecord"
+      },
+      "TaskState": {
+        "$ref": "core.schema.json#/$defs/TaskState"
+      },
+      "ProductionControlState": {
+        "$ref": "core.schema.json#/$defs/ProductionControlState"
+      },
+      "ExecutionState": {
+        "$ref": "core.schema.json#/$defs/ExecutionState"
+      },
+      "TaskRecord": {
+        "$ref": "core.schema.json#/$defs/TaskRecord"
+      },
+      "TaskControlCommand": {
+        "$ref": "core.schema.json#/$defs/TaskControlCommand"
+      },
+      "ProductionRecord": {
+        "$ref": "core.schema.json#/$defs/ProductionRecord"
+      },
+      "WorkerRegistration": {
+        "$ref": "core.schema.json#/$defs/WorkerRegistration"
+      },
+      "WorkerRecord": {
+        "$ref": "core.schema.json#/$defs/WorkerRecord"
+      },
+      "ClaimTasks": {
+        "$ref": "core.schema.json#/$defs/ClaimTasks"
+      },
+      "HeartbeatAccepted": {
+        "$ref": "core.schema.json#/$defs/HeartbeatAccepted"
+      },
+      "SubmissionReceipt": {
+        "$ref": "core.schema.json#/$defs/SubmissionReceipt"
+      },
+      "CreateReview": {
+        "$ref": "core.schema.json#/$defs/CreateReview"
+      },
+      "ReviewRecord": {
+        "$ref": "core.schema.json#/$defs/ReviewRecord"
+      },
+      "GateStatus": {
+        "$ref": "core.schema.json#/$defs/GateStatus"
+      },
+      "QualitySnapshot": {
+        "$ref": "core.schema.json#/$defs/QualitySnapshot"
+      },
+      "CreateExport": {
+        "$ref": "core.schema.json#/$defs/CreateExport"
+      },
+      "ExportAccepted": {
+        "$ref": "core.schema.json#/$defs/ExportAccepted"
+      },
+      "WorkerHealth": {
+        "$ref": "core.schema.json#/$defs/WorkerHealth"
+      },
+      "ResumeManifest": {
+        "$ref": "core.schema.json#/$defs/ResumeManifest"
+      },
+      "HealthLive": {
+        "$ref": "core.schema.json#/$defs/HealthLive"
+      },
+      "HealthReady": {
+        "$ref": "core.schema.json#/$defs/HealthReady"
+      },
+      "CreateAgentRun": {
+        "$ref": "core.schema.json#/$defs/CreateAgentRun"
+      },
+      "BudgetUsage": {
+        "$ref": "core.schema.json#/$defs/BudgetUsage"
+      },
+      "AgentRunState": {
+        "$ref": "core.schema.json#/$defs/AgentRunState"
+      },
+      "AgentRunAccepted": {
+        "$ref": "core.schema.json#/$defs/AgentRunAccepted"
+      },
+      "AgentRunRecord": {
+        "$ref": "core.schema.json#/$defs/AgentRunRecord"
+      },
+      "ApplyRepairProposal": {
+        "$ref": "core.schema.json#/$defs/ApplyRepairProposal"
+      },
+      "RepairApplied": {
+        "$ref": "core.schema.json#/$defs/RepairApplied"
+      },
+      "QualifyPolicy": {
+        "$ref": "core.schema.json#/$defs/QualifyPolicy"
+      },
+      "RevokeQualification": {
+        "$ref": "core.schema.json#/$defs/RevokeQualification"
+      },
+      "RevocationReceipt": {
+        "$ref": "core.schema.json#/$defs/RevocationReceipt"
+      },
+      "DownloadReference": {
+        "$ref": "core.schema.json#/$defs/DownloadReference"
+      },
+      "ReleaseResponse": {
+        "$ref": "core.schema.json#/$defs/ReleaseResponse"
+      },
+      "DeviceEnvironment": {
+        "$ref": "core.schema.json#/$defs/DeviceEnvironment"
+      },
+      "IssueLocation": {
+        "$ref": "core.schema.json#/$defs/IssueLocation"
+      },
+      "IssueState": {
+        "$ref": "core.schema.json#/$defs/IssueState"
+      },
+      "CreateIssue": {
+        "$ref": "core.schema.json#/$defs/CreateIssue"
+      },
+      "IssueRecord": {
+        "$ref": "core.schema.json#/$defs/IssueRecord"
+      },
+      "LocateIssue": {
+        "$ref": "core.schema.json#/$defs/LocateIssue"
+      },
+      "CreateRepairPlan": {
+        "$ref": "core.schema.json#/$defs/CreateRepairPlan"
+      },
+      "RepairPlanRecord": {
+        "$ref": "core.schema.json#/$defs/RepairPlanRecord"
+      },
+      "AppendIssueEvidence": {
+        "$ref": "core.schema.json#/$defs/AppendIssueEvidence"
+      },
+      "EvidenceAppended": {
+        "$ref": "core.schema.json#/$defs/EvidenceAppended"
+      },
+      "ResolutionRecord": {
+        "$ref": "core.schema.json#/$defs/ResolutionRecord"
+      },
+      "ConfirmIssue": {
+        "$ref": "core.schema.json#/$defs/ConfirmIssue"
+      },
+      "ReopenIssue": {
+        "$ref": "core.schema.json#/$defs/ReopenIssue"
+      }
+    },
+    "securitySchemes": {
+      "BrowserSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "fv_session",
+        "description": "经配对建立的用户会话；角色由服务器验证。"
+      },
+      "CsrfToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-CSRF-Token",
+        "description": "会话写入另校验CSRF及Origin/Host。"
+      },
+      "UserToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "用户或维护者CLI独立令牌，权限由服务器提供。"
+      },
+      "WorkerToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "执行器独立令牌，仅授权任务范围及登记能力。"
+      }
+    }
+  }
+}

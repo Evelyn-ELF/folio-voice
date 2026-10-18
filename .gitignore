@@ -205,6 +205,9 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
+# 契约类型检查的本地依赖，可由package-lock.json重建
+node_modules/
+
 # Ruff stuff:
 .ruff_cache/
 

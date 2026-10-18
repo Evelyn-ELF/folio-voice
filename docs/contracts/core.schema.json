@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:folio-voice:core-contracts:0.1",
+  "$id": "urn:folio-voice:core-contracts:0.4",
   "title": "Folio Voice 核心设计契约",
-  "description": "设计阶段结构契约，非运行授权；跨字段与持久化约束见配套文档。",
+  "description": "核心结构契约；类型生成源。身份、跨字段、版本、租约与持久化语义仍由服务端验证。",
   "$defs": {
     "UUID": {
       "type": "string",
@@ -11,7 +11,9 @@
     },
     "SHA256": {
       "type": "string",
-      "pattern": "^[0-9a-f]{64}$"
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
     },
     "Action": {
       "type": "object",
@@ -477,6 +479,4168 @@
         "decision",
         "reason_codes"
       ]
+    },
+    "DateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ArtifactReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "size_bytes",
+        "sha256"
+      ]
+    },
+    "CreateProduction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "book_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "text_revision_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "voice_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        }
+      },
+      "required": [
+        "book_id",
+        "text_revision_id",
+        "voice_version_id",
+        "model_revision",
+        "config_sha256",
+        "scope",
+        "request_id"
+      ]
+    },
+    "ProductionAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "control_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status_url": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "production_id",
+        "control_revision",
+        "status_url"
+      ]
+    },
+    "TaskLease": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lease_token": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "app_generation": {
+          "$ref": "#/$defs/UUID"
+        },
+        "expires_at": {
+          "$ref": "#/$defs/DateTime"
+        },
+        "control_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "input_artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReference"
+          }
+        }
+      },
+      "required": [
+        "task_id",
+        "production_id",
+        "attempt_no",
+        "lease_token",
+        "input_snapshot_sha256",
+        "app_generation",
+        "expires_at",
+        "control_revision",
+        "input_artifacts"
+      ]
+    },
+    "Heartbeat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lease_token": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "app_generation": {
+          "$ref": "#/$defs/UUID"
+        }
+      },
+      "required": [
+        "attempt_no",
+        "lease_token",
+        "input_snapshot_sha256",
+        "app_generation"
+      ]
+    },
+    "CheckpointCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lease_token": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "app_generation": {
+          "$ref": "#/$defs/UUID"
+        },
+        "checkpoint_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "completed_unit_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "attempt_no",
+        "lease_token",
+        "input_snapshot_sha256",
+        "app_generation",
+        "checkpoint_artifact_id",
+        "completed_unit_ids"
+      ]
+    },
+    "TaskResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lease_token": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "app_generation": {
+          "$ref": "#/$defs/UUID"
+        },
+        "output_artifact_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "result_summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "attempt_no",
+        "lease_token",
+        "input_snapshot_sha256",
+        "app_generation",
+        "output_artifact_ids",
+        "result_summary"
+      ]
+    },
+    "ProductionControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "expected_control_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "request_id",
+        "expected_control_revision"
+      ]
+    },
+    "CheckpointManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "adapter_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completed_unit_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CheckpointUnitArtifacts"
+          }
+        },
+        "pending_unit_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "cursor": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "input_snapshot_sha256",
+        "adapter_version",
+        "completed_unit_ids",
+        "artifacts",
+        "pending_unit_ids",
+        "cursor"
+      ]
+    },
+    "CheckpointUnitArtifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unit_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "unit_id",
+        "artifacts"
+      ]
+    },
+    "DecimalString": {
+      "type": "string",
+      "pattern": "^(?:0|-?[1-9][0-9]*|-?(?:0|[1-9][0-9]*)\\.[0-9]*[1-9])(?![\\s\\S])",
+      "description": "规范十进制：无指数、前导零、负零或小数尾零。"
+    },
+    "NonnegativeDecimalString": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*|(?:0|[1-9][0-9]*)\\.[0-9]*[1-9])(?![\\s\\S])"
+    },
+    "CapabilityScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "source_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "epub",
+              "pdf_text",
+              "pdf_scanned",
+              "pdf_mixed"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "voice_version_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "model_revisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "processing_config_sha256s": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SHA256"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "deliverable_kinds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "audio",
+              "epub"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "languages",
+        "source_types",
+        "voice_version_ids",
+        "model_revisions",
+        "processing_config_sha256s",
+        "deliverable_kinds"
+      ]
+    },
+    "MetricThreshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "upper",
+            "lower",
+            "equal"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/DecimalString"
+        },
+        "regression_tolerance": {
+          "$ref": "#/$defs/NonnegativeDecimalString"
+        }
+      },
+      "required": [
+        "metric",
+        "unit",
+        "direction",
+        "value",
+        "regression_tolerance"
+      ]
+    },
+    "DetectorBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "engine_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prompt_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHA256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_modalities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "structure"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D05",
+              "D06"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "thresholds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MetricThreshold"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "calibration_report_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHA256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "engine",
+        "engine_revision",
+        "model_revision",
+        "prompt_sha256",
+        "input_modalities",
+        "risks",
+        "thresholds",
+        "calibration_report_sha256"
+      ]
+    },
+    "VersionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ]
+    },
+    "RepairPresetReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "config_sha256"
+      ]
+    },
+    "FeeLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}(?![\\s\\S])"
+        },
+        "per_production_minor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "daily_minor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "timezone": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "currency",
+        "per_production_minor",
+        "daily_minor",
+        "timezone"
+      ]
+    },
+    "BudgetRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plan_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "replans": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "reflections": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "actions_per_turn": {
+          "const": 1
+        },
+        "model_requests_per_finding": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "tool_calls_per_finding": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "tts_generations_per_block": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "no_progress_repetitions": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "request_timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "transient_retries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "fee_limits": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FeeLimits"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "plan_steps",
+        "replans",
+        "reflections",
+        "actions_per_turn",
+        "model_requests_per_finding",
+        "tool_calls_per_finding",
+        "tts_generations_per_block",
+        "no_progress_repetitions",
+        "request_timeout_seconds",
+        "transient_retries",
+        "fee_limits"
+      ]
+    },
+    "QualityPolicyConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": 2
+        },
+        "canonicalization": {
+          "const": "fv-json-v1"
+        },
+        "applicability": {
+          "$ref": "#/$defs/CapabilityScope"
+        },
+        "required_detectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DetectorBinding"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "adjudication_rule_sha256s": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SHA256"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "repair_presets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RepairPresetReference"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "budget_rules": {
+          "$ref": "#/$defs/BudgetRules"
+        }
+      },
+      "required": [
+        "contract_version",
+        "canonicalization",
+        "applicability",
+        "required_detectors",
+        "adjudication_rule_sha256s",
+        "repair_presets",
+        "budget_rules"
+      ]
+    },
+    "QualityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "config": {
+          "$ref": "#/$defs/QualityPolicyConfig"
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "policy_hash",
+        "config",
+        "created_at"
+      ]
+    },
+    "Qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "contract_version": {
+          "const": 2
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "scope": {
+          "$ref": "#/$defs/CapabilityScope"
+        },
+        "dataset_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHA256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "report_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHA256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issuer_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issued_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DateTime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "evaluating",
+            "active",
+            "suspended",
+            "revoked"
+          ]
+        },
+        "change_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "model",
+              "prompt",
+              "detector",
+              "threshold",
+              "encoder",
+              "structure",
+              "processing",
+              "voice",
+              "source"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "revocation_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "revision",
+        "contract_version",
+        "policy_hash",
+        "scope",
+        "dataset_sha256",
+        "report_sha256",
+        "issuer_id",
+        "issued_at",
+        "status",
+        "change_triggers",
+        "revocation_sequence",
+        "created_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "active",
+                  "suspended",
+                  "revoked"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "dataset_sha256": {
+                "$ref": "#/$defs/SHA256"
+              },
+              "report_sha256": {
+                "$ref": "#/$defs/SHA256"
+              },
+              "issuer_id": {
+                "$ref": "#/$defs/UUID"
+              },
+              "issued_at": {
+                "$ref": "#/$defs/DateTime"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "suspended",
+                  "revoked"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "revocation_sequence": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "revocation_sequence": {
+                "const": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TestedVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "os_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reader": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reader_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "encoder_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packager_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "platform",
+        "os_version",
+        "reader",
+        "reader_version",
+        "encoder_version",
+        "packager_version"
+      ]
+    },
+    "CompatibilityLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "chapters": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sentences": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "duration_samples": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sample_rate": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "chapters",
+        "sentences",
+        "duration_samples",
+        "sample_rate",
+        "size_bytes"
+      ]
+    },
+    "DeviceTestReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "evidence_id": {
+          "$ref": "#/$defs/UUID"
+        }
+      },
+      "required": [
+        "artifact_sha256",
+        "evidence_id"
+      ]
+    },
+    "CompatibilityProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "contract_version": {
+          "const": 2
+        },
+        "deliverable_kind": {
+          "type": "string",
+          "enum": [
+            "audio",
+            "epub"
+          ]
+        },
+        "tested_versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TestedVersions"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "file_features": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "limits": {
+          "$ref": "#/$defs/CompatibilityLimits"
+        },
+        "device_tests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DeviceTestReference"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "active",
+            "suspended",
+            "revoked"
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "contract_version",
+        "deliverable_kind",
+        "tested_versions",
+        "file_features",
+        "limits",
+        "device_tests",
+        "status",
+        "created_at"
+      ]
+    },
+    "GateEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Q1": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "Q2": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "Q3": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "Q4": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "Q5": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5"
+      ]
+    },
+    "QualificationReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "revocation_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "policy_hash",
+        "revocation_sequence"
+      ]
+    },
+    "ReleaseBlocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "code",
+        "detail"
+      ]
+    },
+    "ReleaseDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "contract_version": {
+          "const": 2
+        },
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "export_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "deliverable_kind": {
+          "type": "string",
+          "enum": [
+            "audio",
+            "epub"
+          ]
+        },
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "production_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "quality_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "quality_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "gate_evidence": {
+          "$ref": "#/$defs/GateEvidence"
+        },
+        "qualification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QualificationReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "compatibility_profile": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VersionReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "released",
+            "blocked"
+          ]
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReleaseBlocker"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "contract_version",
+        "request_id",
+        "export_id",
+        "deliverable_kind",
+        "artifact_id",
+        "artifact_sha256",
+        "production_id",
+        "production_snapshot_sha256",
+        "quality_revision",
+        "quality_snapshot_sha256",
+        "gate_evidence",
+        "qualification",
+        "compatibility_profile",
+        "decision",
+        "blockers",
+        "created_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "released"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "gate_evidence": {
+                "properties": {
+                  "Q1": {
+                    "minItems": 1
+                  },
+                  "Q2": {
+                    "minItems": 1
+                  },
+                  "Q3": {
+                    "minItems": 1
+                  },
+                  "Q4": {
+                    "minItems": 1
+                  },
+                  "Q5": {
+                    "minItems": 1
+                  }
+                }
+              },
+              "qualification": {
+                "$ref": "#/$defs/QualificationReference"
+              },
+              "compatibility_profile": {
+                "$ref": "#/$defs/VersionReference"
+              },
+              "blockers": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "blockers": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "integer",
+          "minimum": 400,
+          "maximum": 599
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "affected_scope": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReleaseBlocker"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "health": {
+          "$ref": "#/$defs/HealthReady"
+        }
+      },
+      "required": [
+        "type",
+        "title",
+        "status",
+        "detail",
+        "instance",
+        "code",
+        "request_id",
+        "retryable",
+        "affected_scope"
+      ]
+    },
+    "RequestCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        }
+      },
+      "required": [
+        "request_id"
+      ]
+    },
+    "CreateSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "pairing_code": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "request_id",
+        "pairing_code"
+      ]
+    },
+    "SessionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "user",
+            "maintainer"
+          ]
+        },
+        "expires_at": {
+          "$ref": "#/$defs/DateTime"
+        },
+        "csrf_token": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "principal_id",
+        "role",
+        "expires_at",
+        "csrf_token"
+      ]
+    },
+    "SessionClosed": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "closed": {
+          "const": true
+        }
+      },
+      "required": [
+        "closed"
+      ]
+    },
+    "CreateUpload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "source",
+            "voice",
+            "task_output",
+            "checkpoint",
+            "evidence",
+            "text_revision",
+            "configuration"
+          ]
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "request_id",
+        "size_bytes",
+        "sha256",
+        "media_type",
+        "purpose",
+        "task_id"
+      ]
+    },
+    "UploadChunk": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "index",
+        "size_bytes",
+        "sha256"
+      ]
+    },
+    "UploadRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "chunk_size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expires_at": {
+          "$ref": "#/$defs/DateTime"
+        },
+        "received_chunks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UploadChunk"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "open",
+            "completed",
+            "expired"
+          ]
+        },
+        "artifact": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "size_bytes",
+        "sha256",
+        "chunk_size_bytes",
+        "expires_at",
+        "received_chunks",
+        "state",
+        "artifact"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "artifact": {
+                "$ref": "#/$defs/ArtifactReference"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "artifact": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ChunkAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "upload_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "upload_id",
+        "index",
+        "size_bytes",
+        "sha256"
+      ]
+    },
+    "ArtifactRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": [
+            "validated",
+            "invalid",
+            "pending"
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "size_bytes",
+        "sha256",
+        "media_type",
+        "validation_status",
+        "created_at"
+      ]
+    },
+    "BookRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "authors",
+        "revision",
+        "created_at"
+      ]
+    },
+    "CreateBook": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "title",
+        "authors"
+      ]
+    },
+    "SourceSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "reference"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "epub",
+            "pdf_text",
+            "pdf_scanned",
+            "pdf_mixed"
+          ]
+        },
+        "edition": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "role",
+        "format",
+        "edition"
+      ]
+    },
+    "CreateImport": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceSelection"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "selected_primary_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        }
+      },
+      "required": [
+        "request_id",
+        "sources",
+        "selected_primary_artifact_id"
+      ]
+    },
+    "TaskAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "status_url": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "task_id",
+        "status_url"
+      ]
+    },
+    "CreateTextRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "parent_revision_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "structure_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "structure_sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "request_id",
+        "parent_revision_id",
+        "structure_artifact_id",
+        "structure_sha256"
+      ]
+    },
+    "TextRevisionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "book_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "parent_revision_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "structure_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "structure_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "book_id",
+        "revision",
+        "parent_revision_id",
+        "structure_artifact_id",
+        "structure_sha256",
+        "created_at"
+      ]
+    },
+    "RevisionList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "book_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "resource_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TextRevisionRecord"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "book_id",
+        "resource_revision",
+        "items"
+      ]
+    },
+    "CreateVoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "request_id",
+        "name"
+      ]
+    },
+    "VoiceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "revision",
+        "created_at"
+      ]
+    },
+    "CreateVoiceVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "reference_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "reference_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatible_model_revisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "request_id",
+        "reference_artifact_id",
+        "reference_text",
+        "compatible_model_revisions",
+        "config_sha256"
+      ]
+    },
+    "VoiceVersionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "voice_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "reference_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "reference_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatible_model_revisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "approved_review_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "voice_id",
+        "version",
+        "reference_artifact_id",
+        "reference_text",
+        "compatible_model_revisions",
+        "config_sha256",
+        "approved_review_id",
+        "created_at"
+      ]
+    },
+    "TaskState": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "pause_requested",
+        "paused",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "ProductionControlState": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pausing",
+        "paused",
+        "cancelled"
+      ]
+    },
+    "ExecutionState": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "blocked",
+        "failed",
+        "completed"
+      ]
+    },
+    "TaskRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "$ref": "#/$defs/TaskState"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "input_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "output_artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReference"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "last_error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProblemDetails"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "production_id",
+        "stage",
+        "state",
+        "revision",
+        "attempt_no",
+        "input_snapshot_sha256",
+        "output_artifacts",
+        "last_error",
+        "created_at"
+      ]
+    },
+    "TaskControlCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "expected_task_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "request_id",
+        "expected_task_revision"
+      ]
+    },
+    "ProductionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "book_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "text_revision_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "voice_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "control_state": {
+          "$ref": "#/$defs/ProductionControlState"
+        },
+        "control_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "execution_state": {
+          "$ref": "#/$defs/ExecutionState"
+        },
+        "quality_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "book_id",
+        "text_revision_id",
+        "voice_version_id",
+        "model_revision",
+        "config_sha256",
+        "snapshot_sha256",
+        "scope",
+        "control_state",
+        "control_revision",
+        "execution_state",
+        "quality_revision",
+        "created_at"
+      ]
+    },
+    "WorkerRegistration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "protocol_version": {
+          "const": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "container",
+            "macos"
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "model_revisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "protocol_version",
+        "name",
+        "platform",
+        "capabilities",
+        "model_revisions"
+      ]
+    },
+    "WorkerRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "protocol_version": {
+          "const": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "container",
+            "macos"
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "model_revisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "registered_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "protocol_version",
+        "name",
+        "platform",
+        "capabilities",
+        "model_revisions",
+        "online",
+        "registered_at"
+      ]
+    },
+    "ClaimTasks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "model_revisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "capabilities",
+        "model_revisions"
+      ]
+    },
+    "HeartbeatAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expires_at": {
+          "$ref": "#/$defs/DateTime"
+        },
+        "app_generation": {
+          "$ref": "#/$defs/UUID"
+        },
+        "control_state": {
+          "$ref": "#/$defs/ProductionControlState"
+        },
+        "control_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "task_id",
+        "attempt_no",
+        "expires_at",
+        "app_generation",
+        "control_state",
+        "control_revision"
+      ]
+    },
+    "SubmissionReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "receipt_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "task_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "attempt_no": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "accepted_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "receipt_id",
+        "request_id",
+        "task_id",
+        "attempt_no",
+        "accepted_at"
+      ]
+    },
+    "CreateReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "scope_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "dimension": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conclusion": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "rejected",
+            "uncertain"
+          ]
+        },
+        "voice_version_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "comment": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "artifact_id",
+        "artifact_sha256",
+        "scope_id",
+        "dimension",
+        "conclusion",
+        "voice_version_id",
+        "comment"
+      ]
+    },
+    "ReviewRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "scope_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "dimension": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conclusion": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "rejected",
+            "uncertain"
+          ]
+        },
+        "voice_version_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actor_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "artifact_id",
+        "artifact_sha256",
+        "scope_id",
+        "dimension",
+        "conclusion",
+        "voice_version_id",
+        "actor_id",
+        "comment",
+        "created_at"
+      ]
+    },
+    "GateStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gate": {
+          "type": "string",
+          "enum": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "pass",
+            "blocked"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReleaseBlocker"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "gate",
+        "status",
+        "evidence_ids",
+        "blockers"
+      ]
+    },
+    "QualitySnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "contract_version": {
+          "const": 2
+        },
+        "policy_hash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHA256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GateStatus"
+          },
+          "minItems": 5,
+          "uniqueItems": true,
+          "maxItems": 5
+        },
+        "qualification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QualificationReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "compatibility_profile": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VersionReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReleaseBlocker"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "production_id",
+        "snapshot_sha256",
+        "revision",
+        "contract_version",
+        "policy_hash",
+        "gates",
+        "qualification",
+        "compatibility_profile",
+        "blockers"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "gates": {
+              "contains": {
+                "properties": {
+                  "gate": {
+                    "const": "Q1"
+                  }
+                }
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "gates": {
+              "contains": {
+                "properties": {
+                  "gate": {
+                    "const": "Q2"
+                  }
+                }
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "gates": {
+              "contains": {
+                "properties": {
+                  "gate": {
+                    "const": "Q3"
+                  }
+                }
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "gates": {
+              "contains": {
+                "properties": {
+                  "gate": {
+                    "const": "Q4"
+                  }
+                }
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "gates": {
+              "contains": {
+                "properties": {
+                  "gate": {
+                    "const": "Q5"
+                  }
+                }
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
+        }
+      ]
+    },
+    "CreateExport": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "candidate_kind": {
+          "type": "string",
+          "enum": [
+            "preview",
+            "formal_candidate"
+          ]
+        },
+        "deliverable_kind": {
+          "type": "string",
+          "enum": [
+            "audio",
+            "epub"
+          ]
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "production_id",
+        "candidate_kind",
+        "deliverable_kind",
+        "scope"
+      ]
+    },
+    "ExportAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "export_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "task_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "status_url": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "export_id",
+        "task_id",
+        "status_url"
+      ]
+    },
+    "WorkerHealth": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "worker_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "ready_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "worker_id",
+        "online",
+        "ready_capabilities"
+      ]
+    },
+    "ResumeManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "production": {
+          "$ref": "#/$defs/ProductionRecord"
+        },
+        "source_sha256s": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SHA256"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "completed_unit_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "pending_unit_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CheckpointUnitArtifacts"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "failed_task_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "unresolved_issue_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WorkerHealth"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "last_event_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "next_step": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recovery_command": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "production",
+        "source_sha256s",
+        "completed_unit_ids",
+        "pending_unit_ids",
+        "artifacts",
+        "failed_task_ids",
+        "unresolved_issue_ids",
+        "workers",
+        "last_event_sequence",
+        "next_step",
+        "recovery_command",
+        "updated_at"
+      ]
+    },
+    "HealthLive": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "alive"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "HealthReady": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ready": {
+          "type": "boolean"
+        },
+        "database": {
+          "type": "string",
+          "enum": [
+            "ready",
+            "error"
+          ]
+        },
+        "migration": {
+          "type": "string",
+          "enum": [
+            "ready",
+            "error"
+          ]
+        },
+        "disk": {
+          "type": "string",
+          "enum": [
+            "ready",
+            "low",
+            "error"
+          ]
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WorkerHealth"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "ready",
+        "database",
+        "migration",
+        "disk",
+        "workers"
+      ]
+    },
+    "CreateAgentRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "production_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "provider_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "template_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "external_authorization_id": {
+          "$ref": "#/$defs/UUID"
+        }
+      },
+      "required": [
+        "request_id",
+        "production_snapshot_sha256",
+        "scope",
+        "policy_hash",
+        "provider_id",
+        "model_revision",
+        "template_version",
+        "schema_version",
+        "external_authorization_id"
+      ]
+    },
+    "BudgetUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reserved_minor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "actual_minor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "unknown_minor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "model_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "tool_calls": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "currency",
+        "reserved_minor",
+        "actual_minor",
+        "unknown_minor",
+        "model_requests",
+        "tool_calls"
+      ]
+    },
+    "AgentRunState": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "waiting_tool",
+        "waiting_provider",
+        "budget_exhausted",
+        "needs_input",
+        "cancelled",
+        "no_progress",
+        "stale",
+        "needs_maintenance",
+        "completed"
+      ]
+    },
+    "AgentRunAccepted": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "status_url": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "run_id",
+        "status_url"
+      ]
+    },
+    "AgentRunRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "provider_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "template_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "$ref": "#/$defs/AgentRunState"
+        },
+        "budget": {
+          "$ref": "#/$defs/BudgetUsage"
+        },
+        "proposal_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "last_step_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "production_id",
+        "snapshot_sha256",
+        "provider_id",
+        "model_revision",
+        "template_version",
+        "schema_version",
+        "state",
+        "budget",
+        "proposal_ids",
+        "last_step_sequence",
+        "created_at"
+      ]
+    },
+    "ApplyRepairProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "expected_quality_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "production_snapshot_sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "request_id",
+        "expected_quality_revision",
+        "production_snapshot_sha256"
+      ]
+    },
+    "RepairApplied": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "task_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "invalidated_node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "retained_node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "proposal_id",
+        "task_ids",
+        "invalidated_node_ids",
+        "retained_node_ids"
+      ]
+    },
+    "QualifyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "policy_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "qualification_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "qualification_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "scope": {
+          "$ref": "#/$defs/CapabilityScope"
+        },
+        "dataset_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "report_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "change_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "model",
+              "prompt",
+              "detector",
+              "threshold",
+              "encoder",
+              "structure",
+              "processing",
+              "voice",
+              "source"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "policy_version",
+        "policy_hash",
+        "qualification_id",
+        "qualification_version",
+        "scope",
+        "dataset_sha256",
+        "report_sha256",
+        "change_triggers"
+      ]
+    },
+    "RevokeQualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "qualification_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "expected_revocation_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "request_id",
+        "qualification_version",
+        "expected_revocation_sequence",
+        "reason"
+      ]
+    },
+    "RevocationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "qualification_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "qualification_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "revocation_sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "affected_release_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "qualification_id",
+        "qualification_version",
+        "revocation_sequence",
+        "affected_release_ids"
+      ]
+    },
+    "DownloadReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "download_url": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "artifact_id",
+        "sha256",
+        "size_bytes",
+        "download_url"
+      ]
+    },
+    "ReleaseResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "$ref": "#/$defs/ReleaseDecision"
+        },
+        "download": {
+          "$ref": "#/$defs/DownloadReference"
+        }
+      },
+      "required": [
+        "decision",
+        "download"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "decision": {
+              "properties": {
+                "decision": {
+                  "const": "released"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DeviceEnvironment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "os_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reader": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reader_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "platform",
+        "os_version",
+        "reader",
+        "reader_version"
+      ]
+    },
+    "IssueLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "export_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "chapter_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sentence_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "start_sample": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "end_sample": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sample_rate": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "environment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DeviceEnvironment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "export_id",
+        "artifact_sha256",
+        "chapter_id",
+        "sentence_id",
+        "start_sample",
+        "end_sample",
+        "sample_rate",
+        "environment"
+      ]
+    },
+    "IssueState": {
+      "type": "string",
+      "enum": [
+        "awaiting_location",
+        "triaged",
+        "planned",
+        "candidate",
+        "awaiting_device_evidence",
+        "resolved_system",
+        "awaiting_feedback",
+        "closed_confirmed",
+        "reopened",
+        "withdrawn"
+      ]
+    },
+    "CreateIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "book_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IssueLocation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attachment_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "book_id",
+        "description",
+        "location",
+        "attachment_ids"
+      ]
+    },
+    "IssueRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "book_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/IssueState"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IssueLocation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "book_id",
+        "description",
+        "status",
+        "severity",
+        "revision",
+        "location",
+        "created_at"
+      ]
+    },
+    "LocateIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "location": {
+          "$ref": "#/$defs/IssueLocation"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "location",
+        "evidence_ids"
+      ]
+    },
+    "CreateRepairPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "base_export_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "base_artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "target_production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "changed_node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "expected_quality_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "request_id",
+        "base_export_id",
+        "base_artifact_sha256",
+        "target_production_id",
+        "changed_node_ids",
+        "expected_quality_revision"
+      ]
+    },
+    "RepairPlanRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "issue_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "issue_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "base_export_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "base_artifact_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "target_production_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "changed_node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "invalidated_node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "retained_node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "retest_cases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "rollback_artifact_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "required_device_environment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DeviceEnvironment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "issue_id",
+        "issue_revision",
+        "base_export_id",
+        "base_artifact_sha256",
+        "target_production_id",
+        "changed_node_ids",
+        "invalidated_node_ids",
+        "retained_node_ids",
+        "retest_cases",
+        "rollback_artifact_ids",
+        "required_device_environment",
+        "created_at"
+      ]
+    },
+    "AppendIssueEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "issue_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "plan_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "plan_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "candidate_artifact_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "contract_version": {
+          "const": 2
+        },
+        "scope_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "gate": {
+          "type": "string",
+          "enum": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5"
+          ]
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rule_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "suspect",
+            "fail",
+            "unknown",
+            "error"
+          ]
+        },
+        "evidence_kind": {
+          "type": "string",
+          "enum": [
+            "tool",
+            "human",
+            "device_test",
+            "compatibility_match"
+          ]
+        },
+        "environment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DeviceEnvironment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attachment_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "issue_revision",
+        "plan_id",
+        "plan_version",
+        "candidate_artifact_id",
+        "candidate_sha256",
+        "contract_version",
+        "scope_id",
+        "gate",
+        "case_id",
+        "rule_version",
+        "outcome",
+        "evidence_kind",
+        "environment",
+        "attachment_ids"
+      ]
+    },
+    "EvidenceAppended": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "server_sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "issue_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "evidence_id",
+        "server_sequence",
+        "issue_revision"
+      ]
+    },
+    "ResolutionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "issue_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "issue_revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "plan_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "plan_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "proof_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "reproduction_evidence_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "resolution_kind": {
+          "type": "string",
+          "enum": [
+            "resolved_system",
+            "awaiting_feedback"
+          ]
+        },
+        "user_confirmation_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UUID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/DateTime"
+        }
+      },
+      "required": [
+        "id",
+        "issue_id",
+        "issue_revision",
+        "plan_id",
+        "plan_version",
+        "candidate_sha256",
+        "proof_id",
+        "reproduction_evidence_id",
+        "evidence_ids",
+        "resolution_kind",
+        "user_confirmation_id",
+        "created_at"
+      ]
+    },
+    "ConfirmIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "resolution_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "feedback": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "request_id",
+        "resolution_id",
+        "feedback"
+      ]
+    },
+    "ReopenIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "reproduction_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "request_id",
+        "reproduction_description",
+        "evidence_ids"
+      ]
     }
   },
   "oneOf": [
@@ -494,6 +4658,42 @@
     },
     {
       "$ref": "#/$defs/CandidateSelection"
+    },
+    {
+      "$ref": "#/$defs/CreateProduction"
+    },
+    {
+      "$ref": "#/$defs/ProductionAccepted"
+    },
+    {
+      "$ref": "#/$defs/TaskLease"
+    },
+    {
+      "$ref": "#/$defs/Heartbeat"
+    },
+    {
+      "$ref": "#/$defs/CheckpointCommand"
+    },
+    {
+      "$ref": "#/$defs/TaskResult"
+    },
+    {
+      "$ref": "#/$defs/ProductionControl"
+    },
+    {
+      "$ref": "#/$defs/CheckpointManifest"
+    },
+    {
+      "$ref": "#/$defs/QualityPolicy"
+    },
+    {
+      "$ref": "#/$defs/Qualification"
+    },
+    {
+      "$ref": "#/$defs/CompatibilityProfile"
+    },
+    {
+      "$ref": "#/$defs/ReleaseDecision"
     }
   ]
 }

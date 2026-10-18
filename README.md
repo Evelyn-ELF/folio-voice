@@ -2,7 +2,7 @@
 
 本地电子书转音频与同步有声书系统。支持EPUB及文字、扫描、混合PDF输入、多声音管理，输出可直接收听的音频与可重排同步EPUB。采用Docker应用＋Mac原生MLX服务。
 
-当前处于设计阶段，产品实现、真实音频质量和设备兼容性尚待验证。日常交付目标是系统自动完成质量检查，用户无需全量听审。
+当前处于基础开发阶段，已建立I0编排与质量结构、完整HTTP契约、类型生成及内容/任务/证据/Agent/交付的首版迁移；工程骨架已提供存活接口、中文连接页及执行器诊断；制作业务、真实音频质量和设备兼容性尚待实现与验证。日常交付目标是系统自动完成质量检查，用户无需全量听审。
 
 ## 唯一开发入口
 
@@ -26,6 +26,18 @@
 `docs/contracts/`中的Schema和样例是系统设计的机器可读附件；`docs/validation/`只保存实际校验结果及环境，不是额外开发规范。各项完成状态统一在开发任务维护，不因存在报告或文档而认定产品通过。
 
 每次开发变更按[文档维护流程](docs/工程规范.md#document-maintenance)同步相关内容，并运行`python3 tools/check_documents.py`；代码、契约、测试与文档按[变更完成条件](docs/工程规范.md#change-completion)共同交付和评审。
+
+## 本地开发入口
+
+按[工程环境与共用检查](docs/工程规范.md#documentation)安装Python 3.14.2、uv 0.11.25、Node 26.4.0及npm 11.17.0，在仓库根执行：
+
+```sh
+uv sync --locked
+npm ci --ignore-scripts
+uv run --no-sync python scripts/check.py
+```
+
+开发时分别运行`uv run --no-sync python -m uvicorn apps.api.main:app --host 127.0.0.1 --port 8000 --workers 1`与`npm run dev:web`；终端Ctrl+C停止。`npm run build:web`后应用也可直接提供构建页面。容器入口为`docker compose -f deploy/compose.yaml up --build`，停止用同一文件执行`down`；Mac诊断用`uv run --no-sync python -m workers.macos.main --diagnose`。镜像构建后可运行`uv run --no-sync python -m scripts.check_container`验证并回收临时容器。当前只能检查连接与入口，书籍导入和制作尚未实现。
 
 ## 归档边界
 

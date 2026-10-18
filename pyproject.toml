@@ -1,0 +1,58 @@
+[project]
+name = "folio-voice"
+version = "0.1.0"
+description = "本地电子书与同步有声书系统"
+requires-python = ">=3.14,<3.15"
+dependencies = ["fastapi==0.143.3", "pydantic==2.14.1", "uvicorn==0.54.0"]
+
+[dependency-groups]
+dev = [
+  "attrs==26.1.0",
+  "jsonschema==4.26.0",
+  "jsonschema-specifications==2025.9.1",
+  "referencing==0.37.0",
+  "rpds-py==2026.9.1",
+  "rfc3339-validator==0.1.4",
+  "six==1.17.0",
+  "annotated-types==0.8.0",
+  "jsonschema-path==0.5.0",
+  "lazy-object-proxy==1.13.0",
+  "openapi-schema-validator==0.9.0",
+  "openapi-spec-validator==0.9.0",
+  "pathable==0.6.0",
+  "pydantic==2.14.1",
+  "pydantic-core==2.50.1",
+  "pydantic-settings==2.16.0",
+  "python-dotenv==1.2.4",
+  "pyyaml==6.0.3",
+  "typing-extensions==4.16.0",
+  "typing-inspection==0.4.4",
+  "ruff==0.14.14",
+  "mypy==1.19.1",
+  "mypy_extensions==1.1.0",
+  "pathspec==1.1.1",
+  "librt==0.16.0",
+  "httpx2==2.13.1"
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+default = true
+
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+extend-exclude = ["archive"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+explicit_package_bases = true
+files = ["tools/generate_contract_types.py", "packages/contracts/generated.py", "packages/core", "packages/adapters", "apps/api", "workers", "tools/check_module_boundaries.py", "scripts/check.py", "scripts/smoke_http.py", "scripts/check_container.py"]
